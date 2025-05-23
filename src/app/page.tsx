@@ -1,29 +1,15 @@
-import { Header } from '@/components/landing/header';
-import { HeroSection } from '@/components/landing/hero-section';
-import { AutomationAdvisorSection } from '@/components/landing/automation-advisor-section';
-import { BenefitsSection } from '@/components/landing/benefits-section';
-import { MethodologySection } from '@/components/landing/methodology-section';
-import { BlogSection } from '@/components/landing/blog-section';
-import { TestimonialsSection } from '@/components/landing/testimonials-section';
-import { AboutSection } from '@/components/landing/about-section';
-import { ContactSection } from '@/components/landing/contact-section';
-import { Footer } from '@/components/landing/footer';
+// This file is no longer used directly for rendering the page.
+// The content has been moved to src/app/[locale]/page.tsx
+// Next.js with i18n routing will redirect from '/' to '/[defaultLocale]' (e.g., '/es')
+// based on the middleware and i18n config.
 
-export default function LandingPage() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow">
-        <HeroSection />
-        <AutomationAdvisorSection />
-        <BenefitsSection />
-        <MethodologySection />
-        <BlogSection />
-        <TestimonialsSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
-  );
+// You can keep this file minimal or add a redirect component if necessary,
+// but middleware should handle it.
+export default function RootPage() {
+  return null; 
+  // Or a component that redirects, though middleware is preferred.
+  // For example:
+  // import { redirect } from 'next/navigation';
+  // import { i18n } from '@/i18n-config';
+  // redirect(`/${i18n.defaultLocale}`);
 }

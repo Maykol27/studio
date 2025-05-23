@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "title": "Aetheria Consulting",
+    "description": "AI Tailored to You: Our Process Towards Your Success."
+  },
+  "header": {
+    "companyName": "Aetheria Consulting",
+    "benefits": "Benefits",
+    "process": "Process",
+    "testimonials": "Testimonials",
+    "about": "About",
+    "contactUs": "Contact Us",
+    "toggleMenu": "Toggle menu"
+  },
+  "heroSection": {
+    "titlePart1": "AI Tailored to You: ",
+    "titlePart2": "Our Process",
+    "titlePart3": " Towards Your Success.",
+    "description": "Looking to take your business to the next level? At Aetheria Consulting, we transform the complexity of automation and AI into practical and accessible solutions for your SME. We help you professionalize and scale, unlocking your potential and maximizing your focus on what you're most passionate about and what led you to build your company.",
+    "ctaButton": "Boost Your Business with AI: Free Diagnosis!",
+    "videoCaption": "Meet Aetheria's CEO"
+  },
+  "automationAdvisorSection": {
+    "title": "Discover Your Automation Potential",
+    "description": "Complete this form to receive personalized AI-powered automation suggestions for your business.",
+    "formCardTitle": "Get Your Suggestions",
+    "formCardDescription": "Tell us about your business, and our AI will provide tailored automation ideas.",
+    "businessDescriptionLabel": "Business Description",
+    "businessDescriptionPlaceholder": "Describe your business processes, challenges, and goals...",
+    "businessDescriptionError": "Please provide a detailed description of at least 50 characters.",
+    "submitButton": "Get Suggestions",
+    "submitButtonLoading": "Generating...",
+    "suggestionsCardTitle": "Your AI-Powered Suggestions",
+    "suggestionsGeneratingTitle": "Generating Suggestions...",
+    "toastSuccessTitle": "Suggestions Generated!",
+    "toastSuccessDescription": "Your personalized automation suggestions are ready.",
+    "toastErrorTitle": "Error",
+    "toastErrorDescription": "Failed to generate suggestions. Please try again."
+  },
+  "benefitsSection": {
+    "title": "Key Benefits of AI for Your Business",
+    "description": "Discover how Artificial Intelligence transforms your business, optimizing resources and maximizing your ROI with a simple, guided implementation.",
+    "benefit1Title": "Maximum Efficiency and Productivity",
+    "benefit1Description": "Automate tedious tasks, free up valuable time for you and your team. Get fast, measurable results, so you can focus on strategic growth and what you're passionate about.",
+    "benefit2Title": "Intelligent Cost Reduction",
+    "benefit2Description": "Optimize resources and eliminate costly errors with AI solutions that directly impact your profitability. Transform expenses into smart investments that give you peace of mind.",
+    "benefit3Title": "Data-Driven Decisions",
+    "benefit3Description": "Make smarter decisions and anticipate your business's future with the power of AI. Transform complex data into a competitive advantage, with expert support and intuitive tools that give you confidence.",
+    "benefit4Title": "Optimized Customer Experience",
+    "benefit4Description": "Improve customer loyalty and satisfaction with AI. Personalize interactions and offer 24/7 support easily, freeing up your team for high-value relationships."
+  },
+  "methodologySection": {
+    "title": "AI Tailored to You: Our Process Towards Your Success",
+    "description": "We don't just implement technology; we create custom AI solutions that understand your challenges, optimize your operations, and boost your real growth, freeing you to focus on what matters most.",
+    "step1Title": "1. Deep and Strategic Diagnosis",
+    "step1Description": "We go beyond the superficial. We listen to your story, thoroughly understand your unique challenges and goals (even those you haven't clearly identified yet), and precisely identify automation and AI opportunities that will generate the greatest impact on your business and peace of mind. It's the map to your success.",
+    "step2Title": "2. Tailored Solution Design",
+    "step2Description": "No generic solutions. We develop a personalized and robust AI strategy that perfectly aligns with your budget, capabilities, and, above all, your business objectives. We design the path you need.",
+    "step3Title": "3. Agile and Purposeful Implementation",
+    "step3Description": "We turn the plan into action. We manage implementation efficiently and with minimal disruption, ensuring AI integrates smoothly. We provide clear guidance and constant support so your team adopts the new technology with confidence.",
+    "step4Title": "4. Continuous Optimization and Sustainable Growth",
+    "step4Description": "Our partnership doesn't end with implementation. We offer post-implementation support, performance monitoring, and proactive adjustments to ensure your AI investment continues to evolve, maximizing your return and adapting to your future needs, acting as your strategic partner in continuous improvement."
+  },
+  "blogSection": {
+    "title": "Our Blog",
+    "description": "Stay up-to-date with the latest trends in AI and business automation. Ideas, tips, and success stories to inspire your business.",
+    "readMore": "Read More",
+    "posts": [
+      {
+        "id": "1",
+        "title": "The Future of AI in Small Businesses",
+        "summary": "Learn how AI is no longer just for large corporations and how your SME can benefit today.",
+        "slug": "future-of-ai-smb"
+      },
+      {
+        "id": "2",
+        "title": "5 Ways to Automate Your Marketing with AI",
+        "summary": "Discover practical AI tools and strategies to streamline your marketing efforts and boost engagement.",
+        "slug": "automate-marketing-ai"
+      },
+      {
+        "id": "3",
+        "title": "Understanding Natural Language Processing (NLP)",
+        "summary": "A beginner-friendly guide to NLP and its applications in improving customer interactions.",
+        "slug": "understanding-nlp"
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "title": "What Our Clients Say",
+    "description": "Real stories from businesses thriving with our AI solutions.",
+    "testimonials": [
+      {
+        "id": "1",
+        "name": "Jane Doe",
+        "company": "Innovatech Solutions",
+        "quote": "Aetheria Consulting transformed our operations. Their AI solutions increased our efficiency by <strong class=\"text-primary\">40%</strong> and significantly <strong class=\"text-primary\">reduced costs</strong>. Highly recommended!",
+        "rating": 5
+      },
+      {
+        "id": "2",
+        "name": "John Smith",
+        "company": "MarketBoosters Inc.",
+        "quote": "The personalized approach and deep understanding of our needs were exceptional. We now make <strong class=\"text-primary\">data-driven decisions</strong> with confidence, thanks to Aetheria.",
+        "rating": 5
+      },
+      {
+        "id": "3",
+        "name": "Alice Brown",
+        "company": "Creative Ventures LLC",
+        "quote": "Their team is not just technically proficient but also great strategic partners. The <strong class=\"text-primary\">customer experience optimization</strong> has been a game-changer for us.",
+        "rating": 4
+      }
+    ]
+  },
+  "aboutSection": {
+    "title": "About Aetheria Consulting",
+    "subtitle": "Your allies in AI-driven digital transformation. We are passionate about helping businesses thrive and scale.",
+    "paragraph1": "Aetheria Consulting was born from the conviction that Artificial Intelligence should be accessible and beneficial for businesses of all sizes. We bring deep insight and experience in technology (AI, automation), project management, and continuous improvement, acquired in complex environments of large industries. Now, we bring that knowledge to create simple and practical solutions to professionalize and scale your company, regardless of its size or economic capacity.",
+    "paragraph2": "Our mission is to empower businesses like yours to leverage the power of AI to optimize processes, reduce costs, improve decision-making, and enrich their customers' experience. We believe in a collaborative approach, working closely with you to understand your challenges and even discover opportunities you might not see, because we are experts in processes and in understanding your business.",
+    "paragraph3": "With a focus on tangible results and an agile implementation process, we guide you every step of the way. Our goal is not just to provide you with AI tools, but to be your strategic partner in your company's growth, allowing you to focus on what you're passionate about and what led you to build your business."
+  },
+  "contactSection": {
+    "title": "Let's Talk About Your Business",
+    "description": "Complete the form and take the first step towards the digital transformation of your business.",
+    "cardTitle": "Contact Us",
+    "cardDescription": "We're excited to hear from you.",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Doe",
+    "nameError": "Name must be at least 2 characters.",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "you@example.com",
+    "emailError": "Please enter a valid email address.",
+    "companyLabel": "Company (Optional)",
+    "companyPlaceholder": "Your Company Inc.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "How can we help you?",
+    "messageError": "Message must be at least 10 characters.",
+    "submitButton": "Send Request",
+    "submitButtonLoading": "Sending...",
+    "toastSuccessTitle": "Message Sent!",
+    "toastSuccessDescription": "Your request has been sent successfully! We'll be in touch soon.",
+    "toastErrorTitle": "Error",
+    "toastErrorDescriptionGeneral": "Failed to send message. Please try again.",
+    "toastErrorDescriptionUnexpected": "An unexpected error occurred. Please try again later."
+  },
+  "footer": {
+    "companyName": "Aetheria Consulting",
+    "copyright": "Aetheria Consulting. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "languageSwitcher": {
+    "changeLanguage": "Change language",
+    "spanish": "Spanish",
+    "english": "English",
+    "portuguese": "Portuguese"
+  }
+}

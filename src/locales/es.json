@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "title": "Aetheria Consulting",
+    "description": "IA a tu Medida: Nuestro Proceso Hacia Tu Éxito."
+  },
+  "header": {
+    "companyName": "Aetheria Consulting",
+    "benefits": "Beneficios",
+    "process": "Proceso",
+    "testimonials": "Testimonios",
+    "about": "Nosotros",
+    "contactUs": "Contáctanos",
+    "toggleMenu": "Alternar menú"
+  },
+  "heroSection": {
+    "titlePart1": "IA a tu Medida: ",
+    "titlePart2": "Nuestro Proceso",
+    "titlePart3": " Hacia Tu Éxito.",
+    "description": "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu PyME. Te ayudamos a profesionalizarte y escalar, desbloqueando tu potencial y maximizando tu enfoque en lo que más te apasiona y te llevó a construir tu empresa.",
+    "ctaButton": "¡Impulsa tu Negocio con IA: Diagnóstico Gratuito!",
+    "videoCaption": "Conoce al CEO de Aetheria"
+  },
+  "automationAdvisorSection": {
+    "title": "Descubre Tu Potencial de Automatización",
+    "description": "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
+    "formCardTitle": "Obtén Tus Sugerencias",
+    "formCardDescription": "Cuéntanos sobre tu negocio y nuestra IA te proporcionará ideas de automatización a medida.",
+    "businessDescriptionLabel": "Descripción del Negocio",
+    "businessDescriptionPlaceholder": "Describe los procesos, desafíos y objetivos de tu negocio...",
+    "businessDescriptionError": "Por favor, proporciona una descripción detallada de al menos 50 caracteres.",
+    "submitButton": "Obtener Sugerencias",
+    "submitButtonLoading": "Generando...",
+    "suggestionsCardTitle": "Tus Sugerencias Impulsadas por IA",
+    "suggestionsGeneratingTitle": "Generando Sugerencias...",
+    "toastSuccessTitle": "¡Sugerencias Generadas!",
+    "toastSuccessDescription": "Tus sugerencias de automatización personalizadas están listas.",
+    "toastErrorTitle": "Error",
+    "toastErrorDescription": "No se pudieron generar las sugerencias. Por favor, inténtalo de nuevo."
+  },
+  "benefitsSection": {
+    "title": "Beneficios Clave de la IA para Tu Negocio",
+    "description": "Descubre cómo la Inteligencia Artificial transforma tu negocio, optimizando recursos y maximizando tu ROI con una implementación simple y guiada.",
+    "benefit1Title": "Máxima Eficiencia y Productividad",
+    "benefit1Description": "Automatiza tareas tediosas, libera tiempo valioso para ti y tu equipo. Obtén resultados rápidos y medibles, para que puedas enfocarte en el crecimiento estratégico y en lo que te apasiona.",
+    "benefit2Title": "Reducción Inteligente de Costos",
+    "benefit2Description": "Optimiza recursos y elimina errores costosos con soluciones de IA que impactan directamente tu rentabilidad. Transforma gastos en inversiones inteligentes que te dan tranquilidad.",
+    "benefit3Title": "Decisiones Basadas en Datos",
+    "benefit3Description": "Toma decisiones más inteligentes y anticipa el futuro de tu negocio con el poder de la IA. Transforma datos complejos en una ventaja competitiva, con soporte experto y herramientas intuitivas que te dan confianza.",
+    "benefit4Title": "Experiencia del Cliente Optimizada",
+    "benefit4Description": "Mejora la lealtad y satisfacción del cliente con IA. Personaliza interacciones y ofrece soporte 24/7 fácilmente, liberando a tu equipo para relaciones de alto valor."
+  },
+  "methodologySection": {
+    "title": "IA a tu Medida: Nuestro Proceso Hacia Tu Éxito",
+    "description": "No solo implementamos tecnología; creamos soluciones de IA personalizadas que entienden tus desafíos, optimizan tus operaciones e impulsan tu crecimiento real, liberándote para enfocarte en lo que más importa.",
+    "step1Title": "1. Diagnóstico Profundo y Estratégico",
+    "step1Description": "Vamos más allá de lo superficial. Escuchamos tu historia, entendemos a fondo tus desafíos y metas únicas (incluso aquellas que no has identificado claramente), e identificamos con precisión las oportunidades de automatización e IA que generarán el mayor impacto en tu negocio y tranquilidad. Es el mapa hacia tu éxito.",
+    "step2Title": "2. Diseño de Soluciones a Medida",
+    "step2Description": "Sin soluciones genéricas. Desarrollamos una estrategia de IA personalizada y robusta que se alinea perfectamente con tu presupuesto, capacidades y, sobre todo, tus objetivos de negocio. Diseñamos el camino que necesitas.",
+    "step3Title": "3. Implementación Ágil y con Propósito",
+    "step3Description": "Convertimos el plan en acción. Gestionamos la implementación de manera eficiente y con mínima interrupción, asegurando que la IA se integre sin problemas. Brindamos orientación clara y soporte constante para que tu equipo adopte la nueva tecnología con confianza.",
+    "step4Title": "4. Optimización Continua y Crecimiento Sostenible",
+    "step4Description": "Nuestra asociación no termina con la implementación. Ofrecemos soporte post-implementación, monitoreo de rendimiento y ajustes proactivos para asegurar que tu inversión en IA continúe evolucionando, maximizando tu retorno y adaptándose a tus necesidades futuras, actuando como tu socio estratégico en la mejora continua."
+  },
+  "blogSection": {
+    "title": "Nuestro Blog",
+    "description": "Mantente al día con las últimas tendencias en IA y automatización empresarial. Ideas, consejos e historias de éxito para inspirar tu negocio.",
+    "readMore": "Leer Más",
+    "posts": [
+      {
+        "id": "1",
+        "title": "El Futuro de la IA en las Pequeñas Empresas",
+        "summary": "Aprende cómo la IA ya no es solo para grandes corporaciones y cómo tu PyME puede beneficiarse hoy.",
+        "slug": "future-of-ai-smb"
+      },
+      {
+        "id": "2",
+        "title": "5 Maneras de Automatizar tu Marketing con IA",
+        "summary": "Descubre herramientas y estrategias prácticas de IA para optimizar tus esfuerzos de marketing e impulsar el engagement.",
+        "slug": "automate-marketing-ai"
+      },
+      {
+        "id": "3",
+        "title": "Entendiendo el Procesamiento del Lenguaje Natural (PLN)",
+        "summary": "Una guía amigable para principiantes sobre el PLN y sus aplicaciones para mejorar las interacciones con los clientes.",
+        "slug": "understanding-nlp"
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "title": "Lo que Dicen Nuestros Clientes",
+    "description": "Historias reales de negocios prosperando con nuestras soluciones de IA.",
+    "testimonials": [
+      {
+        "id": "1",
+        "name": "Juana Pérez",
+        "company": "Soluciones Innovatech",
+        "quote": "Aetheria Consulting transformó nuestras operaciones. Sus soluciones de IA aumentaron nuestra eficiencia en un <strong class=\"text-primary\">40%</strong> y redujeron significativamente los <strong class=\"text-primary\">costos</strong>. ¡Altamente recomendados!",
+        "rating": 5
+      },
+      {
+        "id": "2",
+        "name": "Juan García",
+        "company": "Impulsores de Mercado Inc.",
+        "quote": "El enfoque personalizado y la profunda comprensión de nuestras necesidades fueron excepcionales. Ahora tomamos <strong class=\"text-primary\">decisiones basadas en datos</strong> con confianza, gracias a Aetheria.",
+        "rating": 5
+      },
+      {
+        "id": "3",
+        "name": "Alicia Moreno",
+        "company": "Emprendimientos Creativos LLC",
+        "quote": "Su equipo no solo es técnicamente competente sino también grandes socios estratégicos. La <strong class=\"text-primary\">optimización de la experiencia del cliente</strong> ha sido un cambio de juego para nosotros.",
+        "rating": 4
+      }
+    ]
+  },
+  "aboutSection": {
+    "title": "Sobre Aetheria Consulting",
+    "subtitle": "Tus aliados en la transformación digital impulsada por IA. Nos apasiona ayudar a las empresas a prosperar y escalar.",
+    "paragraph1": "Aetheria Consulting nació de la convicción de que la Inteligencia Artificial debe ser accesible y beneficiosa para empresas de todos los tamaños. Aportamos una profunda visión y experiencia en tecnología (IA, automatización), gestión de proyectos y mejora continua, adquirida en entornos complejos de grandes industrias. Ahora, llevamos ese conocimiento para crear soluciones simples y prácticas para profesionalizar y escalar tu empresa, sin importar su tamaño o capacidad económica.",
+    "paragraph2": "Nuestra misión es empoderar a negocios como el tuyo para que aprovechen el poder de la IA para optimizar procesos, reducir costos, mejorar la toma de decisiones y enriquecer la experiencia de sus clientes. Creemos en un enfoque colaborativo, trabajando de cerca contigo para entender tus desafíos e incluso descubrir oportunidades que podrías no ver, porque somos expertos en procesos y en entender tu negocio.",
+    "paragraph3": "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio."
+  },
+  "contactSection": {
+    "title": "Hablemos de Tu Negocio",
+    "description": "Completa el formulario y da el primer paso hacia la transformación digital de tu negocio.",
+    "cardTitle": "Contáctanos",
+    "cardDescription": "Estamos emocionados de saber de ti.",
+    "nameLabel": "Nombre Completo",
+    "namePlaceholder": "Juan Pérez",
+    "nameError": "El nombre debe tener al menos 2 caracteres.",
+    "emailLabel": "Dirección de Correo Electrónico",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "emailError": "Por favor, ingresa una dirección de correo electrónico válida.",
+    "companyLabel": "Empresa (Opcional)",
+    "companyPlaceholder": "Tu Empresa Inc.",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "¿Cómo podemos ayudarte?",
+    "messageError": "El mensaje debe tener al menos 10 caracteres.",
+    "submitButton": "Enviar Solicitud",
+    "submitButtonLoading": "Enviando...",
+    "toastSuccessTitle": "¡Mensaje Enviado!",
+    "toastSuccessDescription": "¡Tu solicitud ha sido enviada con éxito! Nos pondremos en contacto pronto.",
+    "toastErrorTitle": "Error",
+    "toastErrorDescriptionGeneral": "No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.",
+    "toastErrorDescriptionUnexpected": "Ocurrió un error inesperado. Por favor, inténtalo más tarde."
+  },
+  "footer": {
+    "companyName": "Aetheria Consulting",
+    "copyright": "Aetheria Consulting. Todos los derechos reservados.",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio"
+  },
+  "languageSwitcher": {
+    "changeLanguage": "Cambiar idioma",
+    "spanish": "Español",
+    "english": "Inglés",
+    "portuguese": "Portugués"
+  }
+}

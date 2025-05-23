@@ -1,39 +1,88 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MountainIcon } from 'lucide-react'; // Or a custom logo icon
+import { MountainIcon, MenuIcon } from 'lucide-react'; 
+import { LanguageSwitcher } from '@/components/language-switcher';
+import type { Locale } from '@/i18n-config';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
-export function Header() {
+
+interface HeaderProps {
+  dictionary: {
+    header: {
+      companyName: string;
+      benefits: string;
+      process: string;
+      testimonials: string;
+      about: string;
+      contactUs: string;
+      toggleMenu: string;
+    };
+    languageSwitcher: {
+        changeLanguage: string;
+        spanish: string;
+        english: string;
+        portuguese: string;
+    }
+  };
+  currentLocale: Locale;
+}
+
+export function Header({ dictionary, currentLocale }: HeaderProps) {
+  const navItems = [
+    { href: '#benefits', label: dictionary.header.benefits },
+    { href: '#process', label: dictionary.header.process },
+    { href: '#testimonials', label: dictionary.header.testimonials },
+    { href: '#about', label: dictionary.header.about },
+  ];
+
   return (
     <header className="py-6 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+        <Link href={`/${currentLocale}`} className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold text-primary-foreground font-heading">Aetheria Consulting</span>
+          <span className="text-2xl font-bold text-primary-foreground font-heading">{dictionary.header.companyName}</span>
         </Link>
-        <nav className="hidden md:flex gap-6 items-center">
-          <Link href="#benefits" className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
-            Benefits
-          </Link>
-          <Link href="#process" className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
-            Process
-          </Link>
-          <Link href="#testimonials" className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
-            Testimonials
-          </Link>
-          <Link href="#about" className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
-            About
-          </Link>
+        <nav className="hidden md:flex gap-4 items-center">
+          {navItems.map(item => (
+            <Link key={item.href} href={item.href} className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
+              {item.label}
+            </Link>
+          ))}
+          <LanguageSwitcher currentLocale={currentLocale} dictionary={dictionary.languageSwitcher} />
           <Link href="#contact" prefetch={false}>
             <Button className="btn-yellow rounded-md px-6 py-3">
-              Contact Us
+              {dictionary.header.contactUs}
             </Button>
           </Link>
         </nav>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          {/* TODO: Add mobile menu */}
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-          <span className="sr-only">Toggle menu</span>
-        </Button>
+        <div className="md:hidden flex items-center">
+           <LanguageSwitcher currentLocale={currentLocale} dictionary={dictionary.languageSwitcher} />
+           <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label={dictionary.header.toggleMenu}>
+                <MenuIcon className="h-6 w-6 text-foreground" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[280px] bg-card text-card-foreground p-6">
+              <div className="flex flex-col space-y-4">
+                {navItems.map(item => (
+                  <SheetClose key={item.href} asChild>
+                    <Link href={item.href} className="text-lg font-medium hover:text-primary transition-colors" prefetch={false}>
+                      {item.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                  <Link href="#contact" prefetch={false}>
+                    <Button className="w-full btn-yellow rounded-md py-3 text-base">
+                      {dictionary.header.contactUs}
+                    </Button>
+                  </Link>
+                </SheetClose>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );
