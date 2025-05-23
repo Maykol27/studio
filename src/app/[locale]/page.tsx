@@ -27,7 +27,7 @@ export default async function LandingPage({ params: { locale } }: { params: { lo
         <AboutSection dictionary={dictionary.aboutSection} />
         <ContactSection dictionary={dictionary.contactSection} />
       </main>
-      <Footer dictionary={dictionary.footer} />
+      <Footer dictionary={dictionary.footer} currentLocale={locale} />
     </div>
   );
 }
