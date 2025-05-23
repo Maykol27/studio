@@ -18,10 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  i18n: {
-    locales: ['es', 'en', 'pt'],
-    defaultLocale: 'es',
-  },
+  // i18n block removed
 };
 
 export default nextConfig;

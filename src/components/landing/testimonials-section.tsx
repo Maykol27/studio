@@ -10,38 +10,58 @@ interface TestimonialData {
   rating: number;
 }
 
-interface TestimonialsSectionProps {
-  dictionary: {
-    title: string;
-    description: string;
-    testimonials: TestimonialData[];
-  };
-}
+// Texts are now hardcoded in English
+const texts = {
+  title: "What Our Clients Say",
+  description: "Real stories from businesses thriving with our AI solutions.",
+  testimonials: [
+    {
+      id: "1",
+      name: "Jane Doe",
+      company: "Innovatech Solutions",
+      quote: "Aetheria Consulting transformed our operations. Their AI solutions increased our efficiency by <strong class=\"text-primary\">40%</strong> and significantly <strong class=\"text-primary\">reduced costs</strong>. Highly recommended!",
+      rating: 5
+    },
+    {
+      id: "2",
+      name: "John Smith",
+      company: "MarketBoosters Inc.",
+      quote: "The personalized approach and deep understanding of our needs were exceptional. We now make <strong class=\"text-primary\">data-driven decisions</strong> with confidence, thanks to Aetheria.",
+      rating: 5
+    },
+    {
+      id: "3",
+      name: "Alice Brown",
+      company: "Creative Ventures LLC",
+      quote: "Their team is not just technically proficient but also great strategic partners. The <strong class=\"text-primary\">customer experience optimization</strong> has been a game-changer for us.",
+      rating: 4
+    }
+  ]
+};
 
-// Placeholder images and hints
 const testimonialAssets = [
   { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'happy client' },
   { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'satisfied customer' },
   { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'smiling person' },
 ];
 
-export function TestimonialsSection({ dictionary }: TestimonialsSectionProps) {
+export function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{dictionary.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
-            {dictionary.description}
+            {texts.description}
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {dictionary.testimonials.map((testimonial, index) => (
+          {texts.testimonials.map((testimonial, index) => (
             <Card key={testimonial.id} className="bg-card border-border rounded-xl card-hover p-6 flex flex-col items-center text-center">
               <CardHeader className="mb-4">
                 <Image
                   src={testimonialAssets[index % testimonialAssets.length].imageUrl}
-                  alt={testimonial.name} // Alt text uses localized name
+                  alt={testimonial.name}
                   width={80}
                   height={80}
                   className="rounded-full mb-3 mx-auto"

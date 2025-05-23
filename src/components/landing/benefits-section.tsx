@@ -2,74 +2,73 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUpIcon, DollarSignIcon, BarChart2Icon, SmileIcon } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 
-interface BenefitsSectionProps {
-  dictionary: {
-    title: string;
-    description: string;
-    benefit1Title: string;
-    benefit1Description: string;
-    benefit2Title: string;
-    benefit2Description: string;
-    benefit3Title: string;
-    benefit3Description: string;
-    benefit4Title: string;
-    benefit4Description: string;
-  };
-}
+// Texts are now hardcoded in English
+const texts = {
+  title: "Key Benefits of AI for Your Business",
+  description: "Discover how Artificial Intelligence transforms your business, optimizing resources and maximizing your ROI with a simple, guided implementation.",
+  benefit1Title: "Maximum Efficiency and Productivity",
+  benefit1Description: "Automate tedious tasks, free up valuable time for you and your team. Get fast, measurable results, so you can focus on strategic growth and what you're passionate about.",
+  benefit2Title: "Intelligent Cost Reduction",
+  benefit2Description: "Optimize resources and eliminate costly errors with AI solutions that directly impact your profitability. Transform expenses into smart investments that give you peace of mind.",
+  benefit3Title: "Data-Driven Decisions",
+  benefit3Description: "Make smarter decisions and anticipate your business's future with the power of AI. Transform complex data into a competitive advantage, with expert support and intuitive tools that give you confidence.",
+  benefit4Title: "Optimized Customer Experience",
+  benefit4Description: "Improve customer loyalty and satisfaction with AI. Personalize interactions and offer 24/7 support easily, freeing up your team for high-value relationships."
+};
 
 interface Benefit {
   icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
-  titleKey: keyof BenefitsSectionProps['dictionary'];
-  descriptionKey: keyof BenefitsSectionProps['dictionary'];
+  title: string;
+  description: string;
 }
 
-const benefitKeys: Benefit[] = [
+const benefits: Benefit[] = [
   {
     icon: TrendingUpIcon,
-    titleKey: 'benefit1Title',
-    descriptionKey: 'benefit1Description',
+    title: texts.benefit1Title,
+    description: texts.benefit1Description,
   },
   {
     icon: DollarSignIcon,
-    titleKey: 'benefit2Title',
-    descriptionKey: 'benefit2Description',
+    title: texts.benefit2Title,
+    description: texts.benefit2Description,
   },
   {
     icon: BarChart2Icon,
-    titleKey: 'benefit3Title',
-    descriptionKey: 'benefit3Description',
+    title: texts.benefit3Title,
+    description: texts.benefit3Description,
   },
   {
     icon: SmileIcon,
-    titleKey: 'benefit4Title',
-    descriptionKey: 'benefit4Description',
+    title: texts.benefit4Title,
+    description: texts.benefit4Description,
   },
 ];
 
-export function BenefitsSection({ dictionary }: BenefitsSectionProps) {
+export function BenefitsSection() {
   return (
     <section id="benefits" className="py-16 md:py-24 bg-secondary/30">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{dictionary.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
-            {dictionary.description}
+            {texts.description}
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {benefitKeys.map((benefitKeyItem, index) => (
+          {benefits.map((benefit, index) => (
             <Card key={index} className="bg-card border-border rounded-xl card-hover p-2">
               <CardHeader className="items-center text-center">
                 <div className="p-4 bg-primary/10 rounded-full mb-4 inline-block">
-                  <benefitKeyItem.icon className="h-10 w-10 text-primary" />
+                  <benefit.icon className="h-10 w-10 text-primary" />
                 </div>
                 <CardTitle className="text-xl font-semibold text-primary-foreground font-heading">
-                  {dictionary[benefitKeyItem.titleKey]}
+                  {benefit.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-foreground/80 text-sm leading-relaxed">
-                  {dictionary[benefitKeyItem.descriptionKey]}
+                  {benefit.description}
                 </p>
               </CardContent>
             </Card>

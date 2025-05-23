@@ -1,46 +1,33 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MountainIcon, MenuIcon } from 'lucide-react'; 
-import { LanguageSwitcher } from '@/components/language-switcher';
-import type { Locale } from '@/i18n-config';
+import { MountainIcon, MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
+// Texts are now hardcoded in English
+const headerTexts = {
+  companyName: "Aetheria Consulting",
+  benefits: "Benefits",
+  process: "Process",
+  testimonials: "Testimonials",
+  about: "About",
+  contactUs: "Contact Us",
+  toggleMenu: "Toggle menu"
+};
 
-interface HeaderProps {
-  dictionary: {
-    header: {
-      companyName: string;
-      benefits: string;
-      process: string;
-      testimonials: string;
-      about: string;
-      contactUs: string;
-      toggleMenu: string;
-    };
-    languageSwitcher: {
-        changeLanguage: string;
-        spanish: string;
-        english: string;
-        portuguese: string;
-    }
-  };
-  currentLocale: Locale;
-}
-
-export function Header({ dictionary, currentLocale }: HeaderProps) {
+export function Header() {
   const navItems = [
-    { href: '#benefits', label: dictionary.header.benefits },
-    { href: '#process', label: dictionary.header.process },
-    { href: '#testimonials', label: dictionary.header.testimonials },
-    { href: '#about', label: dictionary.header.about },
+    { href: '#benefits', label: headerTexts.benefits },
+    { href: '#process', label: headerTexts.process },
+    { href: '#testimonials', label: headerTexts.testimonials },
+    { href: '#about', label: headerTexts.about },
   ];
 
   return (
     <header className="py-6 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href={`/${currentLocale}`} className="flex items-center gap-2" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <MountainIcon className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold text-primary-foreground font-heading">{dictionary.header.companyName}</span>
+          <span className="text-2xl font-bold text-primary-foreground font-heading">{headerTexts.companyName}</span>
         </Link>
         <nav className="hidden md:flex gap-4 items-center">
           {navItems.map(item => (
@@ -48,18 +35,18 @@ export function Header({ dictionary, currentLocale }: HeaderProps) {
               {item.label}
             </Link>
           ))}
-          <LanguageSwitcher currentLocale={currentLocale} dictionary={dictionary.languageSwitcher} />
+          {/* LanguageSwitcher removed */}
           <Link href="#contact" prefetch={false}>
             <Button className="btn-yellow rounded-md px-6 py-3">
-              {dictionary.header.contactUs}
+              {headerTexts.contactUs}
             </Button>
           </Link>
         </nav>
         <div className="md:hidden flex items-center">
-           <LanguageSwitcher currentLocale={currentLocale} dictionary={dictionary.languageSwitcher} />
+           {/* LanguageSwitcher removed */}
            <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label={dictionary.header.toggleMenu}>
+              <Button variant="ghost" size="icon" aria-label={headerTexts.toggleMenu}>
                 <MenuIcon className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
@@ -75,7 +62,7 @@ export function Header({ dictionary, currentLocale }: HeaderProps) {
                 <SheetClose asChild>
                   <Link href="#contact" prefetch={false}>
                     <Button className="w-full btn-yellow rounded-md py-3 text-base">
-                      {dictionary.header.contactUs}
+                      {headerTexts.contactUs}
                     </Button>
                   </Link>
                 </SheetClose>

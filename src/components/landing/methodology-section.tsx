@@ -2,72 +2,71 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SearchIcon, DraftingCompassIcon, RocketIcon, HandshakeIcon } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 
-interface MethodologySectionProps {
-  dictionary: {
-    title: string;
-    description: string;
-    step1Title: string;
-    step1Description: string;
-    step2Title: string;
-    step2Description: string;
-    step3Title: string;
-    step3Description: string;
-    step4Title: string;
-    step4Description: string;
-  };
-}
+// Texts are now hardcoded in English
+const texts = {
+  title: "AI Tailored to You: Our Process Towards Your Success",
+  description: "We don't just implement technology; we create custom AI solutions that understand your challenges, optimize your operations, and boost your real growth, freeing you to focus on what matters most.",
+  step1Title: "1. Deep and Strategic Diagnosis",
+  step1Description: "We go beyond the superficial. We listen to your story, thoroughly understand your unique challenges and goals (even those you haven't clearly identified yet), and precisely identify automation and AI opportunities that will generate the greatest impact on your business and peace of mind. It's the map to your success.",
+  step2Title: "2. Tailored Solution Design",
+  step2Description: "No generic solutions. We develop a personalized and robust AI strategy that perfectly aligns with your budget, capabilities, and, above all, your business objectives. We design the path you need.",
+  step3Title: "3. Agile and Purposeful Implementation",
+  step3Description: "We turn the plan into action. We manage implementation efficiently and with minimal disruption, ensuring AI integrates smoothly. We provide clear guidance and constant support so your team adopts the new technology with confidence.",
+  step4Title: "4. Continuous Optimization and Sustainable Growth",
+  step4Description: "Our partnership doesn't end with implementation. We offer post-implementation support, performance monitoring, and proactive adjustments to ensure your AI investment continues to evolve, maximizing your return and adapting to your future needs, acting as your strategic partner in continuous improvement."
+};
 
 interface ProcessStepData {
   icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
-  titleKey: keyof MethodologySectionProps['dictionary'];
-  descriptionKey: keyof MethodologySectionProps['dictionary'];
+  title: string;
+  description: string;
 }
 
-const processStepKeys: ProcessStepData[] = [
+const processSteps: ProcessStepData[] = [
   {
     icon: SearchIcon,
-    titleKey: 'step1Title',
-    descriptionKey: 'step1Description',
+    title: texts.step1Title,
+    description: texts.step1Description,
   },
   {
     icon: DraftingCompassIcon,
-    titleKey: 'step2Title',
-    descriptionKey: 'step2Description',
+    title: texts.step2Title,
+    description: texts.step2Description,
   },
   {
     icon: RocketIcon,
-    titleKey: 'step3Title',
-    descriptionKey: 'step3Description',
+    title: texts.step3Title,
+    description: texts.step3Description,
   },
   {
     icon: HandshakeIcon,
-    titleKey: 'step4Title',
-    descriptionKey: 'step4Description',
+    title: texts.step4Title,
+    description: texts.step4Description,
   },
 ];
 
-export function MethodologySection({ dictionary }: MethodologySectionProps) {
+export function MethodologySection() {
   return (
     <section id="process" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{dictionary.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
-            {dictionary.description}
+            {texts.description}
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-8">
-          {processStepKeys.map((stepKeyItem, index) => (
+          {processSteps.map((step, index) => (
             <Card key={index} className="bg-card border-border rounded-xl card-hover p-6 flex flex-col sm:flex-row items-start gap-6">
               <div className="p-3 bg-primary/10 rounded-lg shrink-0">
-                 <stepKeyItem.icon className="h-8 w-8 text-primary" />
+                 <step.icon className="h-8 w-8 text-primary" />
               </div>
               <div className="space-y-2">
                 <CardTitle className="text-xl font-semibold text-primary-foreground font-heading">
-                  {dictionary[stepKeyItem.titleKey]}
+                  {step.title}
                 </CardTitle>
                 <p className="text-foreground/80 text-sm leading-relaxed">
-                  {dictionary[stepKeyItem.descriptionKey]}
+                  {step.description}
                 </p>
               </div>
             </Card>
