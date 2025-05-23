@@ -11,37 +11,37 @@ interface BlogPostData {
   slug: string;
 }
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "Our Blog",
-  description: "Stay up-to-date with the latest trends in AI and business automation. Ideas, tips, and success stories to inspire your business.",
-  readMore: "Read More",
+  title: "Nuestro Blog",
+  description: "Mantente al día con las últimas tendencias en IA y automatización empresarial. Ideas, consejos e historias de éxito para inspirar tu negocio.",
+  readMore: "Leer Más",
   posts: [
     {
       id: "1",
-      title: "The Future of AI in Small Businesses",
-      summary: "Learn how AI is no longer just for large corporations and how your SME can benefit today.",
+      title: "El Futuro de la IA en las Pequeñas Empresas",
+      summary: "Aprende cómo la IA ya no es solo para grandes corporaciones y cómo tu PyME puede beneficiarse hoy.",
       slug: "future-of-ai-smb"
     },
     {
       id: "2",
-      title: "5 Ways to Automate Your Marketing with AI",
-      summary: "Discover practical AI tools and strategies to streamline your marketing efforts and boost engagement.",
+      title: "5 Maneras de Automatizar tu Marketing con IA",
+      summary: "Descubre herramientas y estrategias prácticas de IA para optimizar tus esfuerzos de marketing e impulsar el engagement.",
       slug: "automate-marketing-ai"
     },
     {
       id: "3",
-      title: "Understanding Natural Language Processing (NLP)",
-      summary: "A beginner-friendly guide to NLP and its applications in improving customer interactions.",
+      title: "Entendiendo el Procesamiento del Lenguaje Natural (PLN)",
+      summary: "Una guía amigable para principiantes sobre el PLN y sus aplicaciones para mejorar las interacciones con los clientes.",
       slug: "understanding-nlp"
     }
   ]
 };
 
 const blogPostAssets = [
-  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'futuristic technology' },
-  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'marketing automation' },
-  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'language processing' },
+  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'tecnologia futurista' },
+  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'automatizacion marketing' },
+  { imageUrl: 'https://placehold.co/600x400.png', imageHint: 'procesamiento lenguaje' },
 ];
 
 
@@ -73,7 +73,6 @@ export function BlogSection() {
                 <p className="text-foreground/80 text-sm leading-relaxed line-clamp-3">{post.summary}</p>
               </CardContent>
               <CardFooter className="p-6 pt-0">
-                {/* Blog detail pages would need to be /blog/[slug] not /en/blog/[slug] */}
                 <Link href={`/blog/${post.slug}`} passHref> 
                   <Button variant="link" className="text-primary p-0 hover:text-accent group">
                     {texts.readMore}

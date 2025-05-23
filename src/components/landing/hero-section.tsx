@@ -3,14 +3,14 @@ import { Button } from '@/components/ui/button';
 import { PlayCircleIcon, ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const heroTexts = {
-  titlePart1: "AI Tailored to You: ",
-  titlePart2: "Our Process",
-  titlePart3: " Towards Your Success.",
-  description: "Looking to take your business to the next level? At Aetheria Consulting, we transform the complexity of automation and AI into practical and accessible solutions for your SME. We help you professionalize and scale, unlocking your potential and maximizing your focus on what you're most passionate about and what led you to build your company.",
-  ctaButton: "Boost Your Business with AI: Free Diagnosis!",
-  videoCaption: "Meet Aetheria's CEO"
+  titlePart1: "IA a tu Medida: ",
+  titlePart2: "Nuestro Proceso",
+  titlePart3: " Hacia Tu Éxito.",
+  description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu PyME. Te ayudamos a profesionalizarte y escalar, desbloqueando tu potencial y maximizando tu enfoque en lo que más te apasiona y te llevó a construir tu empresa.",
+  ctaButton: "¡Impulsa tu Negocio con IA: Diagnóstico Gratuito!",
+  videoCaption: "Conoce al CEO de Aetheria"
 };
 
 export function HeroSection() {
@@ -39,7 +39,7 @@ export function HeroSection() {
               width={600}
               height={400}
               className="w-full h-full object-cover"
-              data-ai-hint="professional portrait"
+              data-ai-hint="retrato profesional"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <PlayCircleIcon className="h-20 w-20 text-white/80" />

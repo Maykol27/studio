@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "About Aetheria Consulting",
-  subtitle: "Your allies in AI-driven digital transformation. We are passionate about helping businesses thrive and scale.",
-  paragraph1: "Aetheria Consulting was born from the conviction that Artificial Intelligence should be accessible and beneficial for businesses of all sizes. We bring deep insight and experience in technology (AI, automation), project management, and continuous improvement, acquired in complex environments of large industries. Now, we bring that knowledge to create simple and practical solutions to professionalize and scale your company, regardless of its size or economic capacity.",
-  paragraph2: "Our mission is to empower businesses like yours to leverage the power of AI to optimize processes, reduce costs, improve decision-making, and enrich their customers' experience. We believe in a collaborative approach, working closely with you to understand your challenges and even discover opportunities you might not see, because we are experts in processes and in understanding your business.",
-  paragraph3: "With a focus on tangible results and an agile implementation process, we guide you every step of the way. Our goal is not just to provide you with AI tools, but to be your strategic partner in your company's growth, allowing you to focus on what you're passionate about and what led you to build your business."
+  title: "Sobre Aetheria Consulting",
+  subtitle: "Tus aliados en la transformación digital impulsada por IA. Nos apasiona ayudar a las empresas a prosperar y escalar.",
+  paragraph1: "Aetheria Consulting nació de la convicción de que la Inteligencia Artificial debe ser accesible y beneficiosa para empresas de todos los tamaños. Aportamos una profunda visión y experiencia en tecnología (IA, automatización), gestión de proyectos y mejora continua, adquirida en entornos complejos de grandes industrias. Ahora, llevamos ese conocimiento para crear soluciones simples y prácticas para profesionalizar y escalar tu empresa, sin importar su tamaño o capacidad económica.",
+  paragraph2: "Nuestra misión es empoderar a negocios como el tuyo para que aprovechen el poder de la IA para optimizar procesos, reducir costos, mejorar la toma de decisiones y enriquecer la experiencia de sus clientes. Creemos en un enfoque colaborativo, trabajando de cerca contigo para entender tus desafíos e incluso descubrir oportunidades que podrías no ver, porque somos expertos en procesos y en entender tu negocio.",
+  paragraph3: "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio."
 };
 
 export function AboutSection() {
@@ -32,7 +32,7 @@ export function AboutSection() {
               width={550}
               height={400}
               className="w-full h-full object-cover"
-              data-ai-hint="team collaboration office"
+              data-ai-hint="equipo colaboracion oficina"
             />
           </div>
         </div>

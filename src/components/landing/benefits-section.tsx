@@ -2,18 +2,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUpIcon, DollarSignIcon, BarChart2Icon, SmileIcon } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "Key Benefits of AI for Your Business",
-  description: "Discover how Artificial Intelligence transforms your business, optimizing resources and maximizing your ROI with a simple, guided implementation.",
-  benefit1Title: "Maximum Efficiency and Productivity",
-  benefit1Description: "Automate tedious tasks, free up valuable time for you and your team. Get fast, measurable results, so you can focus on strategic growth and what you're passionate about.",
-  benefit2Title: "Intelligent Cost Reduction",
-  benefit2Description: "Optimize resources and eliminate costly errors with AI solutions that directly impact your profitability. Transform expenses into smart investments that give you peace of mind.",
-  benefit3Title: "Data-Driven Decisions",
-  benefit3Description: "Make smarter decisions and anticipate your business's future with the power of AI. Transform complex data into a competitive advantage, with expert support and intuitive tools that give you confidence.",
-  benefit4Title: "Optimized Customer Experience",
-  benefit4Description: "Improve customer loyalty and satisfaction with AI. Personalize interactions and offer 24/7 support easily, freeing up your team for high-value relationships."
+  title: "Beneficios Clave de la IA para Tu Negocio",
+  description: "Descubre cómo la Inteligencia Artificial transforma tu negocio, optimizando recursos y maximizando tu ROI con una implementación simple y guiada.",
+  benefit1Title: "Máxima Eficiencia y Productividad",
+  benefit1Description: "Automatiza tareas tediosas, libera tiempo valioso para ti y tu equipo. Obtén resultados rápidos y medibles, para que puedas enfocarte en el crecimiento estratégico y en lo que te apasiona.",
+  benefit2Title: "Reducción Inteligente de Costos",
+  benefit2Description: "Optimiza recursos y elimina errores costosos con soluciones de IA que impactan directamente tu rentabilidad. Transforma gastos en inversiones inteligentes que te dan tranquilidad.",
+  benefit3Title: "Decisiones Basadas en Datos",
+  benefit3Description: "Toma decisiones más inteligentes y anticipa el futuro de tu negocio con el poder de la IA. Transforma datos complejos en una ventaja competitiva, con soporte experto y herramientas intuitivas que te dan confianza.",
+  benefit4Title: "Experiencia del Cliente Optimizada",
+  benefit4Description: "Mejora la lealtad y satisfacción del cliente con IA. Personaliza interacciones y ofrece soporte 24/7 fácilmente, liberando a tu equipo para relaciones de alto valor."
 };
 
 interface Benefit {

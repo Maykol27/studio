@@ -3,15 +3,15 @@ import { Button } from '@/components/ui/button';
 import { MountainIcon, MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const headerTexts = {
   companyName: "Aetheria Consulting",
-  benefits: "Benefits",
-  process: "Process",
-  testimonials: "Testimonials",
-  about: "About",
-  contactUs: "Contact Us",
-  toggleMenu: "Toggle menu"
+  benefits: "Beneficios",
+  process: "Proceso",
+  testimonials: "Testimonios",
+  about: "Nosotros",
+  contactUs: "Contáctanos",
+  toggleMenu: "Alternar menú"
 };
 
 export function Header() {
@@ -35,7 +35,6 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          {/* LanguageSwitcher removed */}
           <Link href="#contact" prefetch={false}>
             <Button className="btn-yellow rounded-md px-6 py-3">
               {headerTexts.contactUs}
@@ -43,7 +42,6 @@ export function Header() {
           </Link>
         </nav>
         <div className="md:hidden flex items-center">
-           {/* LanguageSwitcher removed */}
            <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label={headerTexts.toggleMenu}>

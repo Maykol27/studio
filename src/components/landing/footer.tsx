@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { MountainIcon } from 'lucide-react';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
   companyName: "Aetheria Consulting",
-  copyright: "Aetheria Consulting. All rights reserved.",
-  privacyPolicy: "Privacy Policy",
-  termsOfService: "Terms of Service"
+  copyright: "Aetheria Consulting. Todos los derechos reservados.",
+  privacyPolicy: "Política de Privacidad",
+  termsOfService: "Términos de Servicio"
 };
 
 export function Footer() {
@@ -24,7 +24,6 @@ export function Footer() {
             &copy; {currentYear} {texts.copyright}
           </p>
           <div className="flex gap-4">
-            {/* Links point to root, assuming these pages are not localized or handled by root paths */}
             <Link href="/privacy-policy" className="text-sm hover:text-primary transition-colors" prefetch={false}>
               {texts.privacyPolicy}
             </Link>

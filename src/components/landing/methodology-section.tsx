@@ -2,18 +2,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SearchIcon, DraftingCompassIcon, RocketIcon, HandshakeIcon } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "AI Tailored to You: Our Process Towards Your Success",
-  description: "We don't just implement technology; we create custom AI solutions that understand your challenges, optimize your operations, and boost your real growth, freeing you to focus on what matters most.",
-  step1Title: "1. Deep and Strategic Diagnosis",
-  step1Description: "We go beyond the superficial. We listen to your story, thoroughly understand your unique challenges and goals (even those you haven't clearly identified yet), and precisely identify automation and AI opportunities that will generate the greatest impact on your business and peace of mind. It's the map to your success.",
-  step2Title: "2. Tailored Solution Design",
-  step2Description: "No generic solutions. We develop a personalized and robust AI strategy that perfectly aligns with your budget, capabilities, and, above all, your business objectives. We design the path you need.",
-  step3Title: "3. Agile and Purposeful Implementation",
-  step3Description: "We turn the plan into action. We manage implementation efficiently and with minimal disruption, ensuring AI integrates smoothly. We provide clear guidance and constant support so your team adopts the new technology with confidence.",
-  step4Title: "4. Continuous Optimization and Sustainable Growth",
-  step4Description: "Our partnership doesn't end with implementation. We offer post-implementation support, performance monitoring, and proactive adjustments to ensure your AI investment continues to evolve, maximizing your return and adapting to your future needs, acting as your strategic partner in continuous improvement."
+  title: "IA a tu Medida: Nuestro Proceso Hacia Tu Éxito",
+  description: "No solo implementamos tecnología; creamos soluciones de IA personalizadas que entienden tus desafíos, optimizan tus operaciones e impulsan tu crecimiento real, liberándote para enfocarte en lo que más importa.",
+  step1Title: "1. Diagnóstico Profundo y Estratégico",
+  step1Description: "Vamos más allá de lo superficial. Escuchamos tu historia, entendemos a fondo tus desafíos y metas únicas (incluso aquellas que no has identificado claramente), e identificamos con precisión las oportunidades de automatización e IA que generarán el mayor impacto en tu negocio y tranquilidad. Es el mapa hacia tu éxito.",
+  step2Title: "2. Diseño de Soluciones a Medida",
+  step2Description: "Sin soluciones genéricas. Desarrollamos una estrategia de IA personalizada y robusta que se alinea perfectamente con tu presupuesto, capacidades y, sobre todo, tus objetivos de negocio. Diseñamos el camino que necesitas.",
+  step3Title: "3. Implementación Ágil y con Propósito",
+  step3Description: "Convertimos el plan en acción. Gestionamos la implementación de manera eficiente y con mínima interrupción, asegurando que la IA se integre sin problemas. Brindamos orientación clara y soporte constante para que tu equipo adopte la nueva tecnología con confianza.",
+  step4Title: "4. Optimización Continua y Crecimiento Sostenible",
+  step4Description: "Nuestra asociación no termina con la implementación. Ofrecemos soporte post-implementación, monitoreo de rendimiento y ajustes proactivos para asegurar que tu inversión en IA continúe evolucionando, maximizando tu retorno y adaptándose a tus necesidades futuras, actuando como tu socio estratégico en la mejora continua."
 };
 
 interface ProcessStepData {

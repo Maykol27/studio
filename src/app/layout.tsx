@@ -19,7 +19,7 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: 'Aetheria Consulting',
-  description: 'AI Tailored to You: Our Process Towards Your Success.',
+  description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="es" className="dark">
       <body className={`${poppins.variable} ${openSans.variable} antialiased bg-background text-foreground`}>
         {children}
         <Toaster />

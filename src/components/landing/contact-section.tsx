@@ -12,30 +12,30 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "Let's Talk About Your Business",
-  description: "Complete the form and take the first step towards the digital transformation of your business.",
-  cardTitle: "Contact Us",
-  cardDescription: "We're excited to hear from you.",
-  nameLabel: "Full Name",
-  namePlaceholder: "John Doe",
-  nameError: "Name must be at least 2 characters.",
-  emailLabel: "Email Address",
-  emailPlaceholder: "you@example.com",
-  emailError: "Please enter a valid email address.",
-  companyLabel: "Company (Optional)",
-  companyPlaceholder: "Your Company Inc.",
-  messageLabel: "Message",
-  messagePlaceholder: "How can we help you?",
-  messageError: "Message must be at least 10 characters.",
-  submitButton: "Send Request",
-  submitButtonLoading: "Sending...",
-  toastSuccessTitle: "Message Sent!",
-  toastSuccessDescription: "Your request has been sent successfully! We'll be in touch soon.",
+  title: "Hablemos de Tu Negocio",
+  description: "Completa el formulario y da el primer paso hacia la transformación digital de tu negocio.",
+  cardTitle: "Contáctanos",
+  cardDescription: "Estamos emocionados de saber de ti.",
+  nameLabel: "Nombre Completo",
+  namePlaceholder: "Juan Pérez",
+  nameError: "El nombre debe tener al menos 2 caracteres.",
+  emailLabel: "Dirección de Correo Electrónico",
+  emailPlaceholder: "tu@ejemplo.com",
+  emailError: "Por favor, ingresa una dirección de correo electrónico válida.",
+  companyLabel: "Empresa (Opcional)",
+  companyPlaceholder: "Tu Empresa Inc.",
+  messageLabel: "Mensaje",
+  messagePlaceholder: "¿Cómo podemos ayudarte?",
+  messageError: "El mensaje debe tener al menos 10 caracteres.",
+  submitButton: "Enviar Solicitud",
+  submitButtonLoading: "Enviando...",
+  toastSuccessTitle: "¡Mensaje Enviado!",
+  toastSuccessDescription: "¡Tu solicitud ha sido enviada con éxito! Nos pondremos en contacto pronto.",
   toastErrorTitle: "Error",
-  toastErrorDescriptionGeneral: "Failed to send message. Please try again.",
-  toastErrorDescriptionUnexpected: "An unexpected error occurred. Please try again later."
+  toastErrorDescriptionGeneral: "No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.",
+  toastErrorDescriptionUnexpected: "Ocurrió un error inesperado. Por favor, inténtalo más tarde."
 };
 
 type ContactFormData = z.infer<ReturnType<typeof getContactFormSchema>>;

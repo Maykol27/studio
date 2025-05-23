@@ -13,23 +13,23 @@ import { useToast } from '@/hooks/use-toast';
 import { getAutomationSuggestions, type AutomationSuggestionsInput, type AutomationSuggestionsOutput } from '@/ai/flows/automation-suggestions';
 import { Loader2 } from 'lucide-react';
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "Discover Your Automation Potential",
-  description: "Complete this form to receive personalized AI-powered automation suggestions for your business.",
-  formCardTitle: "Get Your Suggestions",
-  formCardDescription: "Tell us about your business, and our AI will provide tailored automation ideas.",
-  businessDescriptionLabel: "Business Description",
-  businessDescriptionPlaceholder: "Describe your business processes, challenges, and goals...",
-  businessDescriptionError: "Please provide a detailed description of at least 50 characters.",
-  submitButton: "Get Suggestions",
-  submitButtonLoading: "Generating...",
-  suggestionsCardTitle: "Your AI-Powered Suggestions",
-  suggestionsGeneratingTitle: "Generating Suggestions...",
-  toastSuccessTitle: "Suggestions Generated!",
-  toastSuccessDescription: "Your personalized automation suggestions are ready.",
+  title: "Descubre Tu Potencial de Automatización",
+  description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
+  formCardTitle: "Obtén Tus Sugerencias",
+  formCardDescription: "Cuéntanos sobre tu negocio y nuestra IA te proporcionará ideas de automatización a medida.",
+  businessDescriptionLabel: "Descripción del Negocio",
+  businessDescriptionPlaceholder: "Describe los procesos, desafíos y objetivos de tu negocio...",
+  businessDescriptionError: "Por favor, proporciona una descripción detallada de al menos 50 caracteres.",
+  submitButton: "Obtener Sugerencias",
+  submitButtonLoading: "Generando...",
+  suggestionsCardTitle: "Tus Sugerencias Impulsadas por IA",
+  suggestionsGeneratingTitle: "Generando Sugerencias...",
+  toastSuccessTitle: "¡Sugerencias Generadas!",
+  toastSuccessDescription: "Tus sugerencias de automatización personalizadas están listas.",
   toastErrorTitle: "Error",
-  toastErrorDescription: "Failed to generate suggestions. Please try again."
+  toastErrorDescription: "No se pudieron generar las sugerencias. Por favor, inténtalo de nuevo."
 };
 
 export function AutomationAdvisorSection() {

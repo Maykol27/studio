@@ -10,39 +10,39 @@ interface TestimonialData {
   rating: number;
 }
 
-// Texts are now hardcoded in English
+// Texts are now hardcoded in Spanish
 const texts = {
-  title: "What Our Clients Say",
-  description: "Real stories from businesses thriving with our AI solutions.",
+  title: "Lo que Dicen Nuestros Clientes",
+  description: "Historias reales de negocios prosperando con nuestras soluciones de IA.",
   testimonials: [
     {
       id: "1",
-      name: "Jane Doe",
-      company: "Innovatech Solutions",
-      quote: "Aetheria Consulting transformed our operations. Their AI solutions increased our efficiency by <strong class=\"text-primary\">40%</strong> and significantly <strong class=\"text-primary\">reduced costs</strong>. Highly recommended!",
+      name: "Juana Pérez",
+      company: "Soluciones Innovatech",
+      quote: "Aetheria Consulting transformó nuestras operaciones. Sus soluciones de IA aumentaron nuestra eficiencia en un <strong class=\"text-primary\">40%</strong> y redujeron significativamente los <strong class=\"text-primary\">costos</strong>. ¡Altamente recomendados!",
       rating: 5
     },
     {
       id: "2",
-      name: "John Smith",
-      company: "MarketBoosters Inc.",
-      quote: "The personalized approach and deep understanding of our needs were exceptional. We now make <strong class=\"text-primary\">data-driven decisions</strong> with confidence, thanks to Aetheria.",
+      name: "Juan García",
+      company: "Impulsores de Mercado Inc.",
+      quote: "El enfoque personalizado y la profunda comprensión de nuestras necesidades fueron excepcionales. Ahora tomamos <strong class=\"text-primary\">decisiones basadas en datos</strong> con confianza, gracias a Aetheria.",
       rating: 5
     },
     {
       id: "3",
-      name: "Alice Brown",
-      company: "Creative Ventures LLC",
-      quote: "Their team is not just technically proficient but also great strategic partners. The <strong class=\"text-primary\">customer experience optimization</strong> has been a game-changer for us.",
+      name: "Alicia Moreno",
+      company: "Emprendimientos Creativos LLC",
+      quote: "Su equipo no solo es técnicamente competente sino también grandes socios estratégicos. La <strong class=\"text-primary\">optimización de la experiencia del cliente</strong> ha sido un cambio de juego para nosotros.",
       rating: 4
     }
   ]
 };
 
 const testimonialAssets = [
-  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'happy client' },
-  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'satisfied customer' },
-  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'smiling person' },
+  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'cliente feliz' },
+  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'cliente satisfecho' },
+  { imageUrl: 'https://placehold.co/100x100.png', imageHint: 'persona sonriendo' },
 ];
 
 export function TestimonialsSection() {
