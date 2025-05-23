@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        sans: ['var(--font-open-sans)', 'sans-serif'],
+        heading: ['var(--font-poppins)', 'sans-serif'],
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -62,10 +66,15 @@ export default {
   			}
   		},
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: 'var(--radius)', // 12px
+  			md: 'calc(var(--radius) - 4px)', // 8px
+  			sm: 'var(--radius-sm)', // 8px (updated)
+        xs: 'var(--radius-xs)' // 6px (new)
   		},
+      boxShadow: {
+        custom: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+        'custom-hover': '0px 8px 25px rgba(0, 0, 0, 0.3)',
+      },
   		keyframes: {
   			'accordion-down': {
   				from: {
