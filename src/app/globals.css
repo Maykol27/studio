@@ -12,91 +12,96 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer base {
   :root {
-    --background: 265 30% 16%; /* #262032 */
-    --foreground: 0 0% 88%; /* #E0E0E0 */
+    /* Hedera-inspired Light Theme */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 220 10% 20%; /* Dark Gray for text e.g. #2d3136 */
 
-    --card: 265 30% 20%; /* Slightly lighter than background for cards #2E263D*/
-    --card-foreground: 0 0% 88%; /* #E0E0E0 */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 220 10% 20%; /* Dark Gray for card text */
 
-    --popover: 265 30% 14%; /* Darker for popovers #201A2A */
-    --popover-foreground: 0 0% 88%; /* #E0E0E0 */
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 220 10% 20%; /* Dark Gray for popover text */
 
-    --primary: 279 79% 53%; /* #8A2BE2 */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --primary: 210 100% 50%; /* Vibrant Blue e.g. #007FFF */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 265 30% 25%; /* #3A314A */
-    --secondary-foreground: 0 0% 95%; /* #F2F2F2 */
+    --secondary: 270 70% 60%; /* Medium Purple e.g. #8C4DFF */
+    --secondary-foreground: 0 0% 100%; /* White */
 
-    --muted: 265 30% 22%; /* #332A42 */
-    --muted-foreground: 0 0% 60%; /* #999999 */
+    --muted: 220 15% 96%; /* Very Light Gray e.g. #f2f4f7 */
+    --muted-foreground: 220 10% 45%; /* Medium Gray for muted text e.g. #6a7078 */
 
-    --accent: 213 79% 53%; /* #2B8AE2 */
-    --accent-foreground: 0 0% 100%; /* #FFFFFF */
+    --accent: 170 70% 45%;  /* Teal/Cyan e.g. #20C1BD (adjusted for more vibrancy) */
+    --accent-foreground: 0 0% 100%; /* White text for contrast on darker accent */
 
-    --destructive: 0 72% 51%; /* #E53E3E */
-    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+    --destructive: 0 72% 51%; /* Red e.g. #E53E3E */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 265 30% 30%; /* #473C5A */
-    --input: 265 30% 28%; /* #423754 */
-    --ring: 279 79% 63%; /* Lighter purple for ring #9F4BFF */
+    --border: 220 15% 88%; /* Light Gray for borders e.g. #d9dde2 */
+    --input: 220 15% 94%; /* Slightly off-white for input backgrounds e.g. #eaedf0 */
+    --ring: 210 100% 60%; /* Lighter Blue for focus rings e.g. #3399FF */
 
-    --radius: 0.75rem; /* 12px */
-    --radius-sm: 0.5rem; /* 8px */
-    --radius-xs: 0.375rem; /* 6px */
+    --radius: 0.5rem; /* 8px - Hedera uses less pronounced rounding */
+    --radius-sm: 0.375rem; /* 6px */
+    --radius-xs: 0.25rem; /* 4px */
 
-
-    --sidebar-background: 265 30% 12%;
-    --sidebar-foreground: 0 0% 88%;
-    --sidebar-primary: 279 79% 53%;
+    /* Keeping chart and sidebar variables for potential future use,
+       but they will effectively use the new theme colors if not overridden.
+       For a true Hedera style, sidebars might be light with dark text. */
+    --sidebar-background: 0 0% 98%; /* Very light gray for sidebar e.g. #f9fafb */
+    --sidebar-foreground: 220 10% 25%; /* Darker gray for sidebar text */
+    --sidebar-primary: 210 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 265 30% 20%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 265 30% 25%;
-    --sidebar-ring: 279 79% 63%;
+    --sidebar-accent: 220 15% 92%; /* Lighter accent for sidebar interactive elements */
+    --sidebar-accent-foreground: 210 100% 50%; /* Primary blue for text on accent */
+    --sidebar-border: 220 15% 85%;
+    --sidebar-ring: 210 100% 60%;
 
-    --chart-1: 279 79% 53%;
-    --chart-2: 213 79% 53%;
-    --chart-3: 320 79% 53%;
-    --chart-4: 250 79% 53%;
-    --chart-5: 180 79% 53%;
+    --chart-1: 210 100% 50%; /* Blue */
+    --chart-2: 170 70% 45%; /* Teal */
+    --chart-3: 270 70% 60%; /* Purple */
+    --chart-4: 30 100% 55%; /* Orange */
+    --chart-5: 320 80% 60%; /* Pink */
   }
 
   .dark {
-    /* Keeping dark theme consistent with the primary theme specified */
-    --background: 265 30% 16%;
-    --foreground: 0 0% 88%;
-    --card: 265 30% 20%;
-    --card-foreground: 0 0% 88%;
-    --popover: 265 30% 14%;
-    --popover-foreground: 0 0% 88%;
-    --primary: 279 79% 53%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 265 30% 25%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 265 30% 22%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 213 79% 53%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 265 30% 30%;
-    --input: 265 30% 28%;
-    --ring: 279 79% 63%;
-    
-    --sidebar-background: 265 30% 12%;
-    --sidebar-foreground: 0 0% 88%;
-    --sidebar-primary: 279 79% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 265 30% 20%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 265 30% 25%;
-    --sidebar-ring: 279 79% 63%;
+    /* For now, dark theme will be a slightly adjusted version of the light theme's structure.
+       A true Hedera-style dark theme would require a separate design pass.
+       This is a basic inversion for consistency, not a Hedera-dark-theme.
+    */
+    --background: 220 10% 10%; /* Very Dark Gray/Almost Black */
+    --foreground: 0 0% 90%; /* Light Gray for text */
 
-    --chart-1: 279 79% 53%;
-    --chart-2: 213 79% 53%;
-    --chart-3: 320 79% 53%;
-    --chart-4: 250 79% 53%;
-    --chart-5: 180 79% 53%;
+    --card: 220 10% 15%; /* Darker Gray for cards */
+    --card-foreground: 0 0% 90%;
+
+    --popover: 220 10% 12%; /* Even Darker for popovers */
+    --popover-foreground: 0 0% 90%;
+
+    --primary: 210 100% 55%; /* Slightly lighter Blue for dark mode */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 70% 65%; /* Slightly lighter Purple */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 10% 20%; /* Dark Gray for muted backgrounds */
+    --muted-foreground: 0 0% 60%; /* Lighter Muted Text */
+
+    --accent: 170 70% 50%;  /* Teal/Cyan */
+    --accent-foreground: 0 0% 100%;
+
+    --border: 220 10% 25%; /* Darker Gray for borders */
+    --input: 220 10% 18%; /* Dark Gray for input backgrounds */
+    --ring: 210 100% 65%; /* Brighter Blue for focus rings */
+    
+    --sidebar-background: 220 10% 8%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 210 100% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 10% 15%;
+    --sidebar-accent-foreground: 210 100% 55%;
+    --sidebar-border: 220 10% 22%;
+    --sidebar-ring: 210 100% 65%;
   }
 }
 
@@ -106,22 +111,31 @@ h1, h2, h3, h4, h5, h6 {
   }
   body {
     @apply bg-background text-foreground;
-    /* Apply dark theme by default */
-    @apply dark;
+    /* Default to light theme based on Hedera */
+    /* @apply dark; */ /* Remove default dark theme for now */
   }
 }
 
-/* Custom button style for yellow CTA */
-.btn-yellow {
-  @apply bg-yellow-400 text-background font-semibold hover:bg-yellow-500 transition-all duration-300 ease-in-out;
+/* Custom button style for primary CTA (replaces .btn-yellow) */
+.btn-cta-primary {
+  @apply bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold hover:shadow-lg transition-all duration-300 ease-in-out;
 }
+.btn-cta-primary svg {
+  @apply text-primary-foreground;
+}
+
 
 /* Input focus style */
 .input-focus {
   @apply focus:ring-2 focus:ring-ring focus:border-ring;
 }
 
-/* Card hover style */
+/* Card hover style - more subtle for light theme */
 .card-hover {
-  @apply shadow-custom hover:shadow-custom-hover transform hover:-translate-y-1 transition-all duration-300 ease-in-out;
+  @apply shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-300 ease-in-out;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
 }

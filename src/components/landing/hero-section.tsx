@@ -9,43 +9,57 @@ const heroTexts = {
   titlePart2: "Nuestro Proceso",
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu PyME. Te ayudamos a profesionalizarte y escalar, desbloqueando tu potencial y maximizando tu enfoque en lo que más te apasiona y te llevó a construir tu empresa.",
-  ctaButton: "¡Impulsa tu Negocio con IA: Diagnóstico Gratuito!",
+  ctaButton: "¡Impulsa tu Negocio con IA!", // Shorter CTA
   videoCaption: "Conoce al CEO de Aetheria"
 };
 
 export function HeroSection() {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gradient-to-br from-background to-secondary/30 min-h-screen flex items-center pt-20 sm:pt-24">
+    <section 
+      id="hero" 
+      className="min-h-screen flex items-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background" // Subtle gradient
+    >
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground font-heading leading-tight">
-              {heroTexts.titlePart1}<br /> <span className="text-primary">{heroTexts.titlePart2}</span>{heroTexts.titlePart3}
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground font-heading leading-tight">
+              {heroTexts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{heroTexts.titlePart2}</span>{heroTexts.titlePart3}
             </h1>
-            <p className="text-md sm:text-lg md:text-xl text-foreground/80 leading-relaxed">
+            <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
               {heroTexts.description}
             </p>
-            <Link href="#automation-advisor" passHref>
-              <Button size="lg" className="btn-yellow rounded-md px-6 py-3 text-base sm:text-lg group w-full sm:w-auto">
-                {heroTexts.ctaButton}
-                <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <Link href="#automation-advisor" passHref>
+                <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full sm:w-auto shadow-lg hover:shadow-xl">
+                  {heroTexts.ctaButton}
+                  <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              {/* Optional: Secondary CTA like "Learn More" or "Watch Video" can be added here */}
+              {/* Example: 
+              <Button size="lg" variant="outline" className="rounded-md px-8 py-3.5 text-base sm:text-lg group w-full sm:w-auto border-primary text-primary hover:bg-primary/10">
+                Ver Video Intro
+                <PlayCircleIcon className="ml-2 h-5 w-5" />
+              </Button> 
+              */}
+            </div>
           </div>
-          <div className="relative group rounded-xl overflow-hidden shadow-custom aspect-video mt-6 md:mt-0">
+          <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-300">
+            {/* Placeholder for a more dynamic visual or video */}
             <Image
-              src="https://placehold.co/600x400.png"
+              src="https://placehold.co/600x400.png" // Consider a more abstract/techy placeholder
               alt={heroTexts.videoCaption}
               width={600}
               height={400}
-              className="w-full h-full object-cover"
-              data-ai-hint="retrato profesional"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              data-ai-hint="tecnologia abstracta innovacion" // Updated hint
+              priority // For LCP
             />
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <PlayCircleIcon className="h-16 w-16 sm:h-20 sm:w-20 text-white/80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+              <PlayCircleIcon className="h-20 w-20 text-white/90 transform group-hover:scale-110 transition-transform" />
             </div>
-            <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-background/70 backdrop-blur-sm p-2 rounded-md">
-              <p className="text-xs sm:text-sm text-foreground">{heroTexts.videoCaption}</p>
+            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-black/50 backdrop-blur-sm p-2 rounded-md">
+              <p className="text-xs sm:text-sm text-white/90">{heroTexts.videoCaption}</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MountainIcon, MenuIcon } from 'lucide-react';
+import { LayersIcon, MenuIcon } from 'lucide-react'; // Replaced MountainIcon with LayersIcon
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
 // Texts are now hardcoded in Spanish
@@ -23,20 +23,25 @@ export function Header() {
   ];
 
   return (
-    <header className="py-6 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
+    <header className="py-4 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <MountainIcon className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold text-primary-foreground font-heading">{headerTexts.companyName}</span>
+        <Link href="/" className="flex items-center gap-2 group" prefetch={false}>
+          <LayersIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
+          <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{headerTexts.companyName}</span>
         </Link>
-        <nav className="hidden md:flex gap-4 items-center">
+        <nav className="hidden md:flex gap-6 items-center"> {/* Increased gap */}
           {navItems.map(item => (
-            <Link key={item.href} href={item.href} className="text-sm font-medium hover:text-primary transition-colors" prefetch={false}>
+            <Link 
+              key={item.href} 
+              href={item.href} 
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors" 
+              prefetch={false}
+            >
               {item.label}
             </Link>
           ))}
           <Link href="#contact" prefetch={false}>
-            <Button className="btn-yellow rounded-md px-6 py-3">
+            <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm"> {/* Adjusted padding and text size */}
               {headerTexts.contactUs}
             </Button>
           </Link>
@@ -48,18 +53,18 @@ export function Header() {
                 <MenuIcon className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-card text-card-foreground p-6">
-              <div className="flex flex-col space-y-4">
+            <SheetContent side="right" className="w-[280px] bg-background text-foreground p-6"> {/* Use background for sheet */}
+              <div className="flex flex-col space-y-5 pt-6"> {/* Increased space and padding-top */}
                 {navItems.map(item => (
                   <SheetClose key={item.href} asChild>
-                    <Link href={item.href} className="text-lg font-medium hover:text-primary transition-colors" prefetch={false}>
+                    <Link href={item.href} className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
                       {item.label}
                     </Link>
                   </SheetClose>
                 ))}
                 <SheetClose asChild>
-                  <Link href="#contact" prefetch={false}>
-                    <Button className="w-full btn-yellow rounded-md py-3 text-base">
+                  <Link href="#contact" prefetch={false} className="mt-4">
+                    <Button className="w-full btn-cta-primary rounded-md py-3 text-base">
                       {headerTexts.contactUs}
                     </Button>
                   </Link>
