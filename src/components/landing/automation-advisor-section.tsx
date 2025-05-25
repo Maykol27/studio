@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,9 +19,9 @@ import { Loader2 } from 'lucide-react';
 // Texts are now hardcoded in Spanish
 const texts = {
   title: "Descubre Tu Potencial de Automatización",
-  description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
-  formCardTitle: "Obtén Tus Sugerencias",
-  formCardDescription: "Cuéntanos sobre tu negocio y nuestra IA te proporcionará ideas de automatización a medida.",
+  description: "Completa este formulario para recibir un primer análisis y dar el siguiente paso hacia la transformación de tu negocio.",
+  formCardTitle: "Análisis Inicial Gratuito",
+  formCardDescription: "Cuéntanos sobre tu negocio y te indicaremos cómo podemos ayudarte.",
   
   businessDescriptionLabel: "Descripción del Negocio",
   businessDescriptionPlaceholder: "Describe los procesos clave, la industria y el tamaño de tu negocio...",
@@ -42,7 +43,7 @@ const texts = {
 
   aiBudgetLabel: "Presupuesto para IA (Opcional)",
   aiBudgetPlaceholder: "Selecciona un rango de presupuesto",
-   aiBudgetOptions: [
+  aiBudgetOptions: [
     { value: "no-especificado", label: "No especificado / No estoy seguro" },
     { value: "muy-limitado", label: "Muy limitado" },
     { value: "limitado", label: "Limitado" },
@@ -50,14 +51,15 @@ const texts = {
     { value: "sustancial", label: "Sustancial" },
   ],
 
-  submitButton: "Obtener Sugerencias",
-  submitButtonLoading: "Generando...",
-  suggestionsCardTitle: "Tus Sugerencias Impulsadas por IA",
-  suggestionsGeneratingTitle: "Generando Sugerencias...",
-  toastSuccessTitle: "¡Sugerencias Generadas!",
-  toastSuccessDescription: "Tus sugerencias de automatización personalizadas están listas.",
+  submitButton: "Analizar Potencial",
+  submitButtonLoading: "Analizando...",
+  nextStepsTitle: "¡Excelente Primer Paso!",
+  generatingTitle: "Analizando...",
+  scheduleConsultationButton: "Agendar Asesoría Personalizada",
+  toastSuccessTitle: "¡Análisis Completado!",
+  toastSuccessDescription: "Hemos procesado tu información. Revisa los siguientes pasos.",
   toastErrorTitle: "Error",
-  toastErrorDescription: "No se pudieron generar las sugerencias. Por favor, inténtalo de nuevo."
+  toastErrorDescription: "No se pudo procesar tu solicitud. Por favor, inténtalo de nuevo."
 };
 
 const formSchema = z.object({
@@ -71,7 +73,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export function AutomationAdvisorSection() {
   const [isLoading, setIsLoading] = useState(false);
-  const [suggestions, setSuggestions] = useState<string | null>(null);
+  const [analysisResult, setAnalysisResult] = useState<AutomationSuggestionsOutput | null>(null);
   const { toast } = useToast();
 
   const {
@@ -83,13 +85,13 @@ export function AutomationAdvisorSection() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aiBudget: "",
+      aiBudget: "no-especificado", // Default to "no-especificado"
     }
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsLoading(true);
-    setSuggestions(null);
+    setAnalysisResult(null);
     try {
       const input: AutomationSuggestionsInput = { 
         businessDescription: data.businessDescription,
@@ -98,14 +100,15 @@ export function AutomationAdvisorSection() {
         aiBudget: data.aiBudget || "no-especificado", 
       };
       const result: AutomationSuggestionsOutput = await getAutomationSuggestions(input);
-      setSuggestions(result.suggestions);
+      setAnalysisResult(result);
       toast({
         title: texts.toastSuccessTitle,
         description: texts.toastSuccessDescription,
       });
-      reset(); 
+      // No reseteamos el formulario para que el usuario vea sus datos mientras ve el resultado.
+      // reset(); 
     } catch (error) {
-      console.error("Error getting suggestions:", error);
+      console.error("Error getting analysis:", error);
       toast({
         title: texts.toastErrorTitle,
         description: texts.toastErrorDescription,
@@ -127,12 +130,12 @@ export function AutomationAdvisorSection() {
         </div>
 
         <div className={
-          (suggestions || isLoading) 
+          (analysisResult || isLoading) 
           ? "grid md:grid-cols-2 gap-8 items-start" 
           : "flex justify-center" 
         }>
           <Card className={`bg-card border-border rounded-xl shadow-md card-hover ${
-            !(suggestions || isLoading) ? 'w-full max-w-2xl' : ''
+            !(analysisResult || isLoading) ? 'w-full max-w-2xl' : ''
           }`}>
             <CardHeader>
               <CardTitle className="text-2xl font-heading text-foreground">{texts.formCardTitle}</CardTitle>
@@ -141,7 +144,7 @@ export function AutomationAdvisorSection() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <div>
                   <Label htmlFor="businessDescription" className="block text-sm font-medium text-foreground/90 mb-1">
                     {texts.businessDescriptionLabel}
@@ -150,7 +153,7 @@ export function AutomationAdvisorSection() {
                     id="businessDescription"
                     {...register('businessDescription')}
                     rows={3}
-                    className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.businessDescription ? 'border-destructive' : ''}`}
+                    className={`w-full bg-input border-border rounded-xs p-3 sm:h-24 input-focus ${errors.businessDescription ? 'border-destructive' : ''}`}
                     placeholder={texts.businessDescriptionPlaceholder}
                   />
                   {errors.businessDescription && (
@@ -166,7 +169,7 @@ export function AutomationAdvisorSection() {
                     id="businessNeeds"
                     {...register('businessNeeds')}
                     rows={3}
-                    className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.businessNeeds ? 'border-destructive' : ''}`}
+                    className={`w-full bg-input border-border rounded-xs p-3 sm:h-24 input-focus ${errors.businessNeeds ? 'border-destructive' : ''}`}
                     placeholder={texts.businessNeedsPlaceholder}
                   />
                   {errors.businessNeeds && (
@@ -212,7 +215,7 @@ export function AutomationAdvisorSection() {
                     control={control}
                     name="aiBudget"
                     render={({ field }) => (
-                      <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value || "no-especificado"}>
                         <SelectTrigger
                           id="aiBudget"
                           className={`w-full bg-input border-border rounded-xs input-focus ${errors.aiBudget ? 'border-destructive' : ''}`}
@@ -248,22 +251,24 @@ export function AutomationAdvisorSection() {
             </CardContent>
           </Card>
           
-          {suggestions && (
+          {analysisResult && !isLoading && (
             <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-foreground">{texts.suggestionsCardTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-foreground">{texts.nextStepsTitle}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none text-foreground/90 whitespace-pre-line">
-                  {suggestions}
-                </div>
+              <CardContent className="space-y-4">
+                <p className="text-foreground/90">{analysisResult.shortResponse}</p>
+                <p className="text-foreground/90 font-semibold">{analysisResult.callToAction}</p>
+                <Button asChild className="w-full btn-cta-primary rounded-md py-3 text-base mt-4">
+                  <Link href="#contact">{texts.scheduleConsultationButton}</Link>
+                </Button>
               </CardContent>
             </Card>
           )}
-          {!suggestions && isLoading && (
+          {!analysisResult && isLoading && (
              <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-foreground">{texts.suggestionsGeneratingTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-foreground">{texts.generatingTitle}</CardTitle>
               </CardHeader>
               <CardContent className="flex items-center justify-center py-10">
                 <Loader2 className="h-12 w-12 text-primary animate-spin" />
@@ -275,4 +280,3 @@ export function AutomationAdvisorSection() {
     </section>
   );
 }
-

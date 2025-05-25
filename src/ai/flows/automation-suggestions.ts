@@ -32,9 +32,12 @@ const AutomationSuggestionsInputSchema = z.object({
 export type AutomationSuggestionsInput = z.infer<typeof AutomationSuggestionsInputSchema>;
 
 const AutomationSuggestionsOutputSchema = z.object({
-  suggestions: z
+  shortResponse: z
     .string()
-    .describe('A list of personalized automation strategies for the business, formatted as a multi-line string. Each suggestion should be actionable and tailored to the input.'),
+    .describe('A short, encouraging message acknowledging the user input.'),
+  callToAction: z
+    .string()
+    .describe('A clear call to action prompting the user to complete the contact form for a personalized consultation to discuss specific strategies.'),
 });
 export type AutomationSuggestionsOutput = z.infer<typeof AutomationSuggestionsOutputSchema>;
 
@@ -46,31 +49,21 @@ const prompt = ai.definePrompt({
   name: 'automationSuggestionsPrompt',
   input: {schema: AutomationSuggestionsInputSchema},
   output: {schema: AutomationSuggestionsOutputSchema},
-  prompt: `Eres un consultor experto en IA y automatización de procesos de negocio, especializado en ayudar a PyMEs.
+  prompt: `Eres un consultor de Aetheria Consulting. Un usuario ha completado un formulario inicial con detalles sobre su negocio.
+Tu tarea es generar una respuesta breve y positiva, seguida de un claro llamado a la acción para que el usuario complete el formulario de contacto principal y así poder agendar una cita para una asesoría personalizada donde se discutirán estrategias específicas.
 
-Analiza la siguiente información sobre el negocio de un usuario para proponer estrategias de automatización personalizadas y accionables. Considera su nivel de experiencia y presupuesto para que las sugerencias sean realistas y relevantes.
+Utiliza la siguiente información del usuario como contexto para tu respuesta, pero NO la repitas directamente en la respuesta generada:
+- Descripción del Negocio: {{{businessDescription}}}
+- Necesidades Específicas: {{{businessNeeds}}}
+- Nivel de Experiencia con IA: {{{aiExperienceLevel}}}
+- Presupuesto Estimado para IA: {{{aiBudget}}}
 
-**Descripción del Negocio:**
-{{{businessDescription}}}
-
-**Necesidades Específicas del Negocio:**
-{{{businessNeeds}}}
-
-**Nivel de Experiencia con IA del Usuario:**
-{{{aiExperienceLevel}}}
-
-**Presupuesto Estimado para IA (seleccionado de una lista):**
-{{{aiBudget}}}
-
-Basado en esta información, proporciona una lista detallada de al menos 3-5 sugerencias de automatización. Para cada sugerencia:
-1. Describe claramente el proceso o tarea a automatizar.
-2. Explica cómo la IA o la automatización pueden ayudar.
-3. Menciona los beneficios esperados (ej. ahorro de tiempo, reducción de costos, mejora de eficiencia, etc.).
-4. Si es posible, sugiere herramientas o tipos de soluciones de IA que podrían ser adecuadas, considerando el nivel de experiencia y presupuesto.
-
-Formatea tus sugerencias de manera clara, por ejemplo, usando encabezados o listas con viñetas para cada una. El tono debe ser profesional, alentador y fácil de entender para alguien que no sea experto en IA.
-Prioriza soluciones que ofrezcan un alto impacto y sean relativamente fáciles de implementar para una PyME.
-Si el presupuesto es "no-especificado" o un término cualitativo como "muy-limitado", "limitado", etc., interpreta ese presupuesto en consecuencia al ofrecer sugerencias y, si es necesario, sugiere que se podría refinar más con información presupuestaria más específica.
+Debes generar la respuesta en el formato especificado por el esquema de salida.
+El 'shortResponse' debe ser un mensaje alentador que reconozca la información recibida y mencione brevemente que hay potencial para aplicar soluciones de IA.
+El 'callToAction' debe invitar claramente al usuario a la sección de contacto para una consulta más detallada y personalizada.
+Ejemplo de Tono y Estructura:
+shortResponse: "¡Gracias por compartir los detalles de tu negocio! Vemos un gran potencial para aplicar soluciones de IA y automatización que se ajusten a tus necesidades y presupuesto."
+callToAction: "Para explorar estas oportunidades a fondo y recibir una asesoría completamente personalizada, te invitamos a completar nuestro formulario de contacto. ¡Agendemos una cita para diseñar juntos el futuro de tu empresa!"
 `,
 });
 
@@ -85,6 +78,3 @@ const automationSuggestionsFlow = ai.defineFlow(
     return output!;
   }
 );
-
-    
-
