@@ -15,24 +15,24 @@ const heroTexts = {
 
 export function HeroSection() {
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-br from-background to-secondary/30 min-h-screen flex items-center pt-24">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gradient-to-br from-background to-secondary/30 min-h-screen flex items-center pt-20 sm:pt-24">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground font-heading leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground font-heading leading-tight">
               {heroTexts.titlePart1}<br /> <span className="text-primary">{heroTexts.titlePart2}</span>{heroTexts.titlePart3}
             </h1>
-            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed">
+            <p className="text-md sm:text-lg md:text-xl text-foreground/80 leading-relaxed">
               {heroTexts.description}
             </p>
             <Link href="#automation-advisor" passHref>
-              <Button size="lg" className="btn-yellow rounded-md px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg group">
+              <Button size="lg" className="btn-yellow rounded-md px-6 py-3 text-base sm:text-lg group w-full sm:w-auto">
                 {heroTexts.ctaButton}
                 <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
           </div>
-          <div className="relative group rounded-xl overflow-hidden shadow-custom aspect-video">
+          <div className="relative group rounded-xl overflow-hidden shadow-custom aspect-video mt-6 md:mt-0">
             <Image
               src="https://placehold.co/600x400.png"
               alt={heroTexts.videoCaption}
@@ -42,10 +42,10 @@ export function HeroSection() {
               data-ai-hint="retrato profesional"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <PlayCircleIcon className="h-20 w-20 text-white/80" />
+              <PlayCircleIcon className="h-16 w-16 sm:h-20 sm:w-20 text-white/80" />
             </div>
-            <div className="absolute bottom-4 left-4 bg-background/70 backdrop-blur-sm p-2 rounded-md">
-              <p className="text-sm text-foreground">{heroTexts.videoCaption}</p>
+            <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-background/70 backdrop-blur-sm p-2 rounded-md">
+              <p className="text-xs sm:text-sm text-foreground">{heroTexts.videoCaption}</p>
             </div>
           </div>
         </div>
