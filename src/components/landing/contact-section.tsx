@@ -103,7 +103,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-background">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
@@ -111,14 +111,14 @@ export function ContactSection() {
             {texts.description}
           </p>
         </div>
-        <Card className="max-w-2xl mx-auto bg-card border-border rounded-xl shadow-custom p-2 sm:p-0">
-          <CardHeader className="sm:p-6">
+        <Card className="max-w-2xl mx-auto bg-card border-border rounded-xl shadow-custom">
+          <CardHeader className="p-4 sm:p-6">
             <CardTitle className="text-2xl font-heading text-primary-foreground">{texts.cardTitle}</CardTitle>
             <CardDescription className="text-muted-foreground">
               {texts.cardDescription}
             </CardDescription>
           </CardHeader>
-          <CardContent className="sm:p-6">
+          <CardContent className="p-4 sm:p-6">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
                 <Label htmlFor="name" className="block text-sm font-medium text-foreground/90 mb-1">{texts.nameLabel}</Label>
@@ -136,7 +136,7 @@ export function ContactSection() {
               </div>
               <div>
                 <Label htmlFor="message" className="block text-sm font-medium text-foreground/90 mb-1">{texts.messageLabel}</Label>
-                <Textarea id="message" {...register('message')} rows={5} className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.message ? 'border-destructive' : ''}`} placeholder={texts.messagePlaceholder} />
+                <Textarea id="message" {...register('message')} rows={4} sm-rows={5} className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.message ? 'border-destructive' : ''}`} placeholder={texts.messagePlaceholder} />
                 {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
               </div>
               <Button type="submit" disabled={isLoading} className="w-full btn-yellow rounded-md py-3 text-base">

@@ -15,7 +15,7 @@ const heroTexts = {
 
 export function HeroSection() {
   return (
-    <section className="py-20 md:py-32 lg:py-40 bg-gradient-to-br from-background to-secondary/30 min-h-screen flex items-center pt-24">
+    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-br from-background to-secondary/30 min-h-screen flex items-center pt-24">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -26,7 +26,7 @@ export function HeroSection() {
               {heroTexts.description}
             </p>
             <Link href="#automation-advisor" passHref>
-              <Button size="lg" className="btn-yellow rounded-md px-8 py-6 text-lg group">
+              <Button size="lg" className="btn-yellow rounded-md px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg group">
                 {heroTexts.ctaButton}
                 <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
