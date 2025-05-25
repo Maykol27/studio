@@ -14,16 +14,16 @@ export function Footer() {
 
   return (
     <footer className="py-8 bg-card border-t border-border">
-      <div className="container mx-auto px-4 md:px-8 text-center text-foreground/70">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div className="container mx-auto px-4 md:px-8 text-foreground/70">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 text-center md:text-left">
           <Link href="/" className="flex items-center gap-2" prefetch={false}>
             <MountainIcon className="h-6 w-6 text-primary" />
             <span className="text-lg font-semibold text-primary-foreground font-heading">{texts.companyName}</span>
           </Link>
-          <p className="text-sm">
+          <p className="text-sm order-last md:order-none">
             &copy; {currentYear} {texts.copyright}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link href="/privacy-policy" className="text-sm hover:text-primary transition-colors" prefetch={false}>
               {texts.privacyPolicy}
             </Link>
