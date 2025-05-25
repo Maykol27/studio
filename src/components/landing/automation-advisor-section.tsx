@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { getAutomationSuggestions, type AutomationSuggestionsInput, type AutomationSuggestionsOutput } from '@/ai/flows/automation-suggestions';
 import { Loader2, ListChecksIcon, LightbulbIcon, BriefcaseIcon } from 'lucide-react';
 
+// Texts are now hardcoded in Spanish
 const texts = {
   title: "Análisis Inicial Gratuito",
   description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
@@ -42,7 +43,7 @@ const texts = {
 
   aiBudgetLabel: "Presupuesto para IA (Opcional)",
   aiBudgetPlaceholder: "Selecciona un rango",
-  aiBudgetError: "Por favor, selecciona un rango de presupuesto.",
+  aiBudgetError: "Por favor, selecciona un rango de presupuesto.", // Not strictly needed if optional and default is set
   aiBudgetOptions: [
     { value: "no-especificado", label: "No especificado / No estoy seguro" },
     { value: "muy-limitado", label: "Muy limitado" },
@@ -54,7 +55,7 @@ const texts = {
   submitButton: "Obtener Sugerencias",
   submitButtonLoading: "Analizando...",
   
-  resultsCardTitle: "Ideas Clave para Tu Negocio",
+  resultsCardTitle: "¡Excelente Primer Paso!",
   generatingTitle: "Generando Ideas...",
   scheduleConsultationButton: "Agendar Asesoría Personalizada",
   
@@ -94,8 +95,8 @@ export function AutomationAdvisorSection() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aiBudget: "no-especificado",
-      aiExperienceLevel: "",
+      aiBudget: "no-especificado", // Default for the select
+      aiExperienceLevel: "", // Default for the select
     }
   });
 
@@ -235,6 +236,7 @@ export function AutomationAdvisorSection() {
                       </Select>
                     )}
                   />
+                   {/* errors.aiBudget is optional, so message might not always be relevant unless specifically validated as required */}
                    {errors.aiBudget && ( 
                     <p className="mt-1 text-sm text-destructive">{errors.aiBudget.message}</p>
                   )}
@@ -281,7 +283,9 @@ export function AutomationAdvisorSection() {
                     return (
                       <li key={index} className="p-4 bg-secondary/5 rounded-lg border border-border/50">
                         <div className="flex items-start gap-3">
-                          <Icon className="h-6 w-6 text-accent mt-1 shrink-0" />
+                          <div className="p-2 bg-primary/10 rounded-lg inline-flex items-center justify-center shrink-0">
+                            <Icon className="h-5 w-5 text-primary" />
+                          </div>
                           <div>
                             <h4 className="font-semibold text-foreground/90 mb-1">{suggestion.title}</h4>
                             <p className="text-sm text-foreground/80">{suggestion.generalExplanation}</p>
@@ -304,4 +308,3 @@ export function AutomationAdvisorSection() {
     </section>
   );
 }
-
