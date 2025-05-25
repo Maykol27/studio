@@ -15,7 +15,7 @@ import { useState } from 'react';
 // Texts are now hardcoded in Spanish
 const texts = {
   title: "Hablemos de Tu Negocio",
-  description: "Completa el formulario y da el primer paso hacia la transformación digital de tu negocio.",
+  description: "Completa el formulario para tener una conversación inicial gratuita y dar el primer paso hacia la trasnformación digital de tu negocio.",
   cardTitle: "Contáctanos",
   cardDescription: "Estamos emocionados de saber de ti.",
   nameLabel: "Nombre Completo",
@@ -44,7 +44,7 @@ type ContactFormData = z.infer<ReturnType<typeof getContactFormSchema>>;
 async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; message?: string }> {
   console.log("Contact form submitted:", data);
   await new Promise(resolve => setTimeout(resolve, 1000));
-  // Example: return { success: false, message: texts.toastErrorDescriptionGeneral }; 
+  // Example: return { success: false, message: texts.toastErrorDescriptionGeneral };
   return { success: true, message: texts.toastSuccessDescription };
 }
 
@@ -59,7 +59,7 @@ const getContactFormSchema = () => z.object({
 export function ContactSection() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const contactFormSchema = getContactFormSchema();
 
   const {
@@ -136,7 +136,7 @@ export function ContactSection() {
               </div>
               <div>
                 <Label htmlFor="message" className="block text-sm font-medium text-foreground/90 mb-1">{texts.messageLabel}</Label>
-                <Textarea id="message" {...register('message')} rows={3} sm-rows={4} className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.message ? 'border-destructive' : ''}`} placeholder={texts.messagePlaceholder} />
+                <Textarea id="message" {...register('message')} rows={3} className={`w-full bg-input border-border rounded-xs p-3 input-focus sm:h-24 ${errors.message ? 'border-destructive' : ''}`} placeholder={texts.messagePlaceholder} />
                 {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
               </div>
               <Button type="submit" disabled={isLoading} className="w-full btn-cta-primary rounded-md py-3 text-base">
