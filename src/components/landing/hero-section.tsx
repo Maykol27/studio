@@ -8,24 +8,24 @@ const heroTexts = {
   titlePart1: "IA a tu Medida: ",
   titlePart2: "Nuestro Proceso",
   titlePart3: " Hacia Tu Éxito.",
-  description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu PyME. Te ayudamos a profesionalizarte y escalar, desbloqueando tu potencial y maximizando tu enfoque en lo que más te apasiona y te llevó a construir tu empresa.",
-  ctaButton: "¡Impulsa tu Negocio con IA!", // Shorter CTA
+  description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
+  ctaButton: "¡Impulsa tu Negocio con IA!",
   videoCaption: "Conoce al CEO de Aetheria"
 };
 
 export function HeroSection() {
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       className="min-h-screen flex items-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background" // Subtle gradient
     >
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground font-heading leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
               {heroTexts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{heroTexts.titlePart2}</span>{heroTexts.titlePart3}
             </h1>
-            <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
               {heroTexts.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -36,11 +36,11 @@ export function HeroSection() {
                 </Button>
               </Link>
               {/* Optional: Secondary CTA like "Learn More" or "Watch Video" can be added here */}
-              {/* Example: 
+              {/* Example:
               <Button size="lg" variant="outline" className="rounded-md px-8 py-3.5 text-base sm:text-lg group w-full sm:w-auto border-primary text-primary hover:bg-primary/10">
                 Ver Video Intro
                 <PlayCircleIcon className="ml-2 h-5 w-5" />
-              </Button> 
+              </Button>
               */}
             </div>
           </div>
