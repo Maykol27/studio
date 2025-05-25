@@ -14,14 +14,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { getAutomationSuggestions, type AutomationSuggestionsInput, type AutomationSuggestionsOutput } from '@/ai/flows/automation-suggestions';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ListChecksIcon, LightbulbIcon, BriefcaseIcon } from 'lucide-react';
 
-// Texts are now hardcoded in Spanish
 const texts = {
-  title: "Descubre Tu Potencial de Automatización",
-  description: "Completa este formulario para recibir un primer análisis y dar el siguiente paso hacia la transformación de tu negocio.",
-  formCardTitle: "Análisis Inicial Gratuito",
-  formCardDescription: "Cuéntanos sobre tu negocio y te indicaremos cómo podemos ayudarte.",
+  title: "Análisis Inicial Gratuito",
+  description: "Completa este formulario para recibir un primer análisis con tres ideas generales de automatización para tu negocio y dar el siguiente paso.",
+  formCardTitle: "Cuéntanos Sobre Tu Negocio",
+  formCardDescription: "Proporciona algunos detalles y nuestra IA te ofrecerá ideas.",
   
   businessDescriptionLabel: "Descripción del Negocio",
   businessDescriptionPlaceholder: "Describe los procesos clave, la industria y el tamaño de tu negocio...",
@@ -42,7 +41,8 @@ const texts = {
   ],
 
   aiBudgetLabel: "Presupuesto para IA (Opcional)",
-  aiBudgetPlaceholder: "Selecciona un rango de presupuesto",
+  aiBudgetPlaceholder: "Selecciona un rango",
+  aiBudgetError: "Por favor, selecciona un rango de presupuesto.", // Aunque es opcional, si se interactúa, es bueno tener un mensaje
   aiBudgetOptions: [
     { value: "no-especificado", label: "No especificado / No estoy seguro" },
     { value: "muy-limitado", label: "Muy limitado" },
@@ -51,14 +51,16 @@ const texts = {
     { value: "sustancial", label: "Sustancial" },
   ],
 
-  submitButton: "Analizar Potencial",
+  submitButton: "Obtener Sugerencias",
   submitButtonLoading: "Analizando...",
-  nextStepsTitle: "¡Excelente Primer Paso!",
-  generatingTitle: "Analizando...",
+  
+  resultsCardTitle: "Ideas Clave para Tu Negocio",
+  generatingTitle: "Generando Ideas...",
   scheduleConsultationButton: "Agendar Asesoría Personalizada",
+  
   toastSuccessTitle: "¡Análisis Completado!",
-  toastSuccessDescription: "Hemos procesado tu información. Revisa los siguientes pasos.",
-  toastErrorTitle: "Error",
+  toastSuccessDescription: "Hemos procesado tu información. Revisa las ideas generadas.", // Actualizado
+  toastErrorTitle: "Error en el Análisis",
   toastErrorDescription: "No se pudo procesar tu solicitud. Por favor, inténtalo de nuevo."
 };
 
@@ -70,6 +72,13 @@ const formSchema = z.object({
 });
 
 type FormData = z.infer<typeof formSchema>;
+
+// Helper para iconos de sugerencias
+const suggestionIcons = [
+  LightbulbIcon,
+  ListChecksIcon,
+  BriefcaseIcon,
+];
 
 export function AutomationAdvisorSection() {
   const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +94,8 @@ export function AutomationAdvisorSection() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aiBudget: "no-especificado", // Default to "no-especificado"
+      aiBudget: "no-especificado",
+      aiExperienceLevel: "",
     }
   });
 
@@ -99,14 +109,13 @@ export function AutomationAdvisorSection() {
         aiExperienceLevel: data.aiExperienceLevel,
         aiBudget: data.aiBudget || "no-especificado", 
       };
-      const result: AutomationSuggestionsOutput = await getAutomationSuggestions(input);
+      const result = await getAutomationSuggestions(input);
       setAnalysisResult(result);
       toast({
         title: texts.toastSuccessTitle,
         description: texts.toastSuccessDescription,
       });
-      // No reseteamos el formulario para que el usuario vea sus datos mientras ve el resultado.
-      // reset(); 
+      // reset(); // Opcional: resetear el formulario tras el éxito
     } catch (error) {
       console.error("Error getting analysis:", error);
       toast({
@@ -129,14 +138,8 @@ export function AutomationAdvisorSection() {
           </p>
         </div>
 
-        <div className={
-          (analysisResult || isLoading) 
-          ? "grid md:grid-cols-2 gap-8 items-start" 
-          : "flex justify-center" 
-        }>
-          <Card className={`bg-card border-border rounded-xl shadow-md card-hover ${
-            !(analysisResult || isLoading) ? 'w-full max-w-2xl' : ''
-          }`}>
+        <div className={`grid gap-8 items-start ${analysisResult || isLoading ? 'md:grid-cols-2' : 'md:grid-cols-1 justify-center'}`}>
+          <Card className={`bg-card border-border rounded-xl shadow-md card-hover w-full ${!(analysisResult || isLoading) ? 'max-w-2xl mx-auto' : ''}`}>
             <CardHeader>
               <CardTitle className="text-2xl font-heading text-foreground">{texts.formCardTitle}</CardTitle>
               <CardDescription className="text-muted-foreground">
@@ -232,7 +235,7 @@ export function AutomationAdvisorSection() {
                       </Select>
                     )}
                   />
-                   {errors.aiBudget && (
+                   {errors.aiBudget && ( // Aunque opcional, Zod puede tener mensajes si se define una regla y falla
                     <p className="mt-1 text-sm text-destructive">{errors.aiBudget.message}</p>
                   )}
                 </div>
@@ -251,32 +254,54 @@ export function AutomationAdvisorSection() {
             </CardContent>
           </Card>
           
+          {isLoading && (
+             <Card className="bg-card border-border rounded-xl shadow-md">
+              <CardHeader>
+                <CardTitle className="text-2xl font-heading text-foreground">{texts.generatingTitle}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col items-center justify-center py-10 space-y-4">
+                <Loader2 className="h-12 w-12 text-primary animate-spin" />
+                <p className="text-muted-foreground">Estamos preparando tus ideas...</p>
+              </CardContent>
+            </Card>
+          )}
+
           {analysisResult && !isLoading && (
             <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-foreground">{texts.nextStepsTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-primary">{texts.resultsCardTitle}</CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  {analysisResult.introductoryMessage}
+                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-foreground/90">{analysisResult.shortResponse}</p>
-                <p className="text-foreground/90 font-semibold">{analysisResult.callToAction}</p>
-                <Button asChild className="w-full btn-cta-primary rounded-md py-3 text-base mt-4">
+              <CardContent className="space-y-6">
+                <ul className="space-y-4">
+                  {analysisResult.suggestions.map((suggestion, index) => {
+                    const Icon = suggestionIcons[index % suggestionIcons.length];
+                    return (
+                      <li key={index} className="p-4 bg-secondary/5 rounded-lg border border-border/50">
+                        <div className="flex items-start gap-3">
+                          <Icon className="h-6 w-6 text-accent mt-1 shrink-0" />
+                          <div>
+                            <h4 className="font-semibold text-foreground/90 mb-1">{suggestion.title}</h4>
+                            <p className="text-sm text-foreground/80">{suggestion.generalExplanation}</p>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <p className="text-foreground/90 font-semibold pt-4 border-t border-border/50">{analysisResult.callToAction}</p>
+                <Button asChild className="w-full btn-cta-primary rounded-md py-3 text-base mt-2">
                   <Link href="#contact">{texts.scheduleConsultationButton}</Link>
                 </Button>
               </CardContent>
             </Card>
           )}
-          {!analysisResult && isLoading && (
-             <Card className="bg-card border-border rounded-xl shadow-md">
-              <CardHeader>
-                <CardTitle className="text-2xl font-heading text-foreground">{texts.generatingTitle}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex items-center justify-center py-10">
-                <Loader2 className="h-12 w-12 text-primary animate-spin" />
-              </CardContent>
-            </Card>
-          )}
+
         </div>
       </div>
     </section>
   );
 }
+
