@@ -81,9 +81,6 @@ export default {
         '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
         inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
         none: 'none',
-        // Old custom shadows, can be removed or adapted
-        // custom: '0px 4px 15px rgba(0, 0, 0, 0.05)', // Made more subtle
-        // 'custom-hover': '0px 6px 20px rgba(0, 0, 0, 0.07)', // Made more subtle
       },
   		keyframes: {
   			'accordion-down': {
@@ -109,13 +106,34 @@ export default {
         'fade-in-up': {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
+        },
+        'animate-bubble-1': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.05' }, // Start with lower opacity
+          '25%': { transform: 'translate(30px, -40px) scale(1.15)', opacity: '0.1' },
+          '50%': { transform: 'translate(-20px, 20px) scale(0.85)', opacity: '0.15' },
+          '75%': { transform: 'translate(15px, 40px) scale(1.05)', opacity: '0.1' },
+        },
+        'animate-bubble-2': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.03' }, // Start with lower opacity
+          '25%': { transform: 'translate(-35px, 25px) scale(0.8)', opacity: '0.08' },
+          '50%': { transform: 'translate(25px, -30px) scale(1.2)', opacity: '0.12' },
+          '75%': { transform: 'translate(-10px, -15px) scale(0.95)', opacity: '0.08' },
+        },
+        'animate-bubble-3': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.04' },
+          '25%': { transform: 'translate(10vw, -5vh) scale(1.1)', opacity: '0.09' },
+          '50%': { transform: 'translate(-8vw, 10vh) scale(0.9)', opacity: '0.13' },
+          '75%': { transform: 'translate(5vw, 3vh) scale(1.05)', opacity: '0.09' },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
-        'fade-in-up': 'fade-in-up 0.5s ease-out forwards', // 'forwards' keeps the final state
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+        'bubble-1': 'animate-bubble-1 35s ease-in-out infinite',
+        'bubble-2': 'animate-bubble-2 40s ease-in-out infinite 7s',
+        'bubble-3': 'animate-bubble-3 30s ease-in-out infinite 3s',
   		}
   	}
   },
