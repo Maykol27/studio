@@ -7,7 +7,6 @@
     "companyName": "Aetheria Consulting",
     "benefits": "Benefícios",
     "process": "Processo",
-    "testimonials": "Depoimentos",
     "about": "Sobre Nós",
     "contactUs": "Fale Conosco",
     "toggleMenu": "Alternar menu"
@@ -16,26 +15,49 @@
     "titlePart1": "IA Sob Medida para Você: ",
     "titlePart2": "Nosso Processo",
     "titlePart3": " Rumo ao Seu Sucesso.",
-    "description": "Procurando levar seu negócio para o próximo nível? Na Aetheria Consulting, transformamos a complexidade da automação e IA em soluções práticas e acessíveis para sua PME. Ajudamos você a se profissionalizar e escalar, desbloqueando seu potencial e maximizando seu foco no que mais te apaixona e te levou a construir sua empresa.",
-    "ctaButton": "Impulsione seu Negócio com IA: Diagnóstico Gratuito!",
+    "description": "Procurando levar seu negócio para o próximo nível? Na Aetheria Consulting, transformamos a complexidade da automação e IA em soluções práticas e acessíveis para o seu negócio.",
+    "ctaButton": "Diagnóstico gratuito agora mesmo!",
     "videoCaption": "Conheça o CEO da Aetheria"
   },
   "automationAdvisorSection": {
-    "title": "Descubra Seu Potencial de Automação",
-    "description": "Preencha este formulário para receber sugestões de automação personalizadas e impulsionadas por IA para o seu negócio.",
-    "formCardTitle": "Obtenha Suas Sugestões",
-    "formCardDescription": "Conte-nos sobre o seu negócio, e nossa IA fornecerá ideias de automação sob medida.",
+    "title": "Análise Inicial Gratuita",
+    "description": "Preencha este formulário para receber sugestões de automação personalizadas impulsionadas por IA para o seu negócio.",
+    "formCardTitle": "Conte-nos Sobre o Seu Negócio",
+    "formCardDescription": "Forneça alguns detalhes e nossa IA oferecerá ideias.",
     "businessDescriptionLabel": "Descrição do Negócio",
-    "businessDescriptionPlaceholder": "Descreva os processos, desafios e objetivos do seu negócio...",
-    "businessDescriptionError": "Por favor, forneça uma descrição detalhada de pelo menos 50 caracteres.",
+    "businessDescriptionPlaceholder": "Descreva os processos chave, a indústria e o tamanho do seu negócio...",
+    "businessDescriptionError": "Por favor, forneça uma descrição detalhada de pelo menos 30 caracteres.",
+    "businessNeedsLabel": "Necessidades do Negócio",
+    "businessNeedsPlaceholder": "Descreva os principais desafios, pontos fracos ou áreas que você gostaria de melhorar...",
+    "businessNeedsError": "Por favor, descreva as necessidades do seu negócio (mínimo 30 caracteres).",
+    "aiExperienceLevelLabel": "Nível de Experiência com IA",
+    "aiExperienceLevelPlaceholder": "Selecione seu nível",
+    "aiExperienceLevelError": "Por favor, selecione seu nível de experiência com IA.",
+    "aiExperienceOptions": [
+      { "value": "principiante", "label": "Principiante (Pouco ou nenhum conhecimento)" },
+      { "value": "intermedio", "label": "Intermediário (Conhecimento básico, algumas ferramentas usadas)" },
+      { "value": "avanzado", "label": "Avançado (Experiência aplicando IA, familiar com conceitos)" },
+      { "value": "experto", "label": "Especialista (Desenvolvimento ou implementação profunda de IA)" }
+    ],
+    "aiBudgetLabel": "Orçamento para IA (Opcional)",
+    "aiBudgetPlaceholder": "Selecione um intervalo",
+    "aiBudgetError": "Por favor, selecione um intervalo de orçamento.",
+    "aiBudgetOptions": [
+      { "value": "no-especificado", "label": "Não especificado / Não tenho certeza" },
+      { "value": "muy-limitado", "label": "Muito limitado" },
+      { "value": "limitado", "label": "Limitado" },
+      { "value": "moderado", "label": "Moderado" },
+      { "value": "sustancial", "label": "Substancial" }
+    ],
     "submitButton": "Obter Sugestões",
-    "submitButtonLoading": "Gerando...",
-    "suggestionsCardTitle": "Suas Sugestões Impulsionadas por IA",
-    "suggestionsGeneratingTitle": "Gerando Sugestões...",
-    "toastSuccessTitle": "Sugestões Geradas!",
-    "toastSuccessDescription": "Suas sugestões de automação personalizadas estão prontas.",
-    "toastErrorTitle": "Erro",
-    "toastErrorDescription": "Falha ao gerar sugestões. Por favor, tente novamente."
+    "submitButtonLoading": "Analisando...",
+    "resultsCardTitle": "Excelente Primeiro Passo!",
+    "generatingTitle": "Gerando Ideias...",
+    "scheduleConsultationButton": "Agendar Consultoria Personalizada",
+    "toastSuccessTitle": "Análise Concluída!",
+    "toastSuccessDescription": "Processamos suas informações. Revise as ideias geradas e agendemos uma reunião para explorá-las!",
+    "toastErrorTitle": "Erro na Análise",
+    "toastErrorDescription": "Não foi possível processar sua solicitação. Por favor, tente novamente."
   },
   "benefitsSection": {
     "title": "Principais Benefícios da IA para o Seu Negócio",
@@ -64,65 +86,18 @@
   "blogSection": {
     "title": "Nosso Blog",
     "description": "Mantenha-se atualizado com as últimas tendências em IA e automação empresarial. Ideias, dicas e histórias de sucesso para inspirar seu negócio.",
-    "readMore": "Ler Mais",
-    "posts": [
-      {
-        "id": "1",
-        "title": "O Futuro da IA nas Pequenas Empresas",
-        "summary": "Aprenda como a IA não é mais apenas para grandes corporações e como sua PME pode se beneficiar hoje.",
-        "slug": "future-of-ai-smb"
-      },
-      {
-        "id": "2",
-        "title": "5 Maneiras de Automatizar seu Marketing com IA",
-        "summary": "Descubra ferramentas e estratégias práticas de IA para otimizar seus esforços de marketing e impulsionar o engajamento.",
-        "slug": "automate-marketing-ai"
-      },
-      {
-        "id": "3",
-        "title": "Entendendo o Processamento de Linguagem Natural (PLN)",
-        "summary": "Um guia amigável para iniciantes sobre PLN e suas aplicações para melhorar as interações com os clientes.",
-        "slug": "understanding-nlp"
-      }
-    ]
-  },
-  "testimonialsSection": {
-    "title": "O que Nossos Clientes Dizem",
-    "description": "Histórias reais de negócios prosperando com nossas soluções de IA.",
-    "testimonials": [
-      {
-        "id": "1",
-        "name": "Joana Silva",
-        "company": "Soluções Innovatech",
-        "quote": "A Aetheria Consulting transformou nossas operações. Suas soluções de IA aumentaram nossa eficiência em <strong class=\"text-primary\">40%</strong> e reduziram significativamente os <strong class=\"text-primary\">custos</strong>. Altamente recomendados!",
-        "rating": 5
-      },
-      {
-        "id": "2",
-        "name": "João Santos",
-        "company": "Impulsionadores de Mercado Ltda.",
-        "quote": "A abordagem personalizada e a profunda compreensão de nossas necesidades foram excepcionais. Agora tomamos <strong class=\"text-primary\">decisões baseadas em dados</strong> com confiança, graças à Aetheria.",
-        "rating": 5
-      },
-      {
-        "id": "3",
-        "name": "Alice Costa",
-        "company": "Empreendimentos Criativos ME",
-        "quote": "Sua equipe não é apenas tecnicamente proficiente, mas também ótimos parceiros estratégicos. A <strong class=\"text-primary\">otimização da experiência do cliente</strong> foi um divisor de águas para nós.",
-        "rating": 4
-      }
-    ]
+    "readMore": "Ler Mais"
   },
   "aboutSection": {
     "title": "Sobre a Aetheria Consulting",
     "subtitle": "Seus aliados na transformação digital impulsionada por IA. Somos apaixonados por ajudar empresas a prosperar e escalar.",
     "paragraph1": "A Aetheria Consulting nasceu da convicção de que a Inteligência Artificial deve ser acessível e benéfica para empresas de todos os tamanhos. Trazemos profunda visão e experiência em tecnologia (IA, automação), gerenciamento de projetos e melhoria contínua, adquirida em ambientes complexos de grandes indústrias. Agora, trazemos esse conhecimento para criar soluções simples e práticas para profissionalizar e escalar sua empresa, independentemente do seu tamanho ou capacidade econômica.",
-    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, melhorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descobrir oportunidades que você pode não ver, porque somos especialistas em processos e em entender o seu negócio.",
+    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, melhorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descobrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
     "paragraph3": "Com foco em resultados tangíveis e um processo de implementação ágil, guiamos você em cada etapa do caminho. Nosso objetivo não é apenas fornecer ferramentas de IA, mas ser seu parceiro estratégico no crescimento de sua empresa, permitindo que você se concentre no que te apaixona e no que te levou a construir seu negócio."
   },
   "contactSection": {
     "title": "Vamos Conversar Sobre o Seu Negócio",
-    "description": "Preencha o formulário e dê o primeiro passo para a transformação digital do seu negócio.",
+    "description": "Preencha o formulário para ter uma conversa inicial gratuita e dar o primeiro passo para a transformação digital do seu negócio.",
     "cardTitle": "Fale Conosco",
     "cardDescription": "Estamos ansiosos para ouvir de você.",
     "nameLabel": "Nome Completo",
@@ -153,7 +128,12 @@
   "languageSwitcher": {
     "changeLanguage": "Mudar idioma",
     "spanish": "Espanhol",
-    "english": "Inglês",
     "portuguese": "Português"
+  },
+  "blogPostPage": {
+    "authorLabel": "Autor",
+    "dateLabel": "Data",
+    "notFoundTitle": "Post não encontrado",
+    "notFoundDescription": "O artigo de blog que você procura não existe."
   }
 }

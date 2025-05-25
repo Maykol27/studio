@@ -1,29 +1,9 @@
-import { Header } from '@/components/landing/header';
-import { HeroSection } from '@/components/landing/hero-section';
-import { AutomationAdvisorSection } from '@/components/landing/automation-advisor-section';
-import { BenefitsSection } from '@/components/landing/benefits-section';
-import { MethodologySection } from '@/components/landing/methodology-section';
-import { BlogSection } from '@/components/landing/blog-section';
-// import { TestimonialsSection } from '@/components/landing/testimonials-section'; // Eliminado
-import { AboutSection } from '@/components/landing/about-section';
-import { ContactSection } from '@/components/landing/contact-section';
-import { Footer } from '@/components/landing/footer';
+// Este archivo ya no es necesario como la página principal,
+// ya que src/app/[locale]/page.tsx tomará su lugar.
+// Next.js con App Router y middleware de i18n redirigirá / a /es (o el locale por defecto).
+// Puedes eliminar este archivo o dejarlo vacío.
+// Para esta operación, lo dejaré vacío para que sea eliminado si es necesario por el sistema.
 
-export default function LandingPage() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow">
-        <HeroSection />
-        <AutomationAdvisorSection />
-        <BenefitsSection />
-        <MethodologySection />
-        <BlogSection />
-        {/* <TestimonialsSection /> */} {/* Eliminado */}
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
-  );
+export default function Page() {
+  return null;
 }

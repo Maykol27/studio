@@ -3,33 +3,42 @@ import { Button } from '@/components/ui/button';
 import { LayersIcon, MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import type { Dictionary } from '@/lib/get-dictionary';
+import type { Locale } from '@/i18n-config';
 
-const headerTexts = {
-  companyName: "Aetheria Consulting",
-  benefits: "Beneficios",
-  process: "Proceso",
-  // testimonials: "Testimonios", // Eliminado
-  about: "Nosotros",
-  contactUs: "Contáctanos",
-  toggleMenu: "Alternar menú"
-};
+interface HeaderProps {
+  dictionary: Dictionary['header'];
+  currentLocale: Locale;
+}
 
-export function Header() {
+export function Header({ dictionary, currentLocale }: HeaderProps) {
   const navItems = [
-    { href: '#benefits', label: headerTexts.benefits },
-    { href: '#process', label: headerTexts.process },
-    // { href: '#testimonials', label: headerTexts.testimonials }, // Eliminado
-    { href: '#about', label: headerTexts.about },
+    { href: '#benefits', label: dictionary.benefits },
+    { href: '#process', label: dictionary.process },
+    { href: '#about', label: dictionary.about },
   ];
+
+  // Necesitamos cargar el diccionario completo para pasarlo al LanguageSwitcher
+  // Esto es una simplificación; idealmente, LanguageSwitcher cargaría su propio diccionario.
+  // O, el diccionario de LanguageSwitcher se pasa explícitamente.
+  // Por ahora, asumiremos que el diccionario general contiene la sección languageSwitcher.
+  // Esto se manejará mejor en getDictionary y el componente que lo llama.
+  // Aquí asumimos que el dictionary prop en LandingPage tiene languageSwitcher.
+  // Vamos a necesitar el diccionario del languageSwitcher específicamente.
+  // Se pasará desde la page.tsx que carga el diccionario completo.
+  // Por ahora, el languageSwitcher no usa un diccionario interno, los nombres de idioma son hardcodeados.
+  // Para hacerlo bien, LanguageSwitcher también debería recibir su parte del diccionario.
+  // Voy a modificar LanguageSwitcher para que reciba su `dictionary.languageSwitcher`.
 
   return (
     <header className="py-4 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group" prefetch={false}>
+        <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
           <LayersIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
-          <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{headerTexts.companyName}</span>
+          <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{dictionary.companyName}</span>
         </Link>
-        <nav className="hidden md:flex gap-6 items-center"> {/* Adjusted gap */}
+        <nav className="hidden md:flex gap-4 items-center"> {/* Ajustado a gap-4 para acomodar switcher */}
           {navItems.map(item => (
             <Link 
               key={item.href} 
@@ -41,17 +50,35 @@ export function Header() {
             </Link>
           ))}
           <ThemeSwitcher />
+          {/* Aquí pasamos un placeholder para el diccionario del LanguageSwitcher */}
+          {/* Se debe pasar el diccionario.languageSwitcher desde la página que renderiza Header */}
+          <LanguageSwitcher 
+            currentLocale={currentLocale} 
+            dictionary={{ /* Necesita el sub-diccionario languageSwitcher */
+              changeLanguage: "Change language", // Placeholder
+              spanish: "Español", // Placeholder
+              portuguese: "Português" // Placeholder
+            }} 
+          />
           <Link href="#contact" prefetch={false}>
-            <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm ml-2"> {/* Added ml-2 for spacing */}
-              {headerTexts.contactUs}
+            <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm ml-2">
+              {dictionary.contactUs}
             </Button>
           </Link>
         </nav>
-        <div className="md:hidden flex items-center gap-2"> {/* Added gap for mobile */}
+        <div className="md:hidden flex items-center gap-2">
            <ThemeSwitcher />
+           <LanguageSwitcher 
+            currentLocale={currentLocale} 
+            dictionary={{ /* Necesita el sub-diccionario languageSwitcher */
+              changeLanguage: "Change language",
+              spanish: "Español",
+              portuguese: "Português"
+            }}
+           />
            <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label={headerTexts.toggleMenu}>
+              <Button variant="ghost" size="icon" aria-label={dictionary.toggleMenu}>
                 <MenuIcon className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
@@ -67,7 +94,7 @@ export function Header() {
                 <SheetClose asChild>
                   <Link href="#contact" prefetch={false} className="mt-4">
                     <Button className="w-full btn-cta-primary rounded-md py-3 text-base">
-                      {headerTexts.contactUs}
+                      {dictionary.contactUs}
                     </Button>
                   </Link>
                 </SheetClose>

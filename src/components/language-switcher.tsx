@@ -2,7 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { i18n, type Locale } from '@/i18n-config';
+import type { Locale } from '@/i18n-config';
+import { i18n } from '@/i18n-config';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,15 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { GlobeIcon } from 'lucide-react';
+import type { Dictionary } from '@/lib/get-dictionary'; // Import Dictionary type
 
 interface LanguageSwitcherProps {
   currentLocale: Locale;
-  dictionary: { // This should be the 'languageSwitcher' part of the main dictionary
-    changeLanguage: string;
-    spanish: string;
-    english: string;
-    portuguese: string;
-  };
+  dictionary: Dictionary['languageSwitcher']; // Usar la parte correcta del diccionario
 }
 
 export function LanguageSwitcher({ currentLocale, dictionary }: LanguageSwitcherProps) {
@@ -27,23 +24,14 @@ export function LanguageSwitcher({ currentLocale, dictionary }: LanguageSwitcher
 
   const redirectedPathName = (locale: Locale) => {
     if (!pathname) return '/';
-    // Pathname for default locale 'es' might be '/' or '/es'.
-    // Pathname for other locales will be '/en' or '/pt'.
     const segments = pathname.split('/');
-    
-    // If current pathname is just '/' (meaning default locale 'es' without prefix)
-    if (segments.length === 2 && segments[1] === '') {
-      return `/${locale}`;
-    }
-    
-    segments[1] = locale;
+    segments[1] = locale; // El primer segmento después de '/' es el locale
     return segments.join('/');
   };
   
   const getLanguageName = (locale: Locale) => {
     switch (locale) {
       case 'es': return dictionary.spanish;
-      case 'en': return dictionary.english;
       case 'pt': return dictionary.portuguese;
       default: return locale.toUpperCase();
     }

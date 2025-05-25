@@ -18,10 +18,11 @@ const openSans = Open_Sans({
   weight: ['300', '400', '600'],
 });
 
-export const metadata: Metadata = {
-  title: 'Aetheria Consulting',
-  description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
-};
+// Metadata se moverá a [locale]/layout.tsx
+// export const metadata: Metadata = {
+//   title: 'Aetheria Consulting',
+//   description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
+// };
 
 export default function RootLayout({
   children,
@@ -29,7 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    // El lang se establecerá en [locale]/layout.tsx
+    <html suppressHydrationWarning>
       <body className={`${poppins.variable} ${openSans.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +6,6 @@ import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -15,76 +13,31 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { getAutomationSuggestions, type AutomationSuggestionsInput, type AutomationSuggestionsOutput } from '@/ai/flows/automation-suggestions';
 import { Loader2, ListChecksIcon, LightbulbIcon, BriefcaseIcon } from 'lucide-react';
+import type { Dictionary } from '@/lib/get-dictionary';
 
-// Texts are now hardcoded in Spanish
-const texts = {
-  title: "Análisis Inicial Gratuito",
-  description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
-  formCardTitle: "Cuéntanos Sobre Tu Negocio",
-  formCardDescription: "Proporciona algunos detalles y nuestra IA te ofrecerá ideas.",
-  
-  businessDescriptionLabel: "Descripción del Negocio",
-  businessDescriptionPlaceholder: "Describe los procesos clave, la industria y el tamaño de tu negocio...",
-  businessDescriptionError: "Por favor, proporciona una descripción detallada de al menos 30 caracteres.",
-  
-  businessNeedsLabel: "Necesidades del Negocio",
-  businessNeedsPlaceholder: "Describe los principales desafíos, puntos débiles o áreas que te gustaría mejorar...",
-  businessNeedsError: "Por favor, describe las necesidades de tu negocio (mínimo 30 caracteres).",
+interface AutomationAdvisorSectionProps {
+  dictionary: Dictionary['automationAdvisorSection'];
+}
 
-  aiExperienceLevelLabel: "Nivel de Experiencia con IA",
-  aiExperienceLevelPlaceholder: "Selecciona tu nivel",
-  aiExperienceLevelError: "Por favor, selecciona tu nivel de experiencia con IA.",
-  aiExperienceOptions: [
-    { value: "principiante", label: "Principiante (Poco o ningún conocimiento)" },
-    { value: "intermedio", label: "Intermedio (Conocimiento básico, algunas herramientas usadas)" },
-    { value: "avanzado", label: "Avanzado (Experiencia aplicando IA, familiar con conceptos)" },
-    { value: "experto", label: "Experto (Desarrollo o implementación profunda de IA)" },
-  ],
-
-  aiBudgetLabel: "Presupuesto para IA (Opcional)",
-  aiBudgetPlaceholder: "Selecciona un rango",
-  aiBudgetError: "Por favor, selecciona un rango de presupuesto.", // Not strictly needed if optional and default is set
-  aiBudgetOptions: [
-    { value: "no-especificado", label: "No especificado / No estoy seguro" },
-    { value: "muy-limitado", label: "Muy limitado" },
-    { value: "limitado", label: "Limitado" },
-    { value: "moderado", label: "Moderado" },
-    { value: "sustancial", label: "Sustancial" },
-  ],
-
-  submitButton: "Obtener Sugerencias",
-  submitButtonLoading: "Analizando...",
-  
-  resultsCardTitle: "¡Excelente Primer Paso!",
-  generatingTitle: "Generando Ideas...",
-  scheduleConsultationButton: "Agendar Asesoría Personalizada",
-  
-  toastSuccessTitle: "¡Análisis Completado!",
-  toastSuccessDescription: "Hemos procesado tu información. Revisa las ideas generadas y ¡agendemos una cita para explorarlas!",
-  toastErrorTitle: "Error en el Análisis",
-  toastErrorDescription: "No se pudo procesar tu solicitud. Por favor, inténtalo de nuevo."
-};
-
-const formSchema = z.object({
-  businessDescription: z.string().min(30, { message: texts.businessDescriptionError }),
-  businessNeeds: z.string().min(30, { message: texts.businessNeedsError }),
-  aiExperienceLevel: z.string({ required_error: texts.aiExperienceLevelError }).min(1, { message: texts.aiExperienceLevelError }),
-  aiBudget: z.string().optional(),
-});
-
-type FormData = z.infer<typeof formSchema>;
-
-// Helper para iconos de sugerencias
 const suggestionIcons = [
   LightbulbIcon,
   ListChecksIcon,
   BriefcaseIcon,
 ];
 
-export function AutomationAdvisorSection() {
+export function AutomationAdvisorSection({ dictionary }: AutomationAdvisorSectionProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AutomationSuggestionsOutput | null>(null);
   const { toast } = useToast();
+
+  const formSchema = z.object({
+    businessDescription: z.string().min(30, { message: dictionary.businessDescriptionError }),
+    businessNeeds: z.string().min(30, { message: dictionary.businessNeedsError }),
+    aiExperienceLevel: z.string({ required_error: dictionary.aiExperienceLevelError }).min(1, { message: dictionary.aiExperienceLevelError }),
+    aiBudget: z.string().optional(),
+  });
+  
+  type FormData = z.infer<typeof formSchema>;
 
   const {
     register,
@@ -95,8 +48,8 @@ export function AutomationAdvisorSection() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aiBudget: "no-especificado", // Default for the select
-      aiExperienceLevel: "", // Default for the select
+      aiBudget: "no-especificado",
+      aiExperienceLevel: "",
     }
   });
 
@@ -113,15 +66,14 @@ export function AutomationAdvisorSection() {
       const result = await getAutomationSuggestions(input);
       setAnalysisResult(result);
       toast({
-        title: texts.toastSuccessTitle,
-        description: texts.toastSuccessDescription,
+        title: dictionary.toastSuccessTitle,
+        description: dictionary.toastSuccessDescription,
       });
-      // reset(); // Opcional: resetear el formulario tras el éxito
     } catch (error) {
       console.error("Error getting analysis:", error);
       toast({
-        title: texts.toastErrorTitle,
-        description: texts.toastErrorDescription,
+        title: dictionary.toastErrorTitle,
+        description: dictionary.toastErrorDescription,
         variant: "destructive",
       });
     } finally {
@@ -133,32 +85,32 @@ export function AutomationAdvisorSection() {
     <section id="automation-advisor" className="py-10 sm:py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{dictionary.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
-            {texts.description}
+            {dictionary.description}
           </p>
         </div>
 
         <div className={`grid gap-8 items-start ${analysisResult || isLoading ? 'md:grid-cols-2' : 'md:grid-cols-1 justify-center'}`}>
           <Card className={`bg-card border-border rounded-xl shadow-md card-hover w-full ${!(analysisResult || isLoading) ? 'max-w-2xl mx-auto' : ''}`}>
             <CardHeader>
-              <CardTitle className="text-2xl font-heading text-foreground">{texts.formCardTitle}</CardTitle>
+              <CardTitle className="text-2xl font-heading text-foreground">{dictionary.formCardTitle}</CardTitle>
               <CardDescription className="text-muted-foreground">
-                {texts.formCardDescription}
+                {dictionary.formCardDescription}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <div>
                   <Label htmlFor="businessDescription" className="block text-sm font-medium text-foreground/90 mb-1">
-                    {texts.businessDescriptionLabel}
+                    {dictionary.businessDescriptionLabel}
                   </Label>
                   <Textarea
                     id="businessDescription"
                     {...register('businessDescription')}
                     rows={3}
                     className={`w-full bg-input border-border rounded-xs p-3 sm:h-24 input-focus ${errors.businessDescription ? 'border-destructive' : ''}`}
-                    placeholder={texts.businessDescriptionPlaceholder}
+                    placeholder={dictionary.businessDescriptionPlaceholder}
                   />
                   {errors.businessDescription && (
                     <p className="mt-1 text-sm text-destructive">{errors.businessDescription.message}</p>
@@ -167,14 +119,14 @@ export function AutomationAdvisorSection() {
 
                 <div>
                   <Label htmlFor="businessNeeds" className="block text-sm font-medium text-foreground/90 mb-1">
-                    {texts.businessNeedsLabel}
+                    {dictionary.businessNeedsLabel}
                   </Label>
                   <Textarea
                     id="businessNeeds"
                     {...register('businessNeeds')}
                     rows={3}
                     className={`w-full bg-input border-border rounded-xs p-3 sm:h-24 input-focus ${errors.businessNeeds ? 'border-destructive' : ''}`}
-                    placeholder={texts.businessNeedsPlaceholder}
+                    placeholder={dictionary.businessNeedsPlaceholder}
                   />
                   {errors.businessNeeds && (
                     <p className="mt-1 text-sm text-destructive">{errors.businessNeeds.message}</p>
@@ -183,7 +135,7 @@ export function AutomationAdvisorSection() {
                 
                 <div>
                   <Label htmlFor="aiExperienceLevel" className="block text-sm font-medium text-foreground/90 mb-1">
-                    {texts.aiExperienceLevelLabel}
+                    {dictionary.aiExperienceLevelLabel}
                   </Label>
                   <Controller
                     control={control}
@@ -194,10 +146,10 @@ export function AutomationAdvisorSection() {
                           id="aiExperienceLevel" 
                           className={`w-full bg-input border-border rounded-xs input-focus ${errors.aiExperienceLevel ? 'border-destructive' : ''}`}
                         >
-                          <SelectValue placeholder={texts.aiExperienceLevelPlaceholder} />
+                          <SelectValue placeholder={dictionary.aiExperienceLevelPlaceholder} />
                         </SelectTrigger>
                         <SelectContent>
-                          {texts.aiExperienceOptions.map(option => (
+                          {dictionary.aiExperienceOptions.map(option => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -213,7 +165,7 @@ export function AutomationAdvisorSection() {
 
                 <div>
                   <Label htmlFor="aiBudget" className="block text-sm font-medium text-foreground/90 mb-1">
-                    {texts.aiBudgetLabel}
+                    {dictionary.aiBudgetLabel}
                   </Label>
                   <Controller
                     control={control}
@@ -224,10 +176,10 @@ export function AutomationAdvisorSection() {
                           id="aiBudget"
                           className={`w-full bg-input border-border rounded-xs input-focus ${errors.aiBudget ? 'border-destructive' : ''}`}
                         >
-                          <SelectValue placeholder={texts.aiBudgetPlaceholder} />
+                          <SelectValue placeholder={dictionary.aiBudgetPlaceholder} />
                         </SelectTrigger>
                         <SelectContent>
-                          {texts.aiBudgetOptions.map(option => (
+                          {dictionary.aiBudgetOptions.map(option => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -236,7 +188,6 @@ export function AutomationAdvisorSection() {
                       </Select>
                     )}
                   />
-                   {/* errors.aiBudget is optional, so message might not always be relevant unless specifically validated as required */}
                    {errors.aiBudget && ( 
                     <p className="mt-1 text-sm text-destructive">{errors.aiBudget.message}</p>
                   )}
@@ -246,10 +197,10 @@ export function AutomationAdvisorSection() {
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {texts.submitButtonLoading}
+                      {dictionary.submitButtonLoading}
                     </>
                   ) : (
-                    texts.submitButton
+                    dictionary.submitButton
                   )}
                 </Button>
               </form>
@@ -259,7 +210,7 @@ export function AutomationAdvisorSection() {
           {isLoading && (
              <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-foreground">{texts.generatingTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-foreground">{dictionary.generatingTitle}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col items-center justify-center py-10 space-y-4">
                 <Loader2 className="h-12 w-12 text-primary animate-spin" />
@@ -271,7 +222,7 @@ export function AutomationAdvisorSection() {
           {analysisResult && !isLoading && (
             <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-primary">{texts.resultsCardTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-primary">{dictionary.resultsCardTitle}</CardTitle>
                 <CardDescription className="text-muted-foreground">
                   {analysisResult.introductoryMessage}
                 </CardDescription>
@@ -297,7 +248,7 @@ export function AutomationAdvisorSection() {
                 </ul>
                 <p className="text-foreground/90 font-semibold pt-4 border-t border-border/50">{analysisResult.callToAction}</p>
                 <Button asChild className="w-full btn-cta-primary rounded-md py-3 text-base mt-2">
-                  <Link href="#contact">{texts.scheduleConsultationButton}</Link>
+                  <Link href="#contact">{dictionary.scheduleConsultationButton}</Link>
                 </Button>
               </CardContent>
             </Card>
