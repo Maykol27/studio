@@ -44,11 +44,10 @@ const texts = {
   aiBudgetPlaceholder: "Selecciona un rango de presupuesto",
    aiBudgetOptions: [
     { value: "no-especificado", label: "No especificado / No estoy seguro" },
-    { value: "menos-de-500", label: "Menos de $500" },
-    { value: "500-1000", label: "$500 - $1000" },
-    { value: "1000-5000", label: "$1000 - $5000" },
-    { value: "mas-de-5000", label: "Más de $5000" },
-    { value: "proyecto-especifico", label: "Presupuesto por proyecto específico" },
+    { value: "muy-limitado", label: "Muy limitado" },
+    { value: "limitado", label: "Limitado" },
+    { value: "moderado", label: "Moderado" },
+    { value: "sustancial", label: "Sustancial" },
   ],
 
   submitButton: "Obtener Sugerencias",
@@ -83,7 +82,7 @@ export function AutomationAdvisorSection() {
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: { // Ensure optional fields have a default for Controller
+    defaultValues: {
       aiBudget: "",
     }
   });
@@ -230,7 +229,7 @@ export function AutomationAdvisorSection() {
                       </Select>
                     )}
                   />
-                   {errors.aiBudget && ( // Optional: show error if field becomes required
+                   {errors.aiBudget && (
                     <p className="mt-1 text-sm text-destructive">{errors.aiBudget.message}</p>
                   )}
                 </div>
@@ -276,3 +275,4 @@ export function AutomationAdvisorSection() {
     </section>
   );
 }
+

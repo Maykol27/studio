@@ -26,7 +26,7 @@ const AutomationSuggestionsInputSchema = z.object({
     .string()
     .optional()
     .describe(
-      'The approximate budget the user has for AI solutions, selected from a predefined list (e.g., "menos-de-500", "500-1000", "proyecto-especifico", "no-especificado").'
+      'The approximate budget the user has for AI solutions, selected from a predefined list (e.g., "muy-limitado", "limitado", "moderado", "sustancial", "no-especificado").'
     ),
 });
 export type AutomationSuggestionsInput = z.infer<typeof AutomationSuggestionsInputSchema>;
@@ -70,7 +70,7 @@ Basado en esta información, proporciona una lista detallada de al menos 3-5 sug
 
 Formatea tus sugerencias de manera clara, por ejemplo, usando encabezados o listas con viñetas para cada una. El tono debe ser profesional, alentador y fácil de entender para alguien que no sea experto en IA.
 Prioriza soluciones que ofrezcan un alto impacto y sean relativamente fáciles de implementar para una PyME.
-Si el presupuesto es "no-especificado", ofrece un rango de opciones o pregunta por más detalles para refinar las sugerencias.
+Si el presupuesto es "no-especificado" o un término cualitativo como "muy-limitado", "limitado", etc., interpreta ese presupuesto en consecuencia al ofrecer sugerencias y, si es necesario, sugiere que se podría refinar más con información presupuestaria más específica.
 `,
 });
 
@@ -87,3 +87,4 @@ const automationSuggestionsFlow = ai.defineFlow(
 );
 
     
+
