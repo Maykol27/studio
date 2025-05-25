@@ -108,22 +108,22 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'animate-bubble-1': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.05' }, // Start with lower opacity
-          '25%': { transform: 'translate(30px, -40px) scale(1.15)', opacity: '0.1' },
-          '50%': { transform: 'translate(-20px, 20px) scale(0.85)', opacity: '0.15' },
-          '75%': { transform: 'translate(15px, 40px) scale(1.05)', opacity: '0.1' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.1' },
+          '25%': { transform: 'translate(30px, -40px) scale(1.15)', opacity: '0.2' },
+          '50%': { transform: 'translate(-20px, 20px) scale(0.85)', opacity: '0.3' },
+          '75%': { transform: 'translate(15px, 40px) scale(1.05)', opacity: '0.2' },
         },
         'animate-bubble-2': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.03' }, // Start with lower opacity
-          '25%': { transform: 'translate(-35px, 25px) scale(0.8)', opacity: '0.08' },
-          '50%': { transform: 'translate(25px, -30px) scale(1.2)', opacity: '0.12' },
-          '75%': { transform: 'translate(-10px, -15px) scale(0.95)', opacity: '0.08' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.08' },
+          '25%': { transform: 'translate(-35px, 25px) scale(0.8)', opacity: '0.16' },
+          '50%': { transform: 'translate(25px, -30px) scale(1.2)', opacity: '0.24' },
+          '75%': { transform: 'translate(-10px, -15px) scale(0.95)', opacity: '0.16' },
         },
         'animate-bubble-3': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.04' },
-          '25%': { transform: 'translate(10vw, -5vh) scale(1.1)', opacity: '0.09' },
-          '50%': { transform: 'translate(-8vw, 10vh) scale(0.9)', opacity: '0.13' },
-          '75%': { transform: 'translate(5vw, 3vh) scale(1.05)', opacity: '0.09' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.09' },
+          '25%': { transform: 'translate(10vw, -5vh) scale(1.1)', opacity: '0.18' },
+          '50%': { transform: 'translate(-8vw, 10vh) scale(0.9)', opacity: '0.26' },
+          '75%': { transform: 'translate(5vw, 3vh) scale(1.05)', opacity: '0.18' },
         },
   		},
   		animation: {
