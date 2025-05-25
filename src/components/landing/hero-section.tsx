@@ -19,18 +19,18 @@ export function HeroSection() {
       className="relative min-h-screen flex items-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
       {/* Animated Background Shapes */}
-      <div className="absolute inset-0 z-0 opacity-100"> {/* Changed opacity from 70/50 to 100 */}
+      <div className="absolute inset-0 z-0 opacity-100">
         <div
-          className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/10 rounded-full animate-bubble-1" // Changed from bg-primary/5
+          className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/15 rounded-full animate-bubble-1" 
         />
         <div
-          className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/10 rounded-full animate-bubble-2" // Changed from bg-accent/5
+          className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/15 rounded-full animate-bubble-2" 
         />
         <div
-          className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/10 rounded-full animate-bubble-3 hidden md:block" // Changed from bg-secondary/5
+          className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/15 rounded-full animate-bubble-3 hidden md:block" 
         />
          <div
-          className="absolute bottom-[5%] right-[5%] w-56 h-56 bg-primary/10 rounded-full animate-bubble-1 animation-delay-10000 hidden lg:block" // Changed from bg-primary/5
+          className="absolute bottom-[5%] right-[5%] w-56 h-56 bg-primary/15 rounded-full animate-bubble-1 animation-delay-10000 hidden lg:block" 
         />
       </div>
 
@@ -74,3 +74,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+    
