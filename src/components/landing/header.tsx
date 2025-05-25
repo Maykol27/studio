@@ -8,7 +8,7 @@ const headerTexts = {
   companyName: "Aetheria Consulting",
   benefits: "Beneficios",
   process: "Proceso",
-  testimonials: "Testimonios",
+  // testimonials: "Testimonios", // Eliminado
   about: "Nosotros",
   contactUs: "Contáctanos",
   toggleMenu: "Alternar menú"
@@ -18,7 +18,7 @@ export function Header() {
   const navItems = [
     { href: '#benefits', label: headerTexts.benefits },
     { href: '#process', label: headerTexts.process },
-    { href: '#testimonials', label: headerTexts.testimonials },
+    // { href: '#testimonials', label: headerTexts.testimonials }, // Eliminado
     { href: '#about', label: headerTexts.about },
   ];
 
@@ -29,7 +29,7 @@ export function Header() {
           <LayersIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
           <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{headerTexts.companyName}</span>
         </Link>
-        <nav className="hidden md:flex gap-4 items-center"> {/* Adjusted gap */}
+        <nav className="hidden md:flex gap-6 items-center"> {/* Adjusted gap */}
           {navItems.map(item => (
             <Link 
               key={item.href} 

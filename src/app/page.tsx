@@ -4,7 +4,7 @@ import { AutomationAdvisorSection } from '@/components/landing/automation-adviso
 import { BenefitsSection } from '@/components/landing/benefits-section';
 import { MethodologySection } from '@/components/landing/methodology-section';
 import { BlogSection } from '@/components/landing/blog-section';
-import { TestimonialsSection } from '@/components/landing/testimonials-section';
+// import { TestimonialsSection } from '@/components/landing/testimonials-section'; // Eliminado
 import { AboutSection } from '@/components/landing/about-section';
 import { ContactSection } from '@/components/landing/contact-section';
 import { Footer } from '@/components/landing/footer';
@@ -19,7 +19,7 @@ export default function LandingPage() {
         <BenefitsSection />
         <MethodologySection />
         <BlogSection />
-        <TestimonialsSection />
+        {/* <TestimonialsSection /> */} {/* Eliminado */}
         <AboutSection />
         <ContactSection />
       </main>
