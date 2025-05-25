@@ -108,22 +108,22 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'animate-bubble-1': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.15' },
-          '25%': { transform: 'translate(40px, -60px) scale(1.2)', opacity: '0.3' },
-          '50%': { transform: 'translate(-30px, 30px) scale(0.8)', opacity: '0.4' },
-          '75%': { transform: 'translate(25px, 50px) scale(1.1)', opacity: '0.3' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.2' },
+          '25%': { transform: 'translate(45px, -65px) scale(1.25)', opacity: '0.4' },
+          '50%': { transform: 'translate(-35px, 35px) scale(0.85)', opacity: '0.6' },
+          '75%': { transform: 'translate(30px, 55px) scale(1.15)', opacity: '0.4' },
         },
         'animate-bubble-2': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.12' },
-          '25%': { transform: 'translate(-45px, 35px) scale(0.75)', opacity: '0.25' },
-          '50%': { transform: 'translate(35px, -50px) scale(1.25)', opacity: '0.35' },
-          '75%': { transform: 'translate(-20px, -25px) scale(0.9)', opacity: '0.25' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.15' },
+          '25%': { transform: 'translate(-50px, 40px) scale(0.8)', opacity: '0.35' },
+          '50%': { transform: 'translate(40px, -55px) scale(1.3)', opacity: '0.55' },
+          '75%': { transform: 'translate(-25px, -30px) scale(0.95)', opacity: '0.35' },
         },
         'animate-bubble-3': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.14' },
-          '25%': { transform: 'translate(15vw, -8vh) scale(1.15)', opacity: '0.28' },
-          '50%': { transform: 'translate(-10vw, 12vh) scale(0.85)', opacity: '0.38' },
-          '75%': { transform: 'translate(8vw, 5vh) scale(1.1)', opacity: '0.28' },
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.18' },
+          '25%': { transform: 'translate(17vw, -10vh) scale(1.2)', opacity: '0.38' },
+          '50%': { transform: 'translate(-12vw, 14vh) scale(0.9)', opacity: '0.58' },
+          '75%': { transform: 'translate(10vw, 7vh) scale(1.1)', opacity: '0.38' },
         },
   		},
   		animation: {
@@ -139,5 +139,3 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
-    
