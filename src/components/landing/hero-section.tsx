@@ -6,7 +6,7 @@ import Link from 'next/link';
 // Texts are now hardcoded in Spanish
 const heroTexts = {
   titlePart1: "IA a tu Medida: ",
-  titlePart2: "dame el dodigo de este color",
+  titlePart2: "Nuestro Proceso",
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu PyME. Te ayudamos a profesionalizarte y escalar, desbloqueando tu potencial y maximizando tu enfoque en lo que más te apasiona y te llevó a construir tu empresa.",
   ctaButton: "¡Impulsa tu Negocio con IA: Diagnóstico Gratuito!",
