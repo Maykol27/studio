@@ -9,7 +9,7 @@ const heroTexts = {
   titlePart2: "Nuestro Proceso",
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
-  ctaButton: "¡Impulsa tu Negocio con IA!",
+  ctaButton: "¡Diagnostico gratuito ahora mismo!",
   videoCaption: "Conoce al CEO de Aetheria"
 };
 
