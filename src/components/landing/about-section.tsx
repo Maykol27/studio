@@ -11,7 +11,7 @@ const texts = {
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 bg-secondary/30">
+    <section id="about" className="py-10 sm:py-12 md:py-16 bg-secondary/5"> {/* Changed from bg-secondary/30 */}
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -25,7 +25,7 @@ export function AboutSection() {
               <p>{texts.paragraph3}</p>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden shadow-custom">
+          <div className="rounded-xl overflow-hidden shadow-lg"> {/* Enhanced shadow */}
             <Image
               src="https://placehold.co/550x400.png"
               alt={texts.title}

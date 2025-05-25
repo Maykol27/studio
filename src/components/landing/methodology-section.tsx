@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // CardHeader might not be used if title is directly in Card
 import { SearchIcon, DraftingCompassIcon, RocketIcon, HandshakeIcon } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 
@@ -47,9 +47,9 @@ const processSteps: ProcessStepData[] = [
 
 export function MethodologySection() {
   return (
-    <section id="process" className="py-12 sm:py-16 md:py-20 bg-background">
+    <section id="process" className="py-10 sm:py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
             {texts.description}
@@ -62,9 +62,10 @@ export function MethodologySection() {
                  <step.icon className="h-8 w-8 text-primary" />
               </div>
               <div className="space-y-2">
-                <CardTitle className="text-xl font-semibold text-primary-foreground font-heading">
+                {/* CardTitle can be replaced by a h3 or similar for semantic HTML if CardTitle component enforces specific styles */}
+                <h3 className="text-xl font-semibold text-foreground font-heading">
                   {step.title}
-                </CardTitle>
+                </h3>
                 <p className="text-foreground/80 text-sm leading-relaxed">
                   {step.description}
                 </p>

@@ -47,9 +47,9 @@ const benefits: Benefit[] = [
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="py-12 sm:py-16 md:py-20 bg-secondary/30">
+    <section id="benefits" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
             {texts.description}
@@ -62,7 +62,7 @@ export function BenefitsSection() {
                 <div className="p-4 bg-primary/10 rounded-full mb-4 inline-block">
                   <benefit.icon className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle className="text-xl font-semibold text-primary-foreground font-heading">
+                <CardTitle className="text-xl font-semibold text-foreground font-heading">
                   {benefit.title}
                 </CardTitle>
               </CardHeader>

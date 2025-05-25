@@ -47,9 +47,9 @@ const testimonialAssets = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-background">
+    <section id="testimonials" className="py-10 sm:py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
             {texts.description}
@@ -72,7 +72,7 @@ export function TestimonialsSection() {
                     <StarIcon key={i} className={`h-5 w-5 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
                   ))}
                 </div>
-                <h3 className="text-lg font-semibold text-primary-foreground font-heading">{testimonial.name}</h3>
+                <h3 className="text-lg font-semibold text-foreground font-heading">{testimonial.name}</h3>
                 <p className="text-sm text-accent">{testimonial.company}</p>
               </CardHeader>
               <CardContent>

@@ -103,7 +103,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 bg-background">
+    <section id="contact" className="py-10 sm:py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-10 sm:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
@@ -111,9 +111,9 @@ export function ContactSection() {
             {texts.description}
           </p>
         </div>
-        <Card className="max-w-2xl mx-auto bg-card border-border rounded-xl shadow-custom">
+        <Card className="max-w-2xl mx-auto bg-card border-border rounded-xl shadow-md">
           <CardHeader className="p-4 sm:p-6">
-            <CardTitle className="text-xl sm:text-2xl font-heading text-primary-foreground">{texts.cardTitle}</CardTitle>
+            <CardTitle className="text-xl sm:text-2xl font-heading text-foreground">{texts.cardTitle}</CardTitle>
             <CardDescription className="text-sm sm:text-base text-muted-foreground">
               {texts.cardDescription}
             </CardDescription>
@@ -139,7 +139,7 @@ export function ContactSection() {
                 <Textarea id="message" {...register('message')} rows={3} sm-rows={4} className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.message ? 'border-destructive' : ''}`} placeholder={texts.messagePlaceholder} />
                 {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
               </div>
-              <Button type="submit" disabled={isLoading} className="w-full btn-yellow rounded-md py-3 text-base">
+              <Button type="submit" disabled={isLoading} className="w-full btn-cta-primary rounded-md py-3 text-base">
                  {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

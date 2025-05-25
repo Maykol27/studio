@@ -77,9 +77,9 @@ export function AutomationAdvisorSection() {
   };
 
   return (
-    <section id="automation-advisor" className="py-12 sm:py-16 md:py-20 bg-background">
+    <section id="automation-advisor" className="py-10 sm:py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
             {texts.description}
@@ -87,9 +87,9 @@ export function AutomationAdvisorSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 items-start">
-          <Card className="shadow-custom bg-card border-border rounded-xl">
+          <Card className="bg-card border-border rounded-xl shadow-md card-hover">
             <CardHeader>
-              <CardTitle className="text-2xl font-heading text-primary-foreground">{texts.formCardTitle}</CardTitle>
+              <CardTitle className="text-2xl font-heading text-foreground">{texts.formCardTitle}</CardTitle>
               <CardDescription className="text-muted-foreground">
                 {texts.formCardDescription}
               </CardDescription>
@@ -103,8 +103,8 @@ export function AutomationAdvisorSection() {
                   <Textarea
                     id="businessDescription"
                     {...register('businessDescription')}
-                    rows={4}
-                    sm-rows={6}
+                    rows={3}
+                    sm-rows={4}
                     className={`w-full bg-input border-border rounded-xs p-3 input-focus ${errors.businessDescription ? 'border-destructive' : ''}`}
                     placeholder={texts.businessDescriptionPlaceholder}
                   />
@@ -112,7 +112,7 @@ export function AutomationAdvisorSection() {
                     <p className="mt-1 text-sm text-destructive">{errors.businessDescription.message}</p>
                   )}
                 </div>
-                <Button type="submit" disabled={isLoading} className="w-full btn-yellow rounded-md py-3 text-base">
+                <Button type="submit" disabled={isLoading} className="w-full btn-cta-primary rounded-md py-3 text-base">
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -127,21 +127,21 @@ export function AutomationAdvisorSection() {
           </Card>
           
           {suggestions && (
-            <Card className="shadow-custom bg-card border-border rounded-xl">
+            <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-primary-foreground">{texts.suggestionsCardTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-foreground">{texts.suggestionsCardTitle}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="prose prose-invert max-w-none text-foreground/90 whitespace-pre-line">
+                <div className="prose max-w-none text-foreground/90 whitespace-pre-line">
                   {suggestions}
                 </div>
               </CardContent>
             </Card>
           )}
           {!suggestions && isLoading && (
-             <Card className="shadow-custom bg-card border-border rounded-xl">
+             <Card className="bg-card border-border rounded-xl shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading text-primary-foreground">{texts.suggestionsGeneratingTitle}</CardTitle>
+                <CardTitle className="text-2xl font-heading text-foreground">{texts.suggestionsGeneratingTitle}</CardTitle>
               </CardHeader>
               <CardContent className="flex items-center justify-center py-10">
                 <Loader2 className="h-12 w-12 text-primary animate-spin" />
