@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { LayersIcon, MenuIcon } from 'lucide-react'; // Replaced MountainIcon with LayersIcon
+import { LayersIcon, MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 
-// Texts are now hardcoded in Spanish
 const headerTexts = {
   companyName: "Aetheria Consulting",
   benefits: "Beneficios",
@@ -29,7 +29,7 @@ export function Header() {
           <LayersIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
           <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{headerTexts.companyName}</span>
         </Link>
-        <nav className="hidden md:flex gap-6 items-center"> {/* Increased gap */}
+        <nav className="hidden md:flex gap-4 items-center"> {/* Adjusted gap */}
           {navItems.map(item => (
             <Link 
               key={item.href} 
@@ -40,21 +40,23 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <ThemeSwitcher />
           <Link href="#contact" prefetch={false}>
-            <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm"> {/* Adjusted padding and text size */}
+            <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm ml-2"> {/* Added ml-2 for spacing */}
               {headerTexts.contactUs}
             </Button>
           </Link>
         </nav>
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center gap-2"> {/* Added gap for mobile */}
+           <ThemeSwitcher />
            <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label={headerTexts.toggleMenu}>
                 <MenuIcon className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-background text-foreground p-6"> {/* Use background for sheet */}
-              <div className="flex flex-col space-y-5 pt-6"> {/* Increased space and padding-top */}
+            <SheetContent side="right" className="w-[280px] bg-background text-foreground p-6">
+              <div className="flex flex-col space-y-5 pt-6">
                 {navItems.map(item => (
                   <SheetClose key={item.href} asChild>
                     <Link href={item.href} className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
