@@ -18,7 +18,7 @@ import { Loader2, ListChecksIcon, LightbulbIcon, BriefcaseIcon } from 'lucide-re
 
 const texts = {
   title: "Análisis Inicial Gratuito",
-  description: "Completa este formulario para recibir un primer análisis con tres ideas generales de automatización para tu negocio y dar el siguiente paso.",
+  description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
   formCardTitle: "Cuéntanos Sobre Tu Negocio",
   formCardDescription: "Proporciona algunos detalles y nuestra IA te ofrecerá ideas.",
   
@@ -42,7 +42,7 @@ const texts = {
 
   aiBudgetLabel: "Presupuesto para IA (Opcional)",
   aiBudgetPlaceholder: "Selecciona un rango",
-  aiBudgetError: "Por favor, selecciona un rango de presupuesto.", // Aunque es opcional, si se interactúa, es bueno tener un mensaje
+  aiBudgetError: "Por favor, selecciona un rango de presupuesto.",
   aiBudgetOptions: [
     { value: "no-especificado", label: "No especificado / No estoy seguro" },
     { value: "muy-limitado", label: "Muy limitado" },
@@ -59,7 +59,7 @@ const texts = {
   scheduleConsultationButton: "Agendar Asesoría Personalizada",
   
   toastSuccessTitle: "¡Análisis Completado!",
-  toastSuccessDescription: "Hemos procesado tu información. Revisa las ideas generadas.", // Actualizado
+  toastSuccessDescription: "Hemos procesado tu información. Revisa las ideas generadas y ¡agendemos una cita para explorarlas!",
   toastErrorTitle: "Error en el Análisis",
   toastErrorDescription: "No se pudo procesar tu solicitud. Por favor, inténtalo de nuevo."
 };
@@ -235,7 +235,7 @@ export function AutomationAdvisorSection() {
                       </Select>
                     )}
                   />
-                   {errors.aiBudget && ( // Aunque opcional, Zod puede tener mensajes si se define una regla y falla
+                   {errors.aiBudget && ( 
                     <p className="mt-1 text-sm text-destructive">{errors.aiBudget.message}</p>
                   )}
                 </div>
