@@ -18,19 +18,20 @@ const openSans = Open_Sans({
   weight: ['300', '400', '600'],
 });
 
-// Metadata se moverá a [locale]/layout.tsx
-// export const metadata: Metadata = {
-//   title: 'Aetheria Consulting',
-//   description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
-// };
+// Metadatos por defecto. Serán sobreescritos por los de [locale]/layout.tsx para rutas localizadas.
+export const metadata: Metadata = {
+  title: 'Aetheria Consulting', // Fallback
+  description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.', // Fallback
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Next.js inyectará dinámicamente el atributo `lang` aquí
+  // basado en el `params.locale` del segmento de ruta activo ([locale]).
   return (
-    // El lang se establecerá en [locale]/layout.tsx
     <html suppressHydrationWarning>
       <body className={`${poppins.variable} ${openSans.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider
