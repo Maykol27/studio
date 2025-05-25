@@ -2,11 +2,13 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { blogPosts } from '@/lib/blog-data'; // No necesitamos LocaleBlogPost aquí ya que el contenido está centralizado
+import { blogPosts } from '@/lib/blog-data';
 import { Header } from '@/components/landing/header';
 import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { format, parseISO } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 interface BlogPostPageProps {
   params: { slug: string };
@@ -28,6 +30,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const publishedDate = parseISO(post.date); // Parse the YYYY-MM-DD string
+
   return {
     title: `${post.title} | Aetheria Consulting`,
     description: post.summary,
@@ -43,7 +47,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             },
         ],
         type: 'article',
-        publishedTime: new Date(post.date).toISOString(), // Usar la fecha real del post si está disponible y es parseable
+        publishedTime: publishedDate.toISOString(),
         authors: [post.author],
     },
     twitter: {
@@ -55,12 +59,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
-// Función auxiliar para parsear texto con **bold**
-const parseTextForBold = (text: string): ReactNode[] => {
-  const parts = text.split(/(\*\*.*?\*\*)/g); // Divide por **texto** manteniendo los delimitadores
+const parseTextForFormatting = (text: string): ReactNode[] => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={`bold-${index}`}>{part.slice(2, -2)}</strong>;
+      const boldText = part.slice(2, -2);
+      // Check if the bold text itself contains further ** (should not happen with simple bold)
+      // or if it's meant to be a heading (currently handled separately for full paragraph bolding)
+      return <strong key={`bold-${index}`}>{boldText}</strong>;
     }
     return part;
   });
@@ -73,6 +79,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const parsedDate = parseISO(post.date);
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
+
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -90,8 +100,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
               <div className="flex items-center gap-1.5">
                 <CalendarDaysIcon className="h-4 w-4" />
-                {/* Idealmente, la fecha del post debería ser un objeto Date o un string ISO para formateo */}
-                <time dateTime={new Date(post.date).toISOString()}>{post.date}</time>
+                <time dateTime={parsedDate.toISOString()}>{displayDate}</time>
               </div>
             </div>
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
@@ -108,26 +117,21 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
             {post.fullContent.map((paragraph, index) => {
-              // Manejo de listas
               if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
                 const items = paragraph.split('\n').map(item => item.trim().replace(/^\*\s*/, ''));
                 return (
                   <ul key={`list-${index}`} className="list-disc space-y-1 pl-6">
                     {items.map((item, itemIndex) => (
-                      <li key={`list-item-${index}-${itemIndex}`}>{parseTextForBold(item)}</li>
+                      <li key={`list-item-${index}-${itemIndex}`}>{parseTextForFormatting(item)}</li>
                     ))}
                   </ul>
                 );
               }
-              // Manejo de encabezados (si un párrafo completo está entre **)
-              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.includes(' ', 2) && !paragraph.slice(2,-2).includes('**') ) {
-                 // Esta condición verifica si el texto entre ** no contiene más ** (para evitar doble parseo)
-                 // y si no es solo una palabra en negrita dentro de un párrafo más largo
-                const headingText = paragraph.slice(2, -2); // Remueve los ** de los extremos
+              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes('**') && !paragraph.slice(2,-2).includes(' ')) {
+                const headingText = paragraph.slice(2, -2);
                 return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
               }
-              // Párrafos normales con posible texto en negrita
-              return <p key={`p-${index}`}>{parseTextForBold(paragraph)}</p>;
+              return <p key={`p-${index}`}>{parseTextForFormatting(paragraph)}</p>;
             })}
           </div>
         </article>

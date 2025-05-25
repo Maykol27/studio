@@ -8,7 +8,7 @@ export interface BlogPost {
   imageHint: string;
   fullContent: string[]; // Array of paragraphs
   author: string;
-  date: string; // e.g., "15 de Julio, 2024"
+  date: string; // e.g., "2024-07-15"
 }
 
 export const blogPosts: BlogPost[] = [
@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "futuro tecnologia IA",
     author: "Equipo Aetheria",
-    date: "20 de Julio, 2024",
+    date: "2024-07-20",
     fullContent: [
       "La Inteligencia Artificial (IA) ha dejado de ser una tecnología futurista reservada para las grandes corporaciones. Hoy en día, la IA ofrece un abanico de oportunidades para que las Pequeñas y Medianas Empresas (PyMEs) optimicen sus procesos, mejoren la toma de decisiones y ofrezcan experiencias superiores a sus clientes. En Aetheria Consulting, estamos convencidos de que la IA puede ser un catalizador de crecimiento para negocios de todos los tamaños.",
       "Uno de los principales beneficios de la IA para las PyMEs es la automatización de tareas repetitivas. Desde la gestión de correos electrónicos hasta la programación de publicaciones en redes sociales o la atención al cliente mediante chatbots, la IA puede liberar tiempo valioso para que los empresarios y sus equipos se concentren en actividades estratégicas que realmente impulsen el negocio. Esto no solo aumenta la eficiencia, sino que también reduce la probabilidad de errores humanos.",
@@ -38,7 +38,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "marketing digital automatizacion",
     author: "Equipo Aetheria",
-    date: "22 de Julio, 2024",
+    date: "2024-07-22",
     fullContent: [
       "El marketing digital es esencial para cualquier negocio que busque crecer en el entorno actual. Sin embargo, gestionar múltiples canales, crear contenido atractivo y analizar resultados puede consumir una gran cantidad de tiempo y recursos. Aquí es donde la Inteligencia Artificial (IA) entra en juego, ofreciendo soluciones poderosas para automatizar y optimizar tus esfuerzos de marketing.",
       "**1. Creación de Contenido Asistida por IA:** La generación de ideas y la redacción de textos para blogs, redes sociales, correos electrónicos y anuncios puede ser un desafío constante. Herramientas de IA como Jasper.ai o Copy.ai pueden ayudarte a generar borradores, titulares llamativos, descripciones de productos e incluso guiones para videos a partir de unas pocas indicaciones. Si bien siempre es recomendable la supervisión humana, estas herramientas aceleran significativamente el proceso creativo.",
@@ -46,7 +46,7 @@ export const blogPosts: BlogPost[] = [
       "**3. Chatbots para la Atención al Cliente y Captación de Leads:** Los chatbots impulsados por IA pueden interactuar con los visitantes de tu sitio web o redes sociales 24/7. Pueden responder preguntas frecuentes, calificar leads haciéndoles preguntas clave, programar demostraciones o incluso guiar a los usuarios a través del proceso de compra. Esto mejora la experiencia del cliente y asegura que no se pierda ninguna oportunidad de venta.",
       "**4. Optimización de Campañas Publicitarias (PPC):** Plataformas como Google Ads y Facebook Ads ya incorporan IA para optimizar la puja, la segmentación y la entrega de anuncios. Además, existen herramientas de terceros que utilizan IA para analizar el rendimiento de las campañas en tiempo real, sugerir mejoras en las creatividades o palabras clave, y reasignar presupuestos automáticamente para maximizar los resultados.",
       "**5. Email Marketing Inteligente:** La IA puede llevar tu email marketing al siguiente nivel. Desde la personalización del contenido de cada correo según los intereses del destinatario, hasta la optimización de las horas de envío para maximizar las tasas de apertura, o la automatización de secuencias de correos (lead nurturing) basadas en el comportamiento del usuario. Herramientas como Mailchimp o ActiveCampaign ofrecen funcionalidades de IA para estas tareas.",
-      "Implementar la IA en tu estrategia de marketing no solo te permitirá ahorrar tiempo y recursos, sino que también te ayudará a tomar decisiones más inteligentes, personalizar la experiencia de tus clientes y, en última instancia, lograr mejores resultados. Comienza explorando una o dos de estas áreas y verás el impacto positivo en tu negocio."
+      "Implementar la IA en tu estrategia de marketing no solo te permitirá ahorrar tiempo y recursos, sino que también te ayudará a tomar decisiones más inteligentes, personalizar la experiencia de tus clientes y, últimamente, lograr mejores resultados. Comienza explorando una o dos de estas áreas y verás el impacto positivo en tu negocio."
     ]
   },
   {
@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "lenguaje natural IA",
     author: "Equipo Aetheria",
-    date: "25 de Julio, 2024",
+    date: "2024-07-25",
     fullContent: [
       "El Procesamiento del Lenguaje Natural (PLN), o NLP por sus siglas en inglés (Natural Language Processing), es una rama fascinante de la Inteligencia Artificial que se enfoca en capacitar a las computadoras para entender, interpretar y generar lenguaje humano de una manera valiosa y significativa. Aunque suene complejo, sus aplicaciones son cada vez más comunes y están transformando la forma en que las empresas interactúan con sus clientes.",
       "**¿Qué es el PLN en términos sencillos?** Imagina que puedes hablar con tu computadora o tu teléfono y que este no solo reconoce tus palabras, sino que también comprende tu intención, el sentimiento detrás de tus frases e incluso el contexto de la conversación. Eso es, en esencia, lo que busca el PLN. Combina la lingüística computacional —el modelado del lenguaje humano basado en reglas— con modelos estadísticos, de aprendizaje automático y de aprendizaje profundo.",
@@ -76,3 +76,4 @@ export const blogPosts: BlogPost[] = [
     ]
   }
 ];
+
