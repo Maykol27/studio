@@ -1,4 +1,4 @@
-// HeroSection.tsx
+
 'use client';
 
 import { useRef, useState, useEffect, useCallback } from 'react';
@@ -31,14 +31,26 @@ export function HeroSection({ }: HeroSectionProps) {
   };
 
   useEffect(() => {
+    // Check for PiP support only on the client-side
     setIsPiPSupported(!!document.pictureInPictureEnabled);
-    
+
     const video = videoRef.current;
     if (!video) return;
 
     const handlePlayingState = () => setIsPlaying(!video.paused);
     const handlePiPState = () => setIsInPiP(document.pictureInPictureElement === video);
-    const handleVideoEnd = () => setIsPlaying(false);
+    
+    const handleVideoEnd = async () => {
+      setIsPlaying(false);
+      if (document.pictureInPictureElement === video) {
+        try {
+          await document.exitPictureInPicture();
+          // setIsInPiP(false); // leavepictureinpicture event should handle this
+        } catch (error) {
+          console.error("Error al salir de PiP automáticamente:", error);
+        }
+      }
+    };
 
     video.addEventListener('play', handlePlayingState);
     video.addEventListener('pause', handlePlayingState);
@@ -63,7 +75,7 @@ export function HeroSection({ }: HeroSectionProps) {
         video.removeEventListener('leavepictureinpicture', handlePiPState);
       }
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const togglePlayPause = () => {
     const video = videoRef.current;
@@ -109,14 +121,14 @@ export function HeroSection({ }: HeroSectionProps) {
         }
       });
     }
-  }, [isPlaying, isPiPSupported]);
+  }, [isPlaying, isPiPSupported]); // Dependencies for useCallback
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]);
+  }, [handleScroll]); // Dependency for useEffect
 
   return (
     <section
@@ -125,11 +137,11 @@ export function HeroSection({ }: HeroSectionProps) {
     >
       <div className="absolute inset-0 z-0 opacity-100">
         {/* Animated figures */}
-        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1" />
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1 hidden md:block" />
         <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
         <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
         <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-[2s]" />
-        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]" />
+        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s] hidden md:block" />
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -146,20 +158,15 @@ export function HeroSection({ }: HeroSectionProps) {
           <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-[300ms]">
             <video
               ref={videoRef}
-              // IMPORTANTE: Reemplaza esta URL con la de tu video del CEO hablando
               src="https://www.w3schools.com/html/mov_bbb.mp4" 
               poster="https://placehold.co/600x400.png"
               className="w-full h-full object-cover cursor-pointer"
               playsInline
               onClick={togglePlayPause}
-              // Este data-ai-hint es para la imagen del poster
               data-ai-hint="CEO presentacion" 
               onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
-                const container = videoElement.parentElement;
-                if (container) {
-                  // Opcional
-                }
+                // Optional: Adjust styling or logic after metadata is loaded
               }}
             />
             
@@ -174,7 +181,7 @@ export function HeroSection({ }: HeroSectionProps) {
                 </button>
               )}
 
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent flex justify-between items-center pointer-events-auto z-10">
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent flex justify-between items-center pointer-events-auto z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button 
                   onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
                   aria-label={isPlaying ? texts.pauseVideo : texts.playVideo}
