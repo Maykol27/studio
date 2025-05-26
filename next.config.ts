@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // i18n configuration will be handled by middleware and route structure
+  // No need for the deprecated i18n object here in Next.js 13+ App Router
 };
 
 export default nextConfig;

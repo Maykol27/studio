@@ -18,6 +18,7 @@ const openSans = Open_Sans({
   weight: ['300', '400', '600'],
 });
 
+// Metadata base, puede ser sobreescrita por layouts de locale
 export const metadata: Metadata = {
   title: 'Aetheria Consulting',
   description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
@@ -29,7 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    // El atributo lang será manejado por Next.js en combinación con LocaleLayout
+    <html suppressHydrationWarning>
       <body className={`${poppins.variable} ${openSans.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"

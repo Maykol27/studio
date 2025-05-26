@@ -43,7 +43,7 @@
     "aiBudgetLabel": "Presupuesto para IA (Opcional)",
     "aiBudgetPlaceholder": "Selecciona un rango",
     "aiBudgetError": "Por favor, selecciona un rango de presupuesto.",
-    "aiBudgetOptions": [
+     "aiBudgetOptions": [
       { "value": "no-especificado", "label": "No especificado / No estoy seguro" },
       { "value": "muy-limitado", "label": "Muy limitado" },
       { "value": "limitado", "label": "Limitado" },
@@ -53,7 +53,8 @@
     "submitButton": "Obtener Sugerencias",
     "submitButtonLoading": "Analizando...",
     "resultsCardTitle": "¡Excelente Primer Paso!",
-    "generatingTitle": "Generando Ideas...",
+    "resultsCardIntro": "¡Gracias por compartir los detalles! Basado en tu información, aquí hay tres áreas generales donde la IA y la automatización podrían impulsar tu negocio:",
+    "resultsCardCallToAction": "Para explorar estas ideas más a fondo, discutir herramientas específicas y crear una estrategia a tu medida, te invitamos a completar nuestro formulario de contacto. ¡Agendemos una cita!",
     "scheduleConsultationButton": "Agendar Asesoría Personalizada",
     "toastSuccessTitle": "¡Análisis Completado!",
     "toastSuccessDescription": "Hemos procesado tu información. Revisa las ideas generadas y ¡agendemos una cita para explorarlas!",

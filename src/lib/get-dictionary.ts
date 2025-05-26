@@ -1,6 +1,7 @@
 import type { Locale } from '@/i18n-config';
 
-const dictionaries = {
+// Usamos Record para tipar los diccionarios de manera más genérica
+const dictionaries: Record<Locale, () => Promise<any>> = {
   es: () => import('@/locales/es.json').then((module) => module.default),
   pt: () => import('@/locales/pt.json').then((module) => module.default),
 };
@@ -9,7 +10,8 @@ export const getDictionary = async (locale: Locale) => {
   const loadLocale = dictionaries[locale] ?? dictionaries.es; // Fallback a 'es' si el locale no existe
   try {
     return await loadLocale();
-  } catch (error) {
+  } catch (error)
+ {
     console.error(`Error loading dictionary for locale: ${locale}`, error);
     // Fallback al idioma por defecto si el específico falla
     return await dictionaries.es();

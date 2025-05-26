@@ -1,46 +1,42 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { blogPosts } from '@/lib/blog-data'; // Blog data is currently only in Spanish
+import { blogPosts } from '@/lib/blog-data';
 import { Header } from '@/components/landing/header';
 import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale'; // Import Spanish locale for date formatting
+import { es, pt } from 'date-fns/locale';
+import { getDictionary } from '@/lib/get-dictionary';
+import type { Locale } from '@/i18n-config';
 
 interface BlogPostPageProps {
-  params: { slug: string };
+  params: { slug: string; locale: Locale };
 }
 
-// Hardcoded Spanish texts for UI elements on this page
-const pageTexts = {
-  authorLabel: "Autor",
-  dateLabel: "Fecha",
-  notFoundTitle: "Post no encontrado",
-  notFoundDescription: "El artículo de blog que buscas no existe."
-};
-
-export async function generateStaticParams() {
+export async function generateStaticParams({ params: { locale } }: { params: { locale: Locale }}) {
   return blogPosts.map(post => ({
     slug: post.slug,
+    locale: locale, // Aunque el slug no depende del locale, Next.js necesita esto aquí.
   }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     return {
-      title: pageTexts.notFoundTitle,
-      description: pageTexts.notFoundDescription,
+      title: dictionary.blogPostPage.notFoundTitle,
+      description: dictionary.blogPostPage.notFoundDescription,
     };
   }
-  const publishedDate = parseISO(post.date); // Parse the ISO date string
+  const publishedDate = parseISO(post.date);
 
   return {
-    title: `${post.title} | Aetheria Consulting`, // Title from Spanish data
-    description: post.summary, // Summary from Spanish data
+    title: `${post.title} | Aetheria Consulting`, // El título del post viene de blog-data.ts (actualmente solo español)
+    description: post.summary, // El resumen viene de blog-data.ts (actualmente solo español)
     openGraph: {
         title: post.title,
         description: post.summary,
@@ -80,25 +76,31 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 };
 
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     notFound();
   }
 
-  const parsedDate = parseISO(post.date); // Parse the ISO date string
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
+  const parsedDate = parseISO(post.date);
+  const dateLocale = params.locale === 'pt' ? pt : es;
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
 
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header />
+      <Header
+        headerDictionary={dictionary.header}
+        languageSwitcherDictionary={dictionary.languageSwitcher}
+        currentLocale={params.locale}
+      />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {post.title} {/* Title from Spanish data */}
+              {post.title} {/* Título del post de blog-data.ts (español) */}
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-1.5">
@@ -113,7 +115,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
               <Image
                 src={post.imageUrl}
-                alt={post.title} // Alt text from Spanish data
+                alt={post.title}
                 fill
                 className="object-cover"
                 priority
@@ -123,9 +125,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
-            {post.fullContent.map((paragraph, index) => { // Full content from Spanish data
+            {post.fullContent.map((paragraph, index) => {
               if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
-                const items = paragraph.split('\n').map(item => item.trim().replace(/^\*\s*/, ''));
+                const items = paragraph.split('\\n').map(item => item.trim().replace(/^\\*\\s*/, ''));
                 return (
                   <ul key={`list-${index}`} className="list-disc space-y-1 pl-6">
                     {items.map((item, itemIndex) => (
@@ -143,7 +145,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer />
+      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
     </div>
   );
 }

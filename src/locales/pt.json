@@ -1,8 +1,8 @@
 
 {
   "metadata": {
-    "title": "Aetheria Consulting",
-    "description": "IA Sob Medida para Você: Nosso Processo Rumo ao Seu Sucesso."
+    "title": "Aetheria Consulting (PT)",
+    "description": "IA Sob Medida para Você: Nosso Processo Rumo ao Seu Sucesso. (PT)"
   },
   "header": {
     "companyName": "Aetheria Consulting",
@@ -29,7 +29,7 @@
     "businessDescriptionPlaceholder": "Descreva os processos chave, a indústria e o tamanho do seu negócio...",
     "businessDescriptionError": "Por favor, forneça uma descrição detalhada de pelo menos 30 caracteres.",
     "businessNeedsLabel": "Necessidades do Negócio",
-    "businessNeedsPlaceholder": "Descreva os principais desafios, pontos fracos ou áreas que você gostaria de melhorar...",
+    "businessNeedsPlaceholder": "Descreva os principais desafios, pontos fracos ou áreas que você gostaria de mejorar...",
     "businessNeedsError": "Por favor, descreva as necesidades do seu negócio (mínimo 30 caracteres).",
     "aiExperienceLevelLabel": "Nível de Experiência com IA",
     "aiExperienceLevelPlaceholder": "Selecione seu nível",
@@ -53,7 +53,8 @@
     "submitButton": "Obter Sugestões",
     "submitButtonLoading": "Analisando...",
     "resultsCardTitle": "Excelente Primeiro Passo!",
-    "generatingTitle": "Gerando Ideias...",
+    "resultsCardIntro": "Obrigado por compartilhar os detalhes! Com base nas suas informações, aqui estão três áreas gerais onde a IA e a automação podem impulsionar o seu negócio:",
+    "resultsCardCallToAction": "Para explorar essas ideias mais a fundo, discutir ferramentas específicas e criar uma estratégia à sua medida, convidamos você a preencher nosso formulário de contato. Vamos agendar uma consulta!",
     "scheduleConsultationButton": "Agendar Consultoria Personalizada",
     "toastSuccessTitle": "Análise Concluída!",
     "toastSuccessDescription": "Processamos suas informações. Revise as ideias geradas e agendemos uma reunião para explorá-las!",
