@@ -7,39 +7,28 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
-  SheetHeader, // Added import
-  SheetTitle   // Added import
+  SheetHeader,
+  SheetTitle
 } from '@/components/ui/sheet';
 import { ThemeSwitcher } from '@/components/theme-switcher';
-// LanguageSwitcher no se usa si no hay i18n
-// import { LanguageSwitcher } from '@/components/language-switcher';
-// import type { Dictionary } from '@/lib/get-dictionary';
-// import type { Locale } from '@/i18n-config';
-
-interface HeaderProps {
-  // Estas props no se usan si no hay i18n
-  // headerDictionary: Dictionary['header'];
-  // languageSwitcherDictionary: Dictionary['languageSwitcher'];
-  // currentLocale: Locale;
-}
 
 // Textos hardcodeados en español
 const texts = {
   companyName: "Aetheria Consulting",
   benefits: "Beneficios",
   process: "Proceso",
-  blog: "Blog",
+  blog: "Blog", // Re-added
   about: "Nosotros",
   contactUs: "Contáctanos",
   toggleMenu: "Alternar menú",
-  sheetTitle: "Menú Principal" // Added text for sheet title
+  sheetTitle: "Menú Principal"
 };
 
-export function Header({ }: HeaderProps) {
+export function Header() {
   const navItems = [
     { href: '#benefits', label: texts.benefits },
     { href: '#process', label: texts.process },
-    { href: '#blog', label: texts.blog },
+    { href: '#blog', label: texts.blog }, // Re-added
     { href: '#about', label: texts.about },
   ];
 
@@ -62,7 +51,6 @@ export function Header({ }: HeaderProps) {
             </Link>
           ))}
           <ThemeSwitcher />
-          {/* <LanguageSwitcher currentLocale={currentLocale} dictionary={languageSwitcherDictionary} /> */}
           <Link href="#contact" prefetch={false}>
             <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm ml-2">
               {texts.contactUs}
@@ -71,7 +59,6 @@ export function Header({ }: HeaderProps) {
         </nav>
         <div className="md:hidden flex items-center">
            <ThemeSwitcher />
-           {/* <LanguageSwitcher currentLocale={currentLocale} dictionary={languageSwitcherDictionary} /> */}
            <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label={texts.toggleMenu}>

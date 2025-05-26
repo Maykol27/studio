@@ -8,10 +8,10 @@ import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale'; // Importar directamente la localización en español
+import { es } from 'date-fns/locale';
 
 interface BlogPostPageProps {
-  params: { slug: string }; // Solo esperamos slug
+  params: { slug: string };
 }
 
 export async function generateStaticParams() {
@@ -24,15 +24,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
-    // Si el post no se encuentra, Next.js buscará una página not-found.js
-    // o mostrará su 404 por defecto. Para metadatos, devolvemos algo genérico.
     return {
       title: "Post no encontrado",
       description: "El artículo de blog que buscas no existe o fue movido.",
     };
   }
 
-  const publishedDate = parseISO(post.date); // Asegura que post.date es un string ISO válido (YYYY-MM-DD)
+  const publishedDate = parseISO(post.date);
 
   return {
     title: `${post.title} | Aetheria Consulting`,
@@ -62,16 +60,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 const parseTextForFormatting = (text: string): ReactNode[] => {
-  const parts = text.split(/(\*\*.*?\*\*)/g);
+  const parts = text.split(/(\*\*.*?\*\*)/g); // Split by bold markers
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      // Para que sea solo negrita, y no un subtítulo por error
-      if (boldText) { // Aseguramos que no sea solo "** **"
+      // Check if it's just bold and not a full-line heading marker
+      if (boldText) { 
         return <strong key={`bold-${index}`}>{boldText}</strong>;
       }
     }
-    return part;
+    return part; // Return text as is if not bold
   });
 };
 
@@ -80,7 +78,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
-    notFound(); // Esto debería renderizar la página 404 de Next.js
+    notFound();
   }
 
   const parsedDate = parseISO(post.date);
@@ -89,7 +87,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header />
+      <Header /> {/* No dictionary/locale props needed as i18n was reverted */}
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
@@ -120,13 +118,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
             {post.fullContent.map((paragraph, index) => {
-              // Lógica para detectar subtítulos (todo el párrafo en negrita, sin espacios dentro de los **)
-              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes('**') && !paragraph.slice(2,-2).includes(' ')) {
+              // Simple heading detection: if entire paragraph is **Text** and Text contains no spaces
+              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes(' ') && !paragraph.slice(2,-2).includes('**')) {
                 const headingText = paragraph.slice(2, -2);
                 return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
               }
-              // Lógica para listas (simple, basada en que el párrafo comience con "* ")
-              // Asume que cada elemento de lista es un párrafo separado o líneas separadas por \n dentro de un mismo párrafo
+              // Simple list detection
               if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
                 const items = paragraph.split('\\n').map(item => item.trim().replace(/^\\*\\s*/, ''));
                 return (
@@ -142,8 +139,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer />
+      <Footer /> {/* No dictionary/locale props needed */}
     </div>
   );
 }
-
