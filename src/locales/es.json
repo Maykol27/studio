@@ -7,7 +7,7 @@
   "header": {
     "companyName": "Aetheria Consulting",
     "benefits": "Beneficios",
-    "process": "Nuestro Método",
+    "process": "Propuesta de Valor",
     "blog": "Blog",
     "about": "Nosotros",
     "contactUs": "Contáctanos",
@@ -48,7 +48,7 @@
       { "value": "experto", "label": "Experto (Desarrollo o implementación profunda de IA)" }
     ],
     "aiBudgetLabel": "Presupuesto para IA (Opcional)",
-    "aiBudgetPlaceholder": "Selecciona un rango",
+    "aiBudgetPlaceholder": "Selecciona un rango de presupuesto",
     "aiBudgetError": "Por favor, selecciona un rango de presupuesto.",
     "aiBudgetOptions": [
       { "value": "no-especificado", "label": "No especificado / No estoy seguro" },
@@ -148,3 +148,5 @@
     "message": "Cargando..."
   }
 }
+
+    

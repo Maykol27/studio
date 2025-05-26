@@ -7,7 +7,7 @@
   "header": {
     "companyName": "Aetheria Consulting",
     "benefits": "Benefícios",
-    "process": "Nosso Método",
+    "process": "Proposta de Valor",
     "blog": "Blog",
     "about": "Sobre Nós",
     "contactUs": "Fale Conosco",
@@ -48,7 +48,7 @@
       { "value": "experto", "label": "Especialista (Desenvolvimento ou implementação profunda de IA)" }
     ],
     "aiBudgetLabel": "Orçamento para IA (Opcional)",
-    "aiBudgetPlaceholder": "Selecione um intervalo",
+    "aiBudgetPlaceholder": "Selecione um intervalo de orçamento",
     "aiBudgetError": "Por favor, selecione um intervalo de orçamento.",
     "aiBudgetOptions": [
       { "value": "no-especificado", "label": "Não especificado / Não tenho certeza" },
@@ -73,7 +73,7 @@
     "benefit1Title": "Máxima Eficiência e Produtividade",
     "benefit1Description": "Automatize tarefas tediosas, libere tempo valioso para você e sua equipe. Obtenha resultados rápidos e mensuráveis, para que você possa focar no crescimento estratégico e no que te apaixona.",
     "benefit2Title": "Redução Inteligente de Custos",
-    "benefit2Description": "Otimize recursos e elimine erros custosos com soluções de IA que impactam diretamente sua lucratividade. Transforme despesas em investimentos inteligentes que te dão tranquilidade.",
+    "benefit2Description": "Otimize recursos e elimine erros custosos com soluções de IA que impactam directamente sua lucratividade. Transforme despesas em investimentos inteligentes que te dão tranquilidade.",
     "benefit3Title": "Decisões Baseadas em Dados",
     "benefit3Description": "Tome decisões mais inteligentes e antecipe o futuro do seu negócio com o poder da IA. Transforme dados complexos em uma vantagem competitiva, com suporte especializado e ferramentas intuitivas que te dão confiança.",
     "benefit4Title": "Experiência do Cliente Otimizada",
@@ -100,7 +100,7 @@
     "title": "Sobre a Aetheria Consulting",
     "subtitle": "Seus aliados na transformação digital impulsionada por IA. Somos apaixonados por ajudar empresas a prosperar e escalar.",
     "paragraph1": "A Aetheria Consulting nasceu da convicção de que a Inteligência Artificial deve ser acessível e benéfica para empresas de todos os tamanhos. Trazemos profunda visão e experiência em tecnologia (IA, automação), gerenciamento de projetos e melhoria contínua, adquirida em ambientes complexos de grandes indústrias. Agora, trazemos esse conhecimento para criar soluções simples e práticas para profissionalizar e escalar sua empresa, independentemente do seu tamanho ou capacidade econômica.",
-    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, melhorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descubrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
+    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, mejorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descubrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
     "paragraph3": "Com foco em resultados tangíveis e um processo de implementação ágil, guiamos você em cada etapa do caminho. Nosso objetivo não é apenas fornecer ferramentas de IA, mas ser seu parceiro estratégico no crescimento de sua empresa, permitindo que você se concentre no que te apaixona e no que te levou a construir seu negócio."
   },
   "contactSection": {
@@ -148,3 +148,5 @@
     "message": "Carregando..."
   }
 }
+
+    
