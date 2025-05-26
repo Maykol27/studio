@@ -3,7 +3,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, PlayCircleIcon, PauseIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react';
+import { ArrowRightIcon, PlayCircleIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react'; // Removed PauseIcon as native controls will handle it
 import Link from 'next/link';
 
 interface HeroSectionProps {
@@ -24,7 +24,7 @@ export function HeroSection({ }: HeroSectionProps) {
     ctaButton: "¡Diagnostico gratuito ahora mismo!",
     videoCaption: "Conoce al CEO de Aetheria",
     playVideo: "Reproducir Video",
-    pauseVideo: "Pausar Video",
+    pauseVideo: "Pausar Video", // Kept for aria-label consistency if needed
     enterPiP: "Entrar en Picture-in-Picture",
     exitPiP: "Salir de Picture-in-Picture",
     pipNotSupported: "Picture-in-Picture no es soportado en este navegador."
@@ -138,7 +138,7 @@ export function HeroSection({ }: HeroSectionProps) {
         <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
         <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
         <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-[2s]" />
-        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s] hidden md:block" />
+        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]" />
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -181,7 +181,7 @@ export function HeroSection({ }: HeroSectionProps) {
               />
             </video>
             
-            {/* Overlay for initial big Play button - hidden when video is playing */}
+            {/* Overlay for initial big Play button - hidden when video is playing or controls are active */}
             {!isPlaying && (
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
@@ -207,7 +207,7 @@ export function HeroSection({ }: HeroSectionProps) {
               </div>
             )}
 
-            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none">
+            <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none ${isPlaying ? 'hidden' : ''}`}>
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
