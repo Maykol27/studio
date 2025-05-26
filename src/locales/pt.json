@@ -48,7 +48,7 @@
       { "value": "experto", "label": "Especialista (Desenvolvimento ou implementação profunda de IA)" }
     ],
     "aiBudgetLabel": "Orçamento para IA (Opcional)",
-    "aiBudgetPlaceholder": "Selecione um intervalo de orçamento",
+    "aiBudgetPlaceholder": "Selecione um intervalo",
     "aiBudgetError": "Por favor, selecione um intervalo de orçamento.",
     "aiBudgetOptions": [
       { "value": "no-especificado", "label": "Não especificado / Não tenho certeza" },
