@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     title: "El Futuro de la IA en las PYMES",
     summary: "¿Crees que la IA es solo para gigantes? Descubre cómo la Inteligencia Artificial se vuelve el motor clave para el crecimiento y liderazgo de las Pymes. ¡Anticípate y lidera!",
     slug: "futuro-ia-pymes",
-    imageUrl: "https://placehold.co/600x400.png",
+    imageUrl: "/images/futuro-ia-pymes.jpg", // Actualizado
     imageHint: "futuro tecnologia IA",
     author: "Equipo Aetheria",
     date: "2025-05-02",
@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     title: "5 Maneras de Automatizar tu Marketing con IA",
     summary: "Tu marketing necesita ir más allá. Explora 5 estrategias de IA para personalizar, predecir y revolucionar tus campañas como nunca antes.",
     slug: "automatizar-marketing-ia",
-    imageUrl: "https://placehold.co/600x400.png",
+    imageUrl: "/images/automatizar-marketing-ia.jpg", // Actualizado
     imageHint: "marketing digital automatizacion",
     author: "Equipo Aetheria",
     date: "2025-05-02",
@@ -49,9 +49,9 @@ export const blogPosts: BlogPost[] = [
     id: "3",
     title: "¿Procesos Internos Anclados en el Ayer? La Automatización Inteligente es tu Futuro",
     summary: "¿Tus operaciones internas te frenan? Libera el potencial oculto de tu empresa. Aprende cómo la automatización inteligente (2025+) transforma tus procesos para ser más ágil e innovador.",
-    slug: "entendiendo-pln", // Este slug quizás quieras cambiarlo para que coincida con el nuevo título, ej. "automatizacion-inteligente-procesos"
-    imageUrl: "https://placehold.co/600x400.png",
-    imageHint: "lenguaje natural IA", // Este imageHint también podrías querer cambiarlo
+    slug: "automatizacion-inteligente-procesos", // Actualizado para coincidir con el espíritu del título
+    imageUrl: "/images/automatizacion-inteligente-procesos.jpg", // Actualizado
+    imageHint: "procesos internos automatizacion", // Actualizado
     author: "Equipo Aetheria",
     date: "2025-05-02",
     fullContent: [
