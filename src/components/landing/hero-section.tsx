@@ -151,7 +151,7 @@ export function HeroSection({ }: HeroSectionProps) {
               className="w-full h-full object-cover cursor-pointer"
               playsInline
               onClick={togglePlayPause}
-              data-ai-hint="CEO presentacion empresa"
+              data-ai-hint="Aetheria logo"
               onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
                 const container = videoElement.parentElement;
