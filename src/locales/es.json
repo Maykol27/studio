@@ -92,7 +92,7 @@
     "step4Description": "Nuestra asociación no termina con la implementación. Ofrecemos soporte post-implementación, monitoreo de rendimiento y ajustes proactivos para asegurar que tu inversión en IA continúe evolucionando, maximizando tu retorno y adaptándose a tus necesidades futuras, actuando como tu socio estratégico en la mejora continua."
   },
   "blogSection": {
-    "title": "Nuestro Blog",
+    "title": "Blog",
     "description": "Mantente al día con las últimas tendencias en IA y automatización empresarial. Ideas, consejos e historias de éxito para inspirar tu negocio.",
     "readMore": "Leer Más"
   },
@@ -148,5 +148,3 @@
     "message": "Cargando..."
   }
 }
-
-    
