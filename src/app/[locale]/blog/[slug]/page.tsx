@@ -93,12 +93,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
   const lastPostSlug = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].slug : null;
-  const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
+  // Ya no hay slug del tercer post para tratamiento especial de 'object-top'
 
   let imagePositionClass = '';
-  if (post.slug === thirdPostSlug) {
-    imagePositionClass = 'object-top';
-  } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
+  // Aplicar object-bottom solo si es el primer o último post.
+  // El tercer post ya no tiene clase de posicionamiento específica.
+  if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
     imagePositionClass = 'object-bottom';
   }
 
