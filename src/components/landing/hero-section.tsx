@@ -1,14 +1,29 @@
-
+// src/components/landing/hero-section.tsx
 'use client';
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, PlayCircleIcon, PictureInPictureIcon, PlayIcon, PauseIcon } from 'lucide-react';
 import Link from 'next/link';
-import type { Dictionary } from '@/lib/get-dictionary'; // Asegúrate que Dictionary está bien tipado
+import type { Dictionary } from '@/lib/get-dictionary';
+
+// Default texts (Spanish fallbacks)
+const defaultTexts: Dictionary['heroSection'] = {
+  titlePart1: "IA a tu Medida: ",
+  titlePart2: "Nuestro Proceso",
+  titlePart3: " Hacia Tu Éxito.",
+  description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
+  ctaButton: "¡Diagnostico gratuito ahora mismo!",
+  videoCaption: "Conoce al CEO de Aetheria",
+  playVideo: "Reproducir Video",
+  pauseVideo: "Pausar Video",
+  enterPiP: "Entrar en Picture-in-Picture",
+  exitPiP: "Salir de Picture-in-Picture",
+  pipNotSupported: "Picture-in-Picture no es soportado en este navegador."
+};
 
 interface HeroSectionProps {
-  dictionary: Dictionary['heroSection'];
+  dictionary?: Partial<Dictionary['heroSection']>; // Made dictionary prop optional and accept partial
 }
 
 export function HeroSection({ dictionary }: HeroSectionProps) {
@@ -17,8 +32,13 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
   const [isPiPSupported, setIsPiPSupported] = useState(false);
   const [isInPiP, setIsInPiP] = useState(false);
 
+  // Safely merge provided dictionary with default texts
+  // Fallback to an empty object if dictionary is undefined to prevent spread error
+  const texts = { ...defaultTexts, ...(dictionary || {}) };
+
   useEffect(() => {
-    setIsPiPSupported(!!document.pictureInPictureEnabled);
+    // PiP support can only be checked on the client
+    setIsPiPSupported(typeof document !== 'undefined' && !!document.pictureInPictureEnabled);
 
     const video = videoRef.current;
     if (!video) return;
@@ -42,7 +62,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     video.addEventListener('playing', handlePlayingState); 
     video.addEventListener('ended', handleVideoEnd);
 
-    if (document.pictureInPictureEnabled) {
+    if (typeof document !== 'undefined' && document.pictureInPictureEnabled) {
       video.addEventListener('enterpictureinpicture', handlePiPState);
       video.addEventListener('leavepictureinpicture', handlePiPState);
       if (document.pictureInPictureElement === video) {
@@ -55,7 +75,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
       video.removeEventListener('pause', handlePlayingState);
       video.removeEventListener('playing', handlePlayingState);
       video.removeEventListener('ended', handleVideoEnd);
-      if (document.pictureInPictureEnabled) {
+      if (typeof document !== 'undefined' && document.pictureInPictureEnabled) {
         video.removeEventListener('enterpictureinpicture', handlePiPState);
         video.removeEventListener('leavepictureinpicture', handlePiPState);
       }
@@ -77,7 +97,8 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     if (!video) return;
 
     if (!isPiPSupported) {
-      alert(dictionary.pipNotSupported);
+      // texts.pipNotSupported will always be available due to defaultTexts
+      alert(texts.pipNotSupported); 
       return;
     }
 
@@ -90,15 +111,15 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     } catch (error) {
       console.error("Error al cambiar modo PiP:", error);
     }
-  }, [isPiPSupported, dictionary.pipNotSupported]);
+  }, [isPiPSupported, texts.pipNotSupported]); // Crucially, use texts.pipNotSupported here
 
   const handleScroll = useCallback(() => {
     const video = videoRef.current;
-    if (!video || !isPiPSupported || !isPlaying || document.pictureInPictureElement || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    if (!video || !isPiPSupported || !isPlaying || document.pictureInPictureElement || (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
       return;
     }
     const rect = video.getBoundingClientRect();
-    const isOutOfViewport = rect.bottom < 50 || rect.top > window.innerHeight - 50;
+    const isOutOfViewport = rect.bottom < 50 || rect.top > (typeof window !== 'undefined' ? window.innerHeight - 50 : 0);
     if (isOutOfViewport) {
       video.requestPictureInPicture().catch(err => {
         if (err.name !== 'NotAllowedError' && err.name !== 'InvalidStateError') {
@@ -109,10 +130,12 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
   }, [isPlaying, isPiPSupported]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
   }, [handleScroll]);
 
   return (
@@ -132,10 +155,10 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
-              {dictionary.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{dictionary.titlePart2}</span>{dictionary.titlePart3}
+              {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
             <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
-              {dictionary.description}
+              {texts.description}
             </p>
           </div>
           
@@ -172,7 +195,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
                 onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
-                aria-label={dictionary.playVideo}
+                aria-label={texts.playVideo}
               >
                 <PlayCircleIcon className="h-20 w-20 text-white/90 hover:text-white transition-colors" />
               </div>
@@ -184,7 +207,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
               >
                 <button
                   onClick={(e) => { e.stopPropagation(); togglePiP(); }}
-                  aria-label={isInPiP ? dictionary.exitPiP : dictionary.enterPiP}
+                  aria-label={isInPiP ? texts.exitPiP : texts.enterPiP}
                   className={`p-1.5 bg-black/50 hover:bg-black/70 text-white/90 hover:text-white rounded-md transition-colors`}
                 >
                   <PictureInPictureIcon className="h-5 w-5" /> 
@@ -193,7 +216,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
             )}
 
             <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none ${isPlaying ? 'hidden' : ''}`}>
-              <p className="text-xs sm:text-sm text-white/90">{dictionary.videoCaption}</p>
+              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
         </div>
@@ -201,7 +224,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
         <div className="mt-10 md:mt-16 flex justify-center animate-fade-in-up animation-delay-[600ms]">
           <Link href="#automation-advisor" passHref>
             <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full max-w-xs sm:max-w-md sm:w-auto shadow-lg hover:shadow-xl">
-              {dictionary.ctaButton}
+              {texts.ctaButton}
               <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
@@ -210,5 +233,3 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     </section>
   );
 }
-
-    
