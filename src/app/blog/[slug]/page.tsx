@@ -65,7 +65,7 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
       // Check if it's just bold and not a full-line heading marker
-      if (boldText) { 
+      if (boldText) {
         return <strong key={`bold-${index}`}>{boldText}</strong>;
       }
     }
@@ -84,6 +84,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const parsedDate = parseISO(post.date);
   const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
 
+  const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
+  const lastPostSlug = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].slug : null;
+  const isFirstOrLast = post.slug === firstPostSlug || post.slug === lastPostSlug;
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -109,7 +112,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 src={post.imageUrl}
                 alt={post.title}
                 fill
-                className="object-cover"
+                className={`object-cover ${isFirstOrLast ? 'object-bottom' : ''}`}
                 priority
                 data-ai-hint={post.imageHint}
               />
