@@ -2,7 +2,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { LayersIcon, MenuIcon } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+  SheetHeader, // Added import
+  SheetTitle   // Added import
+} from '@/components/ui/sheet';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 // LanguageSwitcher no se usa si no hay i18n
 // import { LanguageSwitcher } from '@/components/language-switcher';
@@ -21,17 +28,18 @@ const texts = {
   companyName: "Aetheria Consulting",
   benefits: "Beneficios",
   process: "Proceso",
-  blog: "Blog", // Nuevo texto para el blog
+  blog: "Blog",
   about: "Nosotros",
   contactUs: "Contáctanos",
-  toggleMenu: "Alternar menú"
+  toggleMenu: "Alternar menú",
+  sheetTitle: "Menú Principal" // Added text for sheet title
 };
 
 export function Header({ }: HeaderProps) {
   const navItems = [
     { href: '#benefits', label: texts.benefits },
     { href: '#process', label: texts.process },
-    { href: '#blog', label: texts.blog }, // Enlace al Blog añadido aquí
+    { href: '#blog', label: texts.blog },
     { href: '#about', label: texts.about },
   ];
 
@@ -71,7 +79,10 @@ export function Header({ }: HeaderProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background text-foreground p-6">
-              <div className="flex flex-col space-y-5 pt-6">
+              <SheetHeader className="pt-0 px-0 pb-4 text-center border-b mb-4">
+                <SheetTitle>{texts.sheetTitle}</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col space-y-5">
                 {navItems.map(item => (
                   <SheetClose key={item.href} asChild>
                     <Link href={item.href} className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors" prefetch={false}>
