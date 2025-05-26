@@ -8,9 +8,11 @@
     "companyName": "Aetheria Consulting",
     "benefits": "Benefícios",
     "process": "Processo",
+    "blog": "Blog",
     "about": "Sobre Nós",
     "contactUs": "Fale Conosco",
-    "toggleMenu": "Alternar menu"
+    "toggleMenu": "Alternar menu",
+    "sheetTitle": "Menu Principal"
   },
   "heroSection": {
     "titlePart1": "IA Sob Medida para Você: ",
@@ -18,7 +20,12 @@
     "titlePart3": " Rumo ao Seu Sucesso.",
     "description": "Procurando levar seu negócio para o próximo nível? Na Aetheria Consulting, transformamos a complexidade da automação e IA em soluções práticas e acessíveis para o seu negócio.",
     "ctaButton": "Diagnóstico gratuito agora mesmo!",
-    "videoCaption": "Conheça o CEO da Aetheria"
+    "videoCaption": "Conheça o CEO da Aetheria",
+    "playVideo": "Reproduzir Vídeo",
+    "pauseVideo": "Pausar Vídeo",
+    "enterPiP": "Entrar em Picture-in-Picture",
+    "exitPiP": "Sair de Picture-in-Picture",
+    "pipNotSupported": "Picture-in-Picture não é suportado neste navegador."
   },
   "automationAdvisorSection": {
     "title": "Análise Inicial Gratuita",
@@ -53,8 +60,6 @@
     "submitButton": "Obter Sugestões",
     "submitButtonLoading": "Analisando...",
     "resultsCardTitle": "Excelente Primeiro Passo!",
-    "resultsCardIntro": "Obrigado por compartilhar os detalhes! Com base nas suas informações, aqui estão três áreas gerais onde a IA e a automação podem impulsionar o seu negócio:",
-    "resultsCardCallToAction": "Para explorar essas ideias mais a fundo, discutir ferramentas específicas e criar uma estratégia à sua medida, convidamos você a preencher nosso formulário de contato. Vamos agendar uma consulta!",
     "scheduleConsultationButton": "Agendar Consultoria Personalizada",
     "toastSuccessTitle": "Análise Concluída!",
     "toastSuccessDescription": "Processamos suas informações. Revise as ideias geradas e agendemos uma reunião para explorá-las!",
@@ -137,5 +142,8 @@
     "dateLabel": "Data",
     "notFoundTitle": "Post não encontrado",
     "notFoundDescription": "O artigo de blog que você procura não existe."
+  },
+  "loading": {
+    "message": "Carregando..."
   }
 }
