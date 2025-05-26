@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "futuro tecnologia IA",
     author: "Equipo Aetheria",
-    date: "2024-07-20",
+    date: "2025-05-02",
     fullContent: [
       "La Inteligencia Artificial (IA) ha dejado de ser un lujo de las grandes corporaciones para convertirse en el aliado estratégico indispensable de las Pequeñas y Medianas Empresas (Pymes). Pero, ¿qué nos depara el futuro cercano? Olvídate de los chatbots básicos. Estamos hablando de IA predictiva que anticipa las necesidades de tus clientes antes que ellos mismos, sistemas de gestión hiper-personalizados que aprenden y se adaptan a tu equipo, y análisis de datos tan intuitivos que te mostrarán oportunidades de mercado que hoy ni imaginas.",
       "La clave a partir de ahora no será si implementas IA, sino cómo la integras para que trabaje en sinergia con tu talento humano. Las Pymes que prosperarán serán aquellas que utilicen la IA no solo para automatizar, sino para innovar, escalar y tomar decisiones más inteligentes y rápidas. La democratización de la IA avanzada está aquí, abriendo un aban¡nea de posibilidades. ¿Estás listo para que tu Pyme no solo compita, sino que lidere en esta nueva era? Navegar esta transformación puede parecer complejo, pero con la guía adecuada, el potencial es ilimitado."
@@ -34,7 +34,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "marketing digital automatizacion",
     author: "Equipo Aetheria",
-    date: "2024-07-22",
+    date: "2025-05-02",
     fullContent: [
       "El marketing digital es esencial para cualquier negocio que busque crecer en el entorno actual. Sin embargo, gestionar múltiples canales, crear contenido atractivo y analizar resultados puede consumir una gran cantidad de tiempo y recursos. Aquí es donde la Inteligencia Artificial (IA) entra en juego, ofreciendo soluciones poderosas para automatizar y optimizar tus esfuerzos de marketing.",
       "**1. Creación de Contenido Asistida por IA:** La generación de ideas y la redacción de textos para blogs, redes sociales, correos electrónicos y anuncios puede ser un desafío constante. Herramientas de IA pueden ayudarte a generar borradores y titulares.",
@@ -42,7 +42,7 @@ export const blogPosts: BlogPost[] = [
       "**3. Chatbots para la Atención al Cliente:** Los chatbots impulsados por IA pueden interactuar con los visitantes de tu sitio web 24/7, respondiendo preguntas frecuentes y calificando leads.",
       "**4. Optimización de Campañas Publicitarias (PPC):** Plataformas como Google Ads y Facebook Ads ya incorporan IA para optimizar la puja y la segmentación. Herramientas de terceros pueden analizar el rendimiento en tiempo real.",
       "**5. Email Marketing Inteligente:** La IA puede personalizar el contenido de cada correo, optimizar las horas de envío y automatizar secuencias de correos (lead nurturing).",
-      "Implementar la IA en tu estrategia de marketing no solo te permitirá ahorrar tiempo y recursos, sino que también te ayudará a tomar decisiones más inteligentes y personalizar la experiencia de tus clientes."
+      "Implementar la IA en tu estrategia de marketing no solo te permitirá ahorrar tiempo y recursos, sino que también te ayudará a tomar decisiones más inteligentes, personalizar la experiencia de tus clientes y, en última instancia, lograr mejores resultados. Comienza explorando una o dos de estas áreas y verás el impacto positivo en tu negocio."
     ]
   },
   {
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "lenguaje natural IA",
     author: "Equipo Aetheria",
-    date: "2024-07-25",
+    date: "2025-05-02",
     fullContent: [
       "El Procesamiento del Lenguaje Natural (PLN) es una rama de la IA que capacita a las computadoras para entender lenguaje humano. Sus aplicaciones transforman la interacción con clientes.",
       "**¿Qué es el PLN en términos sencillos?** Imagina hablar con tu computadora y que esta comprenda tu intención y sentimiento. Eso busca el PLN, combinando lingüística computacional con aprendizaje automático.",
