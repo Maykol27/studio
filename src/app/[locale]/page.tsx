@@ -15,7 +15,11 @@ export default async function LandingPage({ params: { locale } }: { params: { lo
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header dictionary={dictionary.header} currentLocale={locale} />
+      <Header
+        headerDictionary={dictionary.header}
+        languageSwitcherDictionary={dictionary.languageSwitcher}
+        currentLocale={locale}
+      />
       <main className="flex-grow">
         <HeroSection dictionary={dictionary.heroSection} />
         <AutomationAdvisorSection dictionary={dictionary.automationAdvisorSection} />

@@ -1,23 +1,22 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { blogPosts } from '@/lib/blog-data'; // Asumimos que blog-data está en un idioma y no se localiza dinámicamente.
+import { blogPosts } from '@/lib/blog-data';
 import { Header } from '@/components/landing/header';
 import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es, ptBR } from 'date-fns/locale'; // Importar locales de date-fns
+import { es, ptBR } from 'date-fns/locale';
 import type { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
+import { i18n } from '@/i18n-config'; // Necesario para generateStaticParams
 
 interface BlogPostPageProps {
   params: { slug: string; locale: Locale };
 }
 
 export async function generateStaticParams() {
-  // Si los slugs son diferentes por idioma, esto necesitaría lógica adicional.
-  // Por ahora, asumimos slugs universales.
   const locales = i18n.locales;
   const paths: { slug: string; locale: Locale }[] = [];
 
@@ -42,11 +41,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   const publishedDate = parseISO(post.date);
 
-  // Para un título de blog localizado, necesitaríamos datos de blog localizados.
-  // Por ahora, usamos el título del post.slug.
   return {
     title: `${post.title} | ${dictionary.header.companyName}`,
-    description: post.summary, // También debería ser localizado
+    description: post.summary,
     openGraph: {
         title: post.title,
         description: post.summary,
@@ -60,7 +57,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         ],
         type: 'article',
         publishedTime: publishedDate.toISOString(),
-        authors: [post.author], // Debería ser localizado
+        authors: [post.author],
     },
     twitter: {
         card: 'summary_large_image',
@@ -76,6 +73,10 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
+      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) { // Simple heading check
+         // This logic might need refinement if headings can contain spaces or other bold text
+         return <strong key={`bold-heading-${index}`}>{boldText}</strong>; // For simple inline bold, treat as strong
+      }
       return <strong key={`bold-${index}`}>{boldText}</strong>;
     }
     return part;
@@ -98,17 +99,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header dictionary={dictionary.header} currentLocale={params.locale} />
+      <Header
+        headerDictionary={dictionary.header}
+        languageSwitcherDictionary={dictionary.languageSwitcher}
+        currentLocale={params.locale}
+      />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {post.title} {/* Título del post no localizado */}
+              {post.title}
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-1.5">
                 <UserIcon className="h-4 w-4" />
-                <span>{post.author}</span> {/* Autor no localizado */}
+                <span>{post.author}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CalendarDaysIcon className="h-4 w-4" />
