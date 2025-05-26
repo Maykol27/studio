@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -23,12 +24,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
+    // Si el post no se encuentra, Next.js buscará una página not-found.js
+    // o mostrará su 404 por defecto. Para metadatos, devolvemos algo genérico.
     return {
-      title: "Post no encontrado", // Texto en español directo
+      title: "Post no encontrado",
       description: "El artículo de blog que buscas no existe o fue movido.",
     };
   }
-  const publishedDate = parseISO(post.date);
+
+  const publishedDate = parseISO(post.date); // Asegura que post.date es un string ISO válido (YYYY-MM-DD)
 
   return {
     title: `${post.title} | Aetheria Consulting`,
@@ -62,10 +66,10 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) {
-         return <strong key={`bold-heading-${index}`}>{boldText}</strong>;
+      // Para que sea solo negrita, y no un subtítulo por error
+      if (boldText) { // Aseguramos que no sea solo "** **"
+        return <strong key={`bold-${index}`}>{boldText}</strong>;
       }
-      return <strong key={`bold-${index}`}>{boldText}</strong>;
     }
     return part;
   });
@@ -76,11 +80,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
-    notFound();
+    notFound(); // Esto debería renderizar la página 404 de Next.js
   }
 
   const parsedDate = parseISO(post.date);
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es }); // Usar 'es' directamente
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
 
 
   return (
@@ -116,6 +120,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
             {post.fullContent.map((paragraph, index) => {
+              // Lógica para detectar subtítulos (todo el párrafo en negrita, sin espacios dentro de los **)
+              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes('**') && !paragraph.slice(2,-2).includes(' ')) {
+                const headingText = paragraph.slice(2, -2);
+                return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
+              }
+              // Lógica para listas (simple, basada en que el párrafo comience con "* ")
+              // Asume que cada elemento de lista es un párrafo separado o líneas separadas por \n dentro de un mismo párrafo
               if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
                 const items = paragraph.split('\\n').map(item => item.trim().replace(/^\\*\\s*/, ''));
                 return (
@@ -126,10 +137,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </ul>
                 );
               }
-              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes('**') && !paragraph.slice(2,-2).includes(' ')) {
-                const headingText = paragraph.slice(2, -2);
-                return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
-              }
               return <p key={`p-${index}`}>{parseTextForFormatting(paragraph)}</p>;
             })}
           </div>
@@ -139,3 +146,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   );
 }
+
