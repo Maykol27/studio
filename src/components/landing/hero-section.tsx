@@ -2,13 +2,18 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, PlayCircleIcon } from 'lucide-react';
 import Link from 'next/link';
-import type { Dictionary } from '@/lib/get-dictionary';
 
-interface HeroSectionProps {
-  dictionary: Dictionary['heroSection'];
-}
+// Hardcoded Spanish texts for the hero section
+const texts = {
+  titlePart1: "IA a tu Medida: ",
+  titlePart2: "Nuestro Proceso",
+  titlePart3: " Hacia Tu Éxito.",
+  description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
+  ctaButton: "¡Diagnostico gratuito ahora mismo!",
+  videoCaption: "Conoce al CEO de Aetheria"
+};
 
-export function HeroSection({ dictionary }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section
       id="hero"
@@ -26,15 +31,15 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
-              {dictionary.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{dictionary.titlePart2}</span>{dictionary.titlePart3}
+              {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
             <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
-              {dictionary.description}
+              {texts.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link href="#automation-advisor" passHref>
                 <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full sm:w-auto shadow-lg hover:shadow-xl">
-                  {dictionary.ctaButton}
+                  {texts.ctaButton}
                   <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
@@ -43,7 +48,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
           <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-300">
             <Image
               src="https://placehold.co/600x400.png"
-              alt={dictionary.videoCaption}
+              alt={texts.videoCaption}
               width={600}
               height={400}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -54,7 +59,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
               <PlayCircleIcon className="h-20 w-20 text-white/90 transform group-hover:scale-110 transition-transform" />
             </div>
             <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-black/50 backdrop-blur-sm p-2 rounded-md">
-              <p className="text-xs sm:text-sm text-white/90">{dictionary.videoCaption}</p>
+              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
         </div>

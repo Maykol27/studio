@@ -7,44 +7,39 @@ import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es, ptBR } from 'date-fns/locale'; // Import locales for date formatting
-import type { Locale } from '@/i18n-config';
-import { getDictionary } from '@/lib/get-dictionary';
+import { es } from 'date-fns/locale'; // Import Spanish locale for date formatting
 
 interface BlogPostPageProps {
-  params: { slug: string; locale: Locale };
+  params: { slug: string };
 }
 
-// Ensure generateStaticParams includes locale for each slug
+// Hardcoded Spanish texts for UI elements on this page
+const pageTexts = {
+  authorLabel: "Autor",
+  dateLabel: "Fecha",
+  notFoundTitle: "Post no encontrado",
+  notFoundDescription: "El artículo de blog que buscas no existe."
+};
+
 export async function generateStaticParams() {
-  const locales = ['es', 'pt']; // Define supported locales here or import from i18n-config
-  const paths = locales.flatMap(locale => 
-    blogPosts.map(post => ({
-      slug: post.slug,
-      locale: locale,
-    }))
-  );
-  return paths;
+  return blogPosts.map(post => ({
+    slug: post.slug,
+  }));
 }
-
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const post = blogPosts.find(p => p.slug === params.slug);
-  const dictionary = await getDictionary(params.locale);
-  const blogPostPageDictionary = dictionary.blogPostPage;
-
 
   if (!post) {
     return {
-      title: blogPostPageDictionary.notFoundTitle,
-      description: blogPostPageDictionary.notFoundDescription,
+      title: pageTexts.notFoundTitle,
+      description: pageTexts.notFoundDescription,
     };
   }
-
-  const publishedDate = parseISO(post.date);
+  const publishedDate = parseISO(post.date); // Parse the ISO date string
 
   return {
-    title: `${post.title} | ${dictionary.header.companyName}`, // Title from Spanish data
+    title: `${post.title} | Aetheria Consulting`, // Title from Spanish data
     description: post.summary, // Summary from Spanish data
     openGraph: {
         title: post.title,
@@ -85,27 +80,20 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 };
 
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const dictionary = await getDictionary(params.locale);
-  const blogPostPageDictionary = dictionary.blogPostPage;
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     notFound();
   }
 
-  const parsedDate = parseISO(post.date);
-  const dateLocale = params.locale === 'pt' ? ptBR : es;
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
+  const parsedDate = parseISO(post.date); // Parse the ISO date string
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
 
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header 
-        headerDictionary={dictionary.header} 
-        languageSwitcherDictionary={dictionary.languageSwitcher}
-        currentLocale={params.locale}
-      />
+      <Header />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
@@ -155,7 +143,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+      <Footer />
     </div>
   );
 }
