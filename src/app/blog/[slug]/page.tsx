@@ -7,42 +7,32 @@ import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es, ptBR } from 'date-fns/locale';
-import type { Locale } from '@/i18n-config';
-import { getDictionary } from '@/lib/get-dictionary';
-import { i18n } from '@/i18n-config'; // Necesario para generateStaticParams
+import { es } from 'date-fns/locale'; // Importar locale español
 
 interface BlogPostPageProps {
-  params: { slug: string; locale: Locale };
+  params: { slug: string };
 }
 
 export async function generateStaticParams() {
-  const locales = i18n.locales;
-  const paths: { slug: string; locale: Locale }[] = [];
-
-  locales.forEach(locale => {
-    blogPosts.forEach(post => {
-      paths.push({ slug: post.slug, locale });
-    });
-  });
-  return paths;
+  return blogPosts.map(post => ({
+    slug: post.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     return {
-      title: dictionary.blogPostPage.notFoundTitle,
-      description: dictionary.blogPostPage.notFoundDescription,
+      title: "Post no encontrado",
+      description: "El artículo de blog que buscas no existe.",
     };
   }
 
   const publishedDate = parseISO(post.date);
 
   return {
-    title: `${post.title} | ${dictionary.header.companyName}`,
+    title: `${post.title} | Aetheria Consulting`,
     description: post.summary,
     openGraph: {
         title: post.title,
@@ -73,9 +63,8 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) { // Simple heading check
-         // This logic might need refinement if headings can contain spaces or other bold text
-         return <strong key={`bold-heading-${index}`}>{boldText}</strong>; // For simple inline bold, treat as strong
+      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) { 
+         return <strong key={`bold-heading-${index}`}>{boldText}</strong>;
       }
       return <strong key={`bold-${index}`}>{boldText}</strong>;
     }
@@ -85,7 +74,6 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
@@ -93,17 +81,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const parsedDate = parseISO(post.date);
-  const dateLocale = params.locale === 'pt' ? ptBR : es;
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
-
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header
-        headerDictionary={dictionary.header}
-        languageSwitcherDictionary={dictionary.languageSwitcher}
-        currentLocale={params.locale}
-      />
+      <Header />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
@@ -153,7 +135,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+      <Footer />
     </div>
   );
 }
