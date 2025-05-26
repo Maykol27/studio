@@ -1,13 +1,12 @@
 // HeroSection.tsx
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, PlayCircleIcon, PlayIcon, PauseIcon, PictureInPictureIcon } from 'lucide-react';
 import Link from 'next/link';
 
 // Dado que se revirtió i18n, los textos se incluyen aquí directamente.
-// Si i18n se rehabilita, estos deberían moverse a los archivos de diccionario.
 interface HeroSectionProps {
   // dictionary: Dictionary['heroSection']; // Comentado por ahora
 }
@@ -98,6 +97,42 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
     }
   };
 
+  const handleScroll = useCallback(() => {
+    const video = videoRef.current;
+    // No activar PiP automático si:
+    // - No hay video
+    // - PiP no es soportado
+    // - El video no se está reproduciendo
+    // - Ya está en modo PiP
+    // - El tema del sistema operativo prefiere movimiento reducido (opcional, pero buena práctica de accesibilidad)
+    if (!video || !isPiPSupported || !isPlaying || document.pictureInPictureElement || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      return;
+    }
+
+    const rect = video.getBoundingClientRect();
+    
+    // Condición para considerar el video "fuera de vista":
+    // - El borde inferior del video está a menos de 50px del borde superior de la ventana (casi completamente desplazado hacia arriba)
+    // - O el borde superior del video está a más de (altura de la ventana - 50px) del borde superior de la ventana (casi completamente desplazado hacia abajo)
+    const isOutOfViewport = rect.bottom < 50 || rect.top > window.innerHeight - 50;
+
+    if (isOutOfViewport) {
+      video.requestPictureInPicture().catch(err => {
+        // Silenciar errores comunes si el usuario no ha interactuado o PiP ya fue solicitado.
+        if (err.name !== 'NotAllowedError' && err.name !== 'InvalidStateError') {
+           console.error("Error intentando entrar en modo PiP automáticamente:", err);
+        }
+      });
+    }
+  }, [isPlaying, isPiPSupported]); // isPlaying y isPiPSupported son dependencias de useCallback
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]); // handleScroll es una dependencia de useEffect
+
   return (
     <section
       id="hero"
@@ -136,25 +171,23 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
               ref={videoRef}
               src="https://www.w3schools.com/html/mov_bbb.mp4" // REEMPLAZAR con la URL de tu video
               poster="https://placehold.co/600x400.png"
-              className="w-full h-full object-cover cursor-pointer" // cursor-pointer para indicar que es clickeable
+              className="w-full h-full object-cover cursor-pointer"
               playsInline
-              onClick={togglePlayPause} // Click en el video también reproduce/pausa
-              onLoadedMetadata={(e) => { // Ajustar el aspect ratio del contenedor si se desea una vez cargado el video
+              onClick={togglePlayPause}
+              data-ai-hint="CEO presentacion empresa"
+              onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
                 const container = videoElement.parentElement;
                 if (container) {
-                  // Opcional: Podrías ajustar el aspect-ratio del contenedor padre aquí si el video tiene un aspect-ratio diferente
-                  // container.style.aspectRatio = `${videoElement.videoWidth} / ${videoElement.videoHeight}`;
+                  // Opcional
                 }
               }}
             />
             
-            {/* Overlay for controls - appears on group hover */}
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              {/* Big Play Button (if paused and overlay is active) */}
               {!isPlaying && (
                 <button
-                  onClick={(e) => { e.stopPropagation(); togglePlayPause(); }} // Detener propagación para no activar el click del video
+                  onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
                   aria-label={texts.playVideo}
                   className="text-white/90 hover:text-white transition-colors mb-4 pointer-events-auto z-10"
                 >
@@ -162,7 +195,6 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
                 </button>
               )}
 
-              {/* Control bar at the bottom (always part of overlay) */}
               <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent flex justify-between items-center pointer-events-auto z-10">
                 <button 
                   onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
@@ -188,7 +220,6 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
               </div>
             </div>
 
-            {/* Video Caption - ensure it doesn't block interactions with overlay */}
             <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none">
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
