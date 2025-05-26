@@ -1,7 +1,5 @@
 import type { Locale } from '@/i18n-config';
 
-// Enumeramos todos los diccionarios aquí para un mejor linting y soporte de TypeScript.
-// También obtenemos la importación predeterminada para tipos más limpios.
 const dictionaries = {
   es: () => import('@/locales/es.json').then((module) => module.default),
   pt: () => import('@/locales/pt.json').then((module) => module.default),

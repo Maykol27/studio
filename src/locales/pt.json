@@ -1,3 +1,4 @@
+
 {
   "metadata": {
     "title": "Aetheria Consulting",
@@ -29,7 +30,7 @@
     "businessDescriptionError": "Por favor, forneça uma descrição detalhada de pelo menos 30 caracteres.",
     "businessNeedsLabel": "Necessidades do Negócio",
     "businessNeedsPlaceholder": "Descreva os principais desafios, pontos fracos ou áreas que você gostaria de melhorar...",
-    "businessNeedsError": "Por favor, descreva as necessidades do seu negócio (mínimo 30 caracteres).",
+    "businessNeedsError": "Por favor, descreva as necesidades do seu negócio (mínimo 30 caracteres).",
     "aiExperienceLevelLabel": "Nível de Experiência com IA",
     "aiExperienceLevelPlaceholder": "Selecione seu nível",
     "aiExperienceLevelError": "Por favor, selecione seu nível de experiência com IA.",

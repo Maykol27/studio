@@ -1,39 +1,51 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { blogPosts } from '@/lib/blog-data';
+import { blogPosts } from '@/lib/blog-data'; // Blog data is currently only in Spanish
 import { Header } from '@/components/landing/header';
 import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale'; // Importar locale español
+import { es, ptBR } from 'date-fns/locale'; // Import locales for date formatting
+import type { Locale } from '@/i18n-config';
+import { getDictionary } from '@/lib/get-dictionary';
 
 interface BlogPostPageProps {
-  params: { slug: string };
+  params: { slug: string; locale: Locale };
 }
 
+// Ensure generateStaticParams includes locale for each slug
 export async function generateStaticParams() {
-  return blogPosts.map(post => ({
-    slug: post.slug,
-  }));
+  const locales = ['es', 'pt']; // Define supported locales here or import from i18n-config
+  const paths = locales.flatMap(locale => 
+    blogPosts.map(post => ({
+      slug: post.slug,
+      locale: locale,
+    }))
+  );
+  return paths;
 }
+
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const post = blogPosts.find(p => p.slug === params.slug);
+  const dictionary = await getDictionary(params.locale);
+  const blogPostPageDictionary = dictionary.blogPostPage;
+
 
   if (!post) {
     return {
-      title: "Post no encontrado",
-      description: "El artículo de blog que buscas no existe.",
+      title: blogPostPageDictionary.notFoundTitle,
+      description: blogPostPageDictionary.notFoundDescription,
     };
   }
 
   const publishedDate = parseISO(post.date);
 
   return {
-    title: `${post.title} | Aetheria Consulting`,
-    description: post.summary,
+    title: `${post.title} | ${dictionary.header.companyName}`, // Title from Spanish data
+    description: post.summary, // Summary from Spanish data
     openGraph: {
         title: post.title,
         description: post.summary,
@@ -74,6 +86,8 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const dictionary = await getDictionary(params.locale);
+  const blogPostPageDictionary = dictionary.blogPostPage;
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
@@ -81,16 +95,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const parsedDate = parseISO(post.date);
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es });
+  const dateLocale = params.locale === 'pt' ? ptBR : es;
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
+
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header />
+      <Header 
+        headerDictionary={dictionary.header} 
+        languageSwitcherDictionary={dictionary.languageSwitcher}
+        currentLocale={params.locale}
+      />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {post.title}
+              {post.title} {/* Title from Spanish data */}
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-1.5">
@@ -105,7 +125,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
               <Image
                 src={post.imageUrl}
-                alt={post.title}
+                alt={post.title} // Alt text from Spanish data
                 fill
                 className="object-cover"
                 priority
@@ -115,7 +135,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
-            {post.fullContent.map((paragraph, index) => {
+            {post.fullContent.map((paragraph, index) => { // Full content from Spanish data
               if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
                 const items = paragraph.split('\n').map(item => item.trim().replace(/^\*\s*/, ''));
                 return (
@@ -135,7 +155,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer />
+      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
     </div>
   );
 }

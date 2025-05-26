@@ -1,27 +1,17 @@
-import { Header } from '@/components/landing/header';
-import { HeroSection } from '@/components/landing/hero-section';
-import { AutomationAdvisorSection } from '@/components/landing/automation-advisor-section';
-import { BenefitsSection } from '@/components/landing/benefits-section';
-import { MethodologySection } from '@/components/landing/methodology-section';
-import { BlogSection } from '@/components/landing/blog-section';
-import { AboutSection } from '@/components/landing/about-section';
-import { ContactSection } from '@/components/landing/contact-section';
-import { Footer } from '@/components/landing/footer';
+// This file is no longer the main entry point for the landing page.
+// The content has been moved to src/app/[locale]/page.tsx
+// This file can be deleted or adapted for a non-localized fallback if absolutely necessary,
+// but the middleware should handle redirection to localized paths.
 
-export default function LandingPage() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow">
-        <HeroSection />
-        <AutomationAdvisorSection />
-        <BenefitsSection />
-        <MethodologySection />
-        <BlogSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
-  );
+// For now, we can redirect to the default locale or show a simple message.
+// However, with the current middleware, users should always be redirected.
+import { redirect } from 'next/navigation';
+import { i18n } from '@/i18n-config';
+
+export default function RootPage() {
+  // Redirect to the default locale.
+  // The middleware should ideally handle this, but this is a fallback.
+  redirect(`/${i18n.defaultLocale}`);
+  // Or, if you want to render something minimal:
+  // return <p>Loading locale...</p>;
 }

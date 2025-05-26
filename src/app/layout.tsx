@@ -18,9 +18,10 @@ const openSans = Open_Sans({
   weight: ['300', '400', '600'],
 });
 
+// Metadata for RootLayout can be general. Specific metadata will be in [locale]/layout.tsx
 export const metadata: Metadata = {
   title: 'Aetheria Consulting',
-  description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
+  description: 'Soluções de IA para o seu negócio.', // General description
 };
 
 export default function RootLayout({
@@ -29,6 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // The lang attribute will be set by Next.js based on the [locale] segment in LocaleLayout
     <html lang="es" suppressHydrationWarning>
       <body className={`${poppins.variable} ${openSans.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider
