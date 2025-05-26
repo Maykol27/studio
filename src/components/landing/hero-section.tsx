@@ -6,12 +6,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, PlayCircleIcon, PlayIcon, PauseIcon, PictureInPictureIcon } from 'lucide-react';
 import Link from 'next/link';
 
-// Dado que se revirtió i18n, los textos se incluyen aquí directamente.
 interface HeroSectionProps {
-  // dictionary: Dictionary['heroSection']; // Comentado por ahora
+  // No se usa diccionario aquí porque los textos están hardcodeados en español
 }
 
-export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
+export function HeroSection({ }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPiPSupported, setIsPiPSupported] = useState(false);
@@ -32,7 +31,6 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
   };
 
   useEffect(() => {
-    // document solo está disponible en el cliente
     setIsPiPSupported(!!document.pictureInPictureEnabled);
     
     const video = videoRef.current;
@@ -99,52 +97,38 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
 
   const handleScroll = useCallback(() => {
     const video = videoRef.current;
-    // No activar PiP automático si:
-    // - No hay video
-    // - PiP no es soportado
-    // - El video no se está reproduciendo
-    // - Ya está en modo PiP
-    // - El tema del sistema operativo prefiere movimiento reducido (opcional, pero buena práctica de accesibilidad)
     if (!video || !isPiPSupported || !isPlaying || document.pictureInPictureElement || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
       return;
     }
-
     const rect = video.getBoundingClientRect();
-    
-    // Condición para considerar el video "fuera de vista":
-    // - El borde inferior del video está a menos de 50px del borde superior de la ventana (casi completamente desplazado hacia arriba)
-    // - O el borde superior del video está a más de (altura de la ventana - 50px) del borde superior de la ventana (casi completamente desplazado hacia abajo)
     const isOutOfViewport = rect.bottom < 50 || rect.top > window.innerHeight - 50;
-
     if (isOutOfViewport) {
       video.requestPictureInPicture().catch(err => {
-        // Silenciar errores comunes si el usuario no ha interactuado o PiP ya fue solicitado.
         if (err.name !== 'NotAllowedError' && err.name !== 'InvalidStateError') {
            console.error("Error intentando entrar en modo PiP automáticamente:", err);
         }
       });
     }
-  }, [isPlaying, isPiPSupported]); // isPlaying y isPiPSupported son dependencias de useCallback
+  }, [isPlaying, isPiPSupported]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]); // handleScroll es una dependencia de useEffect
+  }, [handleScroll]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
-      {/* Animated background figures */}
       <div className="absolute inset-0 z-0 opacity-100">
         <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1" />
         <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
         <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
-        <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-2000" />
-        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-4000" />
+        <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-[2s]" />
+        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]" />
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -156,20 +140,13 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
               {texts.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link href="#automation-advisor" passHref>
-                <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full sm:w-auto shadow-lg hover:shadow-xl">
-                  {texts.ctaButton}
-                  <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
+            {/* Botón CTA movido de aquí */}
           </div>
           
-          <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-300">
+          <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-[300ms]">
             <video
               ref={videoRef}
-              src="https://www.w3schools.com/html/mov_bbb.mp4" // REEMPLAZAR con la URL de tu video
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
               poster="https://placehold.co/600x400.png"
               className="w-full h-full object-cover cursor-pointer"
               playsInline
@@ -224,6 +201,16 @@ export function HeroSection({ /* dictionary */ }: HeroSectionProps) {
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
+        </div>
+        
+        {/* Botón CTA movido aquí, centrado y con margen superior */}
+        <div className="mt-10 md:mt-16 flex justify-center animate-fade-in-up animation-delay-[600ms]">
+          <Link href="#automation-advisor" passHref>
+            <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full max-w-xs sm:max-w-md sm:w-auto shadow-lg hover:shadow-xl">
+              {texts.ctaButton}
+              <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
