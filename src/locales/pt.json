@@ -7,7 +7,7 @@
   "header": {
     "companyName": "Aetheria Consulting",
     "benefits": "Benefícios",
-    "process": "Processo",
+    "process": "Nosso Método",
     "blog": "Blog",
     "about": "Sobre Nós",
     "contactUs": "Fale Conosco",
@@ -60,6 +60,7 @@
     "submitButton": "Obter Sugestões",
     "submitButtonLoading": "Analisando...",
     "resultsCardTitle": "Excelente Primeiro Passo!",
+    "suggestionsGeneratingTitle": "Preparando suas ideias...",
     "scheduleConsultationButton": "Agendar Consultoria Personalizada",
     "toastSuccessTitle": "Análise Concluída!",
     "toastSuccessDescription": "Processamos suas informações. Revise as ideias geradas e agendemos uma reunião para explorá-las!",
@@ -99,7 +100,7 @@
     "title": "Sobre a Aetheria Consulting",
     "subtitle": "Seus aliados na transformação digital impulsionada por IA. Somos apaixonados por ajudar empresas a prosperar e escalar.",
     "paragraph1": "A Aetheria Consulting nasceu da convicção de que a Inteligência Artificial deve ser acessível e benéfica para empresas de todos os tamanhos. Trazemos profunda visão e experiência em tecnologia (IA, automação), gerenciamento de projetos e melhoria contínua, adquirida em ambientes complexos de grandes indústrias. Agora, trazemos esse conhecimento para criar soluções simples e práticas para profissionalizar e escalar sua empresa, independentemente do seu tamanho ou capacidade econômica.",
-    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, melhorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descobrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
+    "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, melhorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descubrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
     "paragraph3": "Com foco em resultados tangíveis e um processo de implementação ágil, guiamos você em cada etapa do caminho. Nosso objetivo não é apenas fornecer ferramentas de IA, mas ser seu parceiro estratégico no crescimento de sua empresa, permitindo que você se concentre no que te apaixona e no que te levou a construir seu negócio."
   },
   "contactSection": {
