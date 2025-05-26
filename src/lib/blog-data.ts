@@ -18,7 +18,7 @@ export const blogPosts: BlogPost[] = [
     summary: "¿Crees que la IA es solo para gigantes? Descubre cómo la Inteligencia Artificial se vuelve el motor clave para el crecimiento y liderazgo de las Pymes. ¡Anticípate y lidera!",
     slug: "futuro-ia-pymes",
     imageUrl: "https://placehold.co/800x450.png",
-    imageHint: "futuro tecnologia IA",
+    imageHint: "futuro tecnologia IA", // Corregido
     author: "Equipo Aetheria",
     date: "2024-07-20",
     fullContent: [
