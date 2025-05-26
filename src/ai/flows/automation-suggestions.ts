@@ -1,4 +1,3 @@
-
 // AutomationSuggestions.ts
 'use server';
 /**
@@ -11,6 +10,8 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { db } from '@/lib/firebase'; // Import Firestore instance
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const AutomationSuggestionsInputSchema = z.object({
   businessDescription: z
@@ -49,6 +50,20 @@ const AutomationSuggestionsOutputSchema = z.object({
 export type AutomationSuggestionsOutput = z.infer<typeof AutomationSuggestionsOutputSchema>;
 
 export async function getAutomationSuggestions(input: AutomationSuggestionsInput): Promise<AutomationSuggestionsOutput> {
+  // First, save the input to Firestore
+  try {
+    const docRef = await addDoc(collection(db, "automationRequests"), {
+      ...input,
+      submittedAt: Timestamp.now() // Server-side timestamp
+    });
+    console.log("Automation request saved with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding automation request to Firestore: ", e);
+    // Optionally, you could decide if this error should prevent AI suggestion generation
+    // For now, we'll log it and continue.
+  }
+
+  // Then, proceed with the Genkit flow
   return automationSuggestionsFlow(input);
 }
 
@@ -103,4 +118,3 @@ const automationSuggestionsFlow = ai.defineFlow(
     return output!;
   }
 );
-
