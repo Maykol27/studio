@@ -124,6 +124,7 @@ export function HeroSection({ }: HeroSectionProps) {
       className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
       <div className="absolute inset-0 z-0 opacity-100">
+        {/* Animated figures */}
         <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1" />
         <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
         <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
@@ -137,21 +138,22 @@ export function HeroSection({ }: HeroSectionProps) {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
               {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
               {texts.description}
             </p>
-            {/* Botón CTA movido de aquí */}
           </div>
           
           <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-[300ms]">
             <video
               ref={videoRef}
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              // IMPORTANTE: Reemplaza esta URL con la de tu video del CEO hablando
+              src="https://www.w3schools.com/html/mov_bbb.mp4" 
               poster="https://placehold.co/600x400.png"
               className="w-full h-full object-cover cursor-pointer"
               playsInline
               onClick={togglePlayPause}
-              data-ai-hint="Aetheria logo"
+              // Este data-ai-hint es para la imagen del poster
+              data-ai-hint="CEO presentacion" 
               onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
                 const container = videoElement.parentElement;
@@ -203,7 +205,6 @@ export function HeroSection({ }: HeroSectionProps) {
           </div>
         </div>
         
-        {/* Botón CTA movido aquí, centrado y con margen superior */}
         <div className="mt-10 md:mt-16 flex justify-center animate-fade-in-up animation-delay-[600ms]">
           <Link href="#automation-advisor" passHref>
             <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full max-w-xs sm:max-w-md sm:w-auto shadow-lg hover:shadow-xl">
