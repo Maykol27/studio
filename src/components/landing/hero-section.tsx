@@ -3,7 +3,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, PlayCircleIcon, PlayIcon, PauseIcon, PictureInPictureIcon } from 'lucide-react';
+import { ArrowRightIcon, PlayCircleIcon, PauseIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react'; // Added PlayIcon just in case, though likely not needed for custom controls now
 import Link from 'next/link';
 
 interface HeroSectionProps {
@@ -31,7 +31,6 @@ export function HeroSection({ }: HeroSectionProps) {
   };
 
   useEffect(() => {
-    // Check for PiP support only on the client-side
     setIsPiPSupported(!!document.pictureInPictureEnabled);
 
     const video = videoRef.current;
@@ -45,7 +44,6 @@ export function HeroSection({ }: HeroSectionProps) {
       if (document.pictureInPictureElement === video) {
         try {
           await document.exitPictureInPicture();
-          // setIsInPiP(false); // leavepictureinpicture event should handle this
         } catch (error) {
           console.error("Error al salir de PiP automáticamente:", error);
         }
@@ -54,7 +52,7 @@ export function HeroSection({ }: HeroSectionProps) {
 
     video.addEventListener('play', handlePlayingState);
     video.addEventListener('pause', handlePlayingState);
-    video.addEventListener('playing', handlePlayingState);
+    video.addEventListener('playing', handlePlayingState); 
     video.addEventListener('ended', handleVideoEnd);
 
     if (document.pictureInPictureEnabled) {
@@ -75,9 +73,9 @@ export function HeroSection({ }: HeroSectionProps) {
         video.removeEventListener('leavepictureinpicture', handlePiPState);
       }
     };
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused || video.ended) {
@@ -85,9 +83,9 @@ export function HeroSection({ }: HeroSectionProps) {
     } else {
       video.pause();
     }
-  };
+  }, []);
 
-  const togglePiP = async () => {
+  const togglePiP = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -105,7 +103,7 @@ export function HeroSection({ }: HeroSectionProps) {
     } catch (error) {
       console.error("Error al cambiar modo PiP:", error);
     }
-  };
+  }, [isPiPSupported, texts.pipNotSupported]);
 
   const handleScroll = useCallback(() => {
     const video = videoRef.current;
@@ -121,14 +119,14 @@ export function HeroSection({ }: HeroSectionProps) {
         }
       });
     }
-  }, [isPlaying, isPiPSupported]); // Dependencies for useCallback
+  }, [isPlaying, isPiPSupported]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]); // Dependency for useEffect
+  }, [handleScroll]);
 
   return (
     <section
@@ -136,7 +134,6 @@ export function HeroSection({ }: HeroSectionProps) {
       className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
       <div className="absolute inset-0 z-0 opacity-100">
-        {/* Animated figures */}
         <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1 hidden md:block" />
         <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
         <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
@@ -160,51 +157,55 @@ export function HeroSection({ }: HeroSectionProps) {
               ref={videoRef}
               src="https://www.w3schools.com/html/mov_bbb.mp4" 
               poster="https://placehold.co/600x400.png"
-              className="w-full h-full object-cover cursor-pointer"
+              className="w-full h-full object-cover" // Removed cursor-pointer
               playsInline
-              onClick={togglePlayPause}
+              controls
               data-ai-hint="CEO presentacion" 
               onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
                 // Optional: Adjust styling or logic after metadata is loaded
               }}
-            />
+            >
+              <track
+                label="Español"
+                kind="subtitles"
+                srcLang="es"
+                src="/subtitles/video_es.vtt" 
+                default 
+              />
+              <track
+                label="Português"
+                kind="subtitles"
+                srcLang="pt"
+                src="/subtitles/video_pt.vtt" 
+              />
+            </video>
             
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              {!isPlaying && (
-                <button
-                  onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
-                  aria-label={texts.playVideo}
-                  className="text-white/90 hover:text-white transition-colors mb-4 pointer-events-auto z-10"
-                >
-                  <PlayCircleIcon className="h-20 w-20" />
-                </button>
-              )}
-
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent flex justify-between items-center pointer-events-auto z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button 
-                  onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
-                  aria-label={isPlaying ? texts.pauseVideo : texts.playVideo}
-                  className="text-white/90 hover:text-white p-1.5 transition-colors"
-                >
-                  {isPlaying ? (
-                    <PauseIcon className="h-6 w-6" />
-                  ) : (
-                    <PlayIcon className="h-6 w-6" />
-                  )}
-                </button>
-                
-                {isPiPSupported && (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); togglePiP(); }}
-                    aria-label={isInPiP ? texts.exitPiP : texts.enterPiP}
-                    className={`p-1.5 transition-colors rounded-sm ${isInPiP ? 'bg-primary/80 text-primary-foreground hover:bg-primary' : 'text-white/90 hover:text-white'}`}
-                  >
-                    <PictureInPictureIcon className="h-5 w-5" /> 
-                  </button>
-                )}
+            {/* Overlay for initial big Play button */}
+            {!isPlaying && (
+              <div 
+                className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
+                onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
+                aria-label={texts.playVideo}
+              >
+                <PlayCircleIcon className="h-20 w-20 text-white/90 hover:text-white transition-colors" />
               </div>
-            </div>
+            )}
+
+            {/* Overlay for custom PiP button - shows only when playing and hovering */}
+            {isPlaying && isPiPSupported && (
+              <div
+                className="absolute bottom-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto z-20" 
+              >
+                <button
+                  onClick={(e) => { e.stopPropagation(); togglePiP(); }}
+                  aria-label={isInPiP ? texts.exitPiP : texts.enterPiP}
+                  className={`p-1.5 bg-black/50 hover:bg-black/70 text-white/90 hover:text-white rounded-md transition-colors`}
+                >
+                  <PictureInPictureIcon className="h-5 w-5" /> 
+                </button>
+              </div>
+            )}
 
             <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none">
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
@@ -224,3 +225,4 @@ export function HeroSection({ }: HeroSectionProps) {
     </section>
   );
 }
+
