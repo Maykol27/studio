@@ -3,7 +3,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, PlayCircleIcon, PauseIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react'; // Added PlayIcon just in case, though likely not needed for custom controls now
+import { ArrowRightIcon, PlayCircleIcon, PauseIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react';
 import Link from 'next/link';
 
 interface HeroSectionProps {
@@ -157,7 +157,7 @@ export function HeroSection({ }: HeroSectionProps) {
               ref={videoRef}
               src="https://www.w3schools.com/html/mov_bbb.mp4" 
               poster="https://placehold.co/600x400.png"
-              className="w-full h-full object-cover" // Removed cursor-pointer
+              className="w-full h-full object-cover"
               playsInline
               controls
               data-ai-hint="CEO presentacion" 
@@ -181,7 +181,7 @@ export function HeroSection({ }: HeroSectionProps) {
               />
             </video>
             
-            {/* Overlay for initial big Play button */}
+            {/* Overlay for initial big Play button - hidden when video is playing */}
             {!isPlaying && (
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
@@ -207,7 +207,7 @@ export function HeroSection({ }: HeroSectionProps) {
               </div>
             )}
 
-            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none">
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none">
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
@@ -225,4 +225,3 @@ export function HeroSection({ }: HeroSectionProps) {
     </section>
   );
 }
-
