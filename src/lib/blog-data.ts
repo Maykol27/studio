@@ -14,7 +14,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: "1",
-    title: "El Futuro de la IA en las Pequeñas Empresas",
+    title: "El Futuro de la IA en las PYMES",
     summary: "¿Crees que la IA es solo para gigantes? Descubre cómo la Inteligencia Artificial se vuelve el motor clave para el crecimiento y liderazgo de las Pymes. ¡Anticípate y lidera!",
     slug: "futuro-ia-pymes",
     imageUrl: "https://placehold.co/800x450.png",
