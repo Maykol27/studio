@@ -47,28 +47,21 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: "3",
-    title: "Entendiendo el Procesamiento del Lenguaje Natural (PLN)",
-    summary: "Una guía amigable para principiantes sobre el PLN y sus aplicaciones para mejorar las interacciones con los clientes.",
-    slug: "entendiendo-pln",
+    title: "¿Procesos Internos Anclados en el Ayer? La Automatización Inteligente es tu Futuro",
+    summary: "",
+    slug: "entendiendo-pln", // Este slug quizás quieras cambiarlo para que coincida con el nuevo título, ej. "automatizacion-inteligente-procesos"
     imageUrl: "https://placehold.co/800x450.png",
-    imageHint: "lenguaje natural IA",
+    imageHint: "lenguaje natural IA", // Este imageHint también podrías querer cambiarlo
     author: "Equipo Aetheria",
     date: "2025-05-02",
     fullContent: [
-      "El Procesamiento del Lenguaje Natural (PLN) es una rama de la IA que capacita a las computadoras para entender lenguaje humano. Sus aplicaciones transforman la interacción con clientes.",
-      "**¿Qué es el PLN en términos sencillos?** Imagina hablar con tu computadora y que esta comprenda tu intención y sentimiento. Eso busca el PLN, combinando lingüística computacional con aprendizaje automático.",
-      "**Componentes Clave del PLN:**",
-      "  *   **Análisis Morfológico y Léxico:** Descompone texto en unidades básicas.",
-      "  *   **Análisis Sintáctico (Parsing):** Examina la estructura gramatical.",
-      "  *   **Análisis Semántico:** Se centra en el significado.",
-      "  *   **Análisis Pragmático:** Considera el contexto.",
-      "**Aplicaciones Prácticas del PLN:**",
-      "  *   **Chatbots y Asistentes Virtuales:** Permiten interacciones fluidas.",
-      "  *   **Análisis de Sentimiento:** Analiza opiniones en redes sociales.",
-      "  *   **Traducción Automática:** Herramientas como Google Translate.",
-      "  *   **Resumen de Texto:** Extrae información relevante.",
-      "  *   **Clasificación de Texto:** Organiza grandes volúmenes de texto.",
-      "El PLN está abriendo nuevas puertas para mejorar la comunicación y obtener insights valiosos. Muchas herramientas basadas en PLN son cada vez más accesibles."
+      "Mientras muchas empresas se enfocan en la IA de cara al cliente, la verdadera revolución silenciosa está ocurriendo dentro de las organizaciones. La automatización inteligente (IA + RPA + Process Mining) no se trata solo de reducir costes, sino de liberar el potencial humano y construir operaciones resilientes y ágiles.",
+      "**¿Cómo puedes mejorar tus procesos internos?**",
+      "**Flujos de Trabajo Cognitivos:** Imagina sistemas que no solo ejecutan tareas, sino que entienden el contexto, aprenden de las excepciones y toman decisiones autónomas en áreas como finanzas, RRHH y logística.",
+      "**Descubrimiento y Optimización Autónoma de Procesos:** La IA analizará continuamente tus operaciones, identificará cuellos de botella e ineficiencias (incluso las que no sabías que tenías) y te sugerirá o incluso implementará mejoras automáticamente.",
+      "**Gestión Predictiva de Recursos:** Desde la asignación de personal hasta el manejo de inventarios, la IA anticipará necesidades futuras, optimizando el uso de tus activos y previniendo problemas antes de que ocurran.",
+      "**Onboarding y Formación Adaptativa:** Sistemas inteligentes que personalizan la integración y el desarrollo de los empleados, acelerando su productividad y mejorando su experiencia.",
+      "Modernizar tus procesos internos no es un gasto, es una inversión estratégica en tu capacidad para adaptarte, innovar y crecer sosteniblemente. El camino hacia la empresa verdaderamente inteligente y automatizada ha comenzado, y dar el primer paso (o el siguiente) es más accesible de lo que piensas con el socio tecnológico correcto."
     ]
   }
 ];
