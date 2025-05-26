@@ -7,36 +7,32 @@ import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import { es, pt } from 'date-fns/locale';
-import { getDictionary } from '@/lib/get-dictionary';
-import type { Locale } from '@/i18n-config';
+import { es } from 'date-fns/locale'; // Importar directamente la localización en español
 
 interface BlogPostPageProps {
-  params: { slug: string; locale: Locale };
+  params: { slug: string }; // Solo esperamos slug
 }
 
-export async function generateStaticParams({ params: { locale } }: { params: { locale: Locale }}) {
+export async function generateStaticParams() {
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: locale, // Aunque el slug no depende del locale, Next.js necesita esto aquí.
   }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     return {
-      title: dictionary.blogPostPage.notFoundTitle,
-      description: dictionary.blogPostPage.notFoundDescription,
+      title: "Post no encontrado", // Texto en español directo
+      description: "El artículo de blog que buscas no existe o fue movido.",
     };
   }
   const publishedDate = parseISO(post.date);
 
   return {
-    title: `${post.title} | Aetheria Consulting`, // El título del post viene de blog-data.ts (actualmente solo español)
-    description: post.summary, // El resumen viene de blog-data.ts (actualmente solo español)
+    title: `${post.title} | Aetheria Consulting`,
+    description: post.summary,
     openGraph: {
         title: post.title,
         description: post.summary,
@@ -66,7 +62,7 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) { 
+      if (boldText && !boldText.includes('**') && !boldText.includes(' ')) {
          return <strong key={`bold-heading-${index}`}>{boldText}</strong>;
       }
       return <strong key={`bold-${index}`}>{boldText}</strong>;
@@ -77,7 +73,6 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const dictionary = await getDictionary(params.locale);
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
@@ -85,22 +80,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const parsedDate = parseISO(post.date);
-  const dateLocale = params.locale === 'pt' ? pt : es;
-  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
+  const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: es }); // Usar 'es' directamente
 
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header
-        headerDictionary={dictionary.header}
-        languageSwitcherDictionary={dictionary.languageSwitcher}
-        currentLocale={params.locale}
-      />
+      <Header />
       <main className="flex-grow pt-24 md:pt-28">
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {post.title} {/* Título del post de blog-data.ts (español) */}
+              {post.title}
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-1.5">
@@ -145,7 +135,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </main>
-      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+      <Footer />
     </div>
   );
 }
