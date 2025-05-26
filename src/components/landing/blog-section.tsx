@@ -15,8 +15,8 @@ interface BlogSectionProps {
 
 export function BlogSection({ dictionary, locale }: BlogSectionProps) {
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
+  const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null; // Slug del tercer post
   const lastPostSlug = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].slug : null;
-  // El tercer post ya no tendrá un tratamiento especial de 'object-top'
 
   return (
     <section id="blog" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
@@ -30,9 +30,9 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => {
             let imagePositionClass = '';
-            // Aplicar object-bottom solo si es el primer o último post, y no es el tercer post al que antes le dábamos object-top.
-            // Ahora, el tercer post no tiene clase de posicionamiento específica.
-            if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
+            if (post.slug === thirdPostSlug) {
+              imagePositionClass = 'object-top'; // Aplicar object-top al tercer post
+            } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
               imagePositionClass = 'object-bottom';
             }
 
@@ -48,6 +48,7 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
                         height={300}
                         className={`w-full h-48 object-cover ${imagePositionClass} transition-transform duration-300 group-hover:scale-105`}
                         data-ai-hint={post.imageHint}
+                        priority={post.slug === firstPostSlug} // Priority para la primera imagen
                       />
                     </div>
                   </Link>
