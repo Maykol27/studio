@@ -1,3 +1,4 @@
+
 import type { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 import { Header } from '@/components/landing/header';
@@ -33,3 +34,5 @@ export default async function LandingPage({ params: { locale } }: { params: { lo
     </div>
   );
 }
+
+    

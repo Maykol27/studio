@@ -3,32 +3,19 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, PlayCircleIcon, PictureInPictureIcon, PlayIcon } from 'lucide-react'; // Removed PauseIcon as native controls will handle it
+import { ArrowRightIcon, PlayCircleIcon, PictureInPictureIcon, PlayIcon, PauseIcon } from 'lucide-react';
 import Link from 'next/link';
+import type { Dictionary } from '@/lib/get-dictionary'; // Asegúrate que Dictionary está bien tipado
 
 interface HeroSectionProps {
-  // No se usa diccionario aquí porque los textos están hardcodeados en español
+  dictionary: Dictionary['heroSection'];
 }
 
-export function HeroSection({ }: HeroSectionProps) {
+export function HeroSection({ dictionary }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPiPSupported, setIsPiPSupported] = useState(false);
   const [isInPiP, setIsInPiP] = useState(false);
-
-  const texts = {
-    titlePart1: "IA a tu Medida: ",
-    titlePart2: "Nuestro Proceso",
-    titlePart3: " Hacia Tu Éxito.",
-    description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
-    ctaButton: "¡Diagnostico gratuito ahora mismo!",
-    videoCaption: "Conoce al CEO de Aetheria",
-    playVideo: "Reproducir Video",
-    pauseVideo: "Pausar Video", // Kept for aria-label consistency if needed
-    enterPiP: "Entrar en Picture-in-Picture",
-    exitPiP: "Salir de Picture-in-Picture",
-    pipNotSupported: "Picture-in-Picture no es soportado en este navegador."
-  };
 
   useEffect(() => {
     setIsPiPSupported(!!document.pictureInPictureEnabled);
@@ -90,7 +77,7 @@ export function HeroSection({ }: HeroSectionProps) {
     if (!video) return;
 
     if (!isPiPSupported) {
-      alert(texts.pipNotSupported);
+      alert(dictionary.pipNotSupported);
       return;
     }
 
@@ -103,7 +90,7 @@ export function HeroSection({ }: HeroSectionProps) {
     } catch (error) {
       console.error("Error al cambiar modo PiP:", error);
     }
-  }, [isPiPSupported, texts.pipNotSupported]);
+  }, [isPiPSupported, dictionary.pipNotSupported]);
 
   const handleScroll = useCallback(() => {
     const video = videoRef.current;
@@ -145,10 +132,10 @@ export function HeroSection({ }: HeroSectionProps) {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
-              {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
+              {dictionary.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{dictionary.titlePart2}</span>{dictionary.titlePart3}
             </h1>
             <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
-              {texts.description}
+              {dictionary.description}
             </p>
           </div>
           
@@ -181,25 +168,23 @@ export function HeroSection({ }: HeroSectionProps) {
               />
             </video>
             
-            {/* Overlay for initial big Play button - hidden when video is playing or controls are active */}
             {!isPlaying && (
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
                 onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
-                aria-label={texts.playVideo}
+                aria-label={dictionary.playVideo}
               >
                 <PlayCircleIcon className="h-20 w-20 text-white/90 hover:text-white transition-colors" />
               </div>
             )}
 
-            {/* Overlay for custom PiP button - shows only when playing and hovering */}
             {isPlaying && isPiPSupported && (
               <div
                 className="absolute bottom-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto z-20" 
               >
                 <button
                   onClick={(e) => { e.stopPropagation(); togglePiP(); }}
-                  aria-label={isInPiP ? texts.exitPiP : texts.enterPiP}
+                  aria-label={isInPiP ? dictionary.exitPiP : dictionary.enterPiP}
                   className={`p-1.5 bg-black/50 hover:bg-black/70 text-white/90 hover:text-white rounded-md transition-colors`}
                 >
                   <PictureInPictureIcon className="h-5 w-5" /> 
@@ -208,7 +193,7 @@ export function HeroSection({ }: HeroSectionProps) {
             )}
 
             <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none ${isPlaying ? 'hidden' : ''}`}>
-              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
+              <p className="text-xs sm:text-sm text-white/90">{dictionary.videoCaption}</p>
             </div>
           </div>
         </div>
@@ -216,7 +201,7 @@ export function HeroSection({ }: HeroSectionProps) {
         <div className="mt-10 md:mt-16 flex justify-center animate-fade-in-up animation-delay-[600ms]">
           <Link href="#automation-advisor" passHref>
             <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full max-w-xs sm:max-w-md sm:w-auto shadow-lg hover:shadow-xl">
-              {texts.ctaButton}
+              {dictionary.ctaButton}
               <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
@@ -225,3 +210,5 @@ export function HeroSection({ }: HeroSectionProps) {
     </section>
   );
 }
+
+    

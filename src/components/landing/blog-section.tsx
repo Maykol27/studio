@@ -4,25 +4,23 @@ import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon } from 'lucide-react';
-import { blogPosts } from '@/lib/blog-data';
+import { blogPosts, getLocalizedPostField } from '@/lib/blog-data';
 import type { Locale } from '@/i18n-config';
 import type { Dictionary } from '@/lib/get-dictionary';
 
 interface BlogSectionProps {
-  dictionary: Partial<Dictionary['blogSection']>; // Allow partial dictionary
+  dictionary: Partial<Dictionary['blogSection']>;
   locale: Locale;
 }
 
-// Default texts (Spanish fallbacks)
 const defaultTexts = {
-  title: "Nuestro Blog",
+  title: "Blog",
   description: "Mantente al día con las últimas tendencias en IA y automatización empresarial. Ideas, consejos e historias de éxito para inspirar tu negocio.",
   readMore: "Leer Más"
 };
 
-export function BlogSection({ dictionary, locale }: BlogSectionProps) {
-  // Use prop dictionary if available, otherwise fall back to defaultTexts
-  const texts = { ...defaultTexts, ...dictionary };
+export function BlogSection({ dictionary: dictProp, locale }: BlogSectionProps) {
+  const texts = { ...defaultTexts, ...dictProp };
 
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
   const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
@@ -46,6 +44,9 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
               imagePositionClass = 'object-bottom';
             }
 
+            const postTitle = getLocalizedPostField(post.title, locale) as string;
+            const postSummary = getLocalizedPostField(post.summary, locale) as string;
+
             return (
               <Card key={post.id} className="bg-card border-border rounded-xl card-hover overflow-hidden flex flex-col group">
                 <CardHeader className="p-0">
@@ -53,7 +54,7 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
                     <div className="overflow-hidden">
                       <Image
                         src={post.imageUrl}
-                        alt={post.title}
+                        alt={postTitle}
                         width={600}
                         height={300}
                         className={`w-full h-48 object-cover ${imagePositionClass} transition-transform duration-300 group-hover:scale-105`}
@@ -66,10 +67,10 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
                 <CardContent className="p-6 flex-grow">
                   <CardTitle className="text-xl font-semibold text-foreground font-heading mb-2">
                     <Link href={`/${locale}/blog/${post.slug}`} className="hover:text-primary transition-colors">
-                      {post.title}
+                      {postTitle}
                     </Link>
                   </CardTitle>
-                  {post.summary && <p className="text-foreground/80 text-sm leading-relaxed line-clamp-3">{post.summary}</p>}
+                  {postSummary && <p className="text-foreground/80 text-sm leading-relaxed line-clamp-3">{postSummary}</p>}
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/${locale}/blog/${post.slug}`} passHref>
@@ -87,3 +88,5 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
     </section>
   );
 }
+
+    

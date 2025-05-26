@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { blogPosts } from '@/lib/blog-data';
+import { blogPosts, getLocalizedPostField, type LocalizedText } from '@/lib/blog-data';
 import { Header } from '@/components/landing/header';
 import { Footer } from '@/components/landing/footer';
 import { CalendarDaysIcon, UserIcon } from 'lucide-react';
@@ -16,11 +16,12 @@ interface BlogPostPageProps {
   params: { slug: string; locale: Locale };
 }
 
-export async function generateStaticParams({ params: { locale } }: { params: { locale: Locale }}) {
-  // For each locale, generate params for each blog post slug
+export async function generateStaticParams({ params: { locale: defaultLocale } }: { params: { locale: Locale }}) {
+  // Aunque el locale se pasa aquí, los slugs son los mismos para todos los idiomas.
+  // Si los slugs fueran localizados, necesitarías mapear sobre los locales también.
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: locale, 
+    locale: defaultLocale, // Pasamos el locale actual para cada slug
   }));
 }
 
@@ -31,25 +32,27 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: dictionary.blogPostPage.notFoundTitle || "Post no encontrado",
-      description: dictionary.blogPostPage.notFoundDescription || "El artículo de blog que buscas no existe o fue movido.",
+      title: dictionary.blogPostPage?.notFoundTitle || "Post no encontrado",
+      description: dictionary.blogPostPage?.notFoundDescription || "El artículo de blog que buscas no existe o fue movido.",
     };
   }
-
+  
+  const postTitle = getLocalizedPostField(post.title, params.locale) as string;
+  const postSummary = getLocalizedPostField(post.summary, params.locale) as string;
   const publishedDate = parseISO(post.date);
 
   return {
-    title: `${post.title} | ${dictionary.metadata.title}`,
-    description: post.summary,
+    title: `${postTitle} | ${dictionary.metadata.title}`,
+    description: postSummary,
     openGraph: {
-        title: post.title,
-        description: post.summary,
+        title: postTitle,
+        description: postSummary,
         images: [
             {
-                url: post.imageUrl, // Asegúrate que esta URL sea absoluta para Open Graph
-                width: 800, // Ancho de tu imagen
-                height: 450, // Alto de tu imagen
-                alt: post.title,
+                url: post.imageUrl, 
+                width: 800, 
+                height: 450, 
+                alt: postTitle,
             },
         ],
         type: 'article',
@@ -58,9 +61,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     },
     twitter: {
         card: 'summary_large_image',
-        title: post.title,
-        description: post.summary,
-        images: [post.imageUrl], // Asegúrate que esta URL sea absoluta
+        title: postTitle,
+        description: postSummary,
+        images: [post.imageUrl], 
     }
   };
 }
@@ -91,13 +94,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const parsedDate = parseISO(post.date);
   const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
 
+  const postTitle = getLocalizedPostField(post.title, params.locale) as string;
+  const postFullContent = getLocalizedPostField(post.fullContent, params.locale) as string[];
+
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
-  const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null; // Slug del tercer post
+  const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
   const lastPostSlug = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].slug : null;
 
   let imagePositionClass = '';
   if (post.slug === thirdPostSlug) {
-    imagePositionClass = 'object-top'; // Aplicar object-top al tercer post
+    imagePositionClass = 'object-top'; 
   } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
     imagePositionClass = 'object-bottom';
   }
@@ -113,7 +119,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
           <header className="mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {post.title}
+              {postTitle}
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-1.5">
@@ -128,7 +134,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
               <Image
                 src={post.imageUrl}
-                alt={post.title}
+                alt={postTitle}
                 fill
                 className={`object-cover ${imagePositionClass}`}
                 priority
@@ -138,7 +144,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
-            {post.fullContent.map((paragraph, index) => {
+            {postFullContent.map((paragraph, index) => {
               if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes(' ') && !paragraph.slice(2,-2).includes('**')) {
                 const headingText = paragraph.slice(2, -2);
                 return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
@@ -162,3 +168,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   );
 }
+
+    
