@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: "2",
     title: "5 Maneras de Automatizar tu Marketing con IA",
-    summary: "Descubre herramientas y estrategias prácticas de IA para optimizar tus esfuerzos de marketing e impulsar el engagement.",
+    summary: "Tu marketing necesita ir más allá. Explora 5 estrategias de IA (¡del futuro, hoy!) para personalizar, predecir y revolucionar tus campañas como nunca antes.",
     slug: "automatizar-marketing-ia",
     imageUrl: "https://placehold.co/800x450.png",
     imageHint: "marketing digital automatizacion",
@@ -72,4 +72,3 @@ export const blogPosts: BlogPost[] = [
     ]
   }
 ];
-
