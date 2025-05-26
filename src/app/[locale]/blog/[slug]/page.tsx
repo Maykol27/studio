@@ -20,7 +20,7 @@ export async function generateStaticParams({ params: { locale } }: { params: { l
   // For each locale, generate params for each blog post slug
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: locale, // This might be redundant if locale is fixed, but good for clarity
+    locale: locale, 
   }));
 }
 
@@ -46,9 +46,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         description: post.summary,
         images: [
             {
-                url: post.imageUrl,
-                width: 800,
-                height: 450,
+                url: post.imageUrl, // Asegúrate que esta URL sea absoluta para Open Graph
+                width: 800, // Ancho de tu imagen
+                height: 450, // Alto de tu imagen
                 alt: post.title,
             },
         ],
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         card: 'summary_large_image',
         title: post.title,
         description: post.summary,
-        images: [post.imageUrl],
+        images: [post.imageUrl], // Asegúrate que esta URL sea absoluta
     }
   };
 }
@@ -70,7 +70,7 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      if (boldText) { // Ensure there's content to bold
+      if (boldText) { 
         return <strong key={`bold-${index}`}>{boldText}</strong>;
       }
     }
@@ -96,13 +96,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
 
   let imagePositionClass = '';
-  const isFirstPost = post.slug === firstPostSlug;
-  const isLastPost = post.slug === lastPostSlug;
-  const isThirdPost = post.slug === thirdPostSlug;
-
-  if (isThirdPost) {
+  if (post.slug === thirdPostSlug) {
     imagePositionClass = 'object-top';
-  } else if (isFirstPost || isLastPost) {
+  } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
     imagePositionClass = 'object-bottom';
   }
 

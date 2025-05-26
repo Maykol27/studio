@@ -30,28 +30,26 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => {
             let imagePositionClass = '';
-            const isFirstPost = post.slug === firstPostSlug;
-            const isLastPost = post.slug === lastPostSlug;
-            const isThirdPost = post.slug === thirdPostSlug;
-
-            if (isThirdPost) {
+            if (post.slug === thirdPostSlug) {
               imagePositionClass = 'object-top';
-            } else if (isFirstPost || isLastPost) {
+            } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
               imagePositionClass = 'object-bottom';
             }
 
             return (
-              <Card key={post.id} className="bg-card border-border rounded-xl card-hover overflow-hidden flex flex-col">
+              <Card key={post.id} className="bg-card border-border rounded-xl card-hover overflow-hidden flex flex-col group">
                 <CardHeader className="p-0">
                   <Link href={`/${locale}/blog/${post.slug}`} passHref>
-                    <Image
-                      src={post.imageUrl}
-                      alt={post.title}
-                      width={600}
-                      height={300}
-                      className={`w-full h-48 object-cover ${imagePositionClass} transition-transform duration-300 group-hover:scale-105`}
-                      data-ai-hint={post.imageHint}
-                    />
+                    <div className="overflow-hidden">
+                      <Image
+                        src={post.imageUrl}
+                        alt={post.title}
+                        width={600}
+                        height={300}
+                        className={`w-full h-48 object-cover ${imagePositionClass} transition-transform duration-300 group-hover:scale-105`}
+                        data-ai-hint={post.imageHint}
+                      />
+                    </div>
                   </Link>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">
@@ -64,9 +62,9 @@ export function BlogSection({ dictionary, locale }: BlogSectionProps) {
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/${locale}/blog/${post.slug}`} passHref>
-                    <Button variant="link" className="text-primary p-0 hover:text-accent group">
+                    <Button variant="link" className="text-primary p-0 hover:text-accent group/link">
                       {dictionary.readMore}
-                      <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                     </Button>
                   </Link>
                 </CardFooter>
