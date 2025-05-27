@@ -9,11 +9,11 @@ import type { Locale } from '@/i18n-config';
 import type { Dictionary } from '@/lib/get-dictionary';
 
 interface BlogSectionProps {
-  dictionary: Partial<Dictionary['blogSection']>;
+  dictionary: Dictionary['blogSection'];
   locale: Locale;
 }
 
-const defaultTexts = {
+const defaultTexts: Dictionary['blogSection'] = {
   title: "Blog",
   description: "Mantente al día con las últimas tendencias en IA y automatización empresarial. Ideas, consejos e historias de éxito para inspirar tu negocio.",
   readMore: "Leer Más"
@@ -27,8 +27,16 @@ export function BlogSection({ dictionary: dictProp, locale }: BlogSectionProps) 
   const lastPostSlug = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].slug : null;
 
   return (
-    <section id="blog" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
-      <div className="container mx-auto px-4 md:px-8">
+    <section id="blog" className="py-10 sm:py-12 md:py-16 bg-secondary/5 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-100">
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1 hidden md:block" />
+        <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
+        <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
+        <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-[2s]" />
+        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]" />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="text-center mb-10 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">{texts.title}</h2>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
@@ -88,5 +96,3 @@ export function BlogSection({ dictionary: dictProp, locale }: BlogSectionProps) 
     </section>
   );
 }
-
-    
