@@ -17,11 +17,9 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams({ params: { locale: defaultLocale } }: { params: { locale: Locale }}) {
-  // Aunque el locale se pasa aquí, los slugs son los mismos para todos los idiomas.
-  // Si los slugs fueran localizados, necesitarías mapear sobre los locales también.
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: defaultLocale, // Pasamos el locale actual para cada slug
+    locale: defaultLocale, 
   }));
 }
 
@@ -109,64 +107,73 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <Header 
-        headerDictionary={dictionary.header}
-        languageSwitcherDictionary={dictionary.languageSwitcher}
-        currentLocale={params.locale}
-      />
-      <main className="flex-grow pt-24 md:pt-28">
-        <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
-          <header className="mb-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
-              {postTitle}
-            </h1>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
-              <div className="flex items-center gap-1.5">
-                <UserIcon className="h-4 w-4" />
-                <span>{post.author}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CalendarDaysIcon className="h-4 w-4" />
-                <time dateTime={parsedDate.toISOString()}>{displayDate}</time>
-              </div>
-            </div>
-            <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
-              <Image
-                src={post.imageUrl}
-                alt={postTitle}
-                fill
-                className={`object-cover ${imagePositionClass}`}
-                priority
-                data-ai-hint={post.imageHint}
-              />
-            </div>
-          </header>
+    <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Animated Background Bubbles */}
+      <div className="absolute inset-0 z-0 opacity-100">
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1 hidden md:block" />
+        <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-accent/20 rounded-full animate-bubble-2" />
+        <div className="absolute bottom-[15%] left-[20%] w-72 h-72 bg-secondary/20 rounded-full animate-bubble-3" />
+        <div className="absolute top-[50%] left-[40%] w-48 h-48 bg-primary/15 rounded-full animate-bubble-1 animation-delay-[2s]" />
+        <div className="absolute bottom-[5%] right-[25%] w-56 h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]" />
+      </div>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
-            {postFullContent.map((paragraph, index) => {
-              if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes(' ') && !paragraph.slice(2,-2).includes('**')) {
-                const headingText = paragraph.slice(2, -2);
-                return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
-              }
-              if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
-                const items = paragraph.split('\\n').map(item => item.trim().replace(/^\\*\\s*/, ''));
-                return (
-                  <ul key={`list-${index}`} className="list-disc space-y-1 pl-6">
-                    {items.map((item, itemIndex) => (
-                      <li key={`list-item-${index}-${itemIndex}`}>{parseTextForFormatting(item)}</li>
-                    ))}
-                  </ul>
-                );
-              }
-              return <p key={`p-${index}`}>{parseTextForFormatting(paragraph)}</p>;
-            })}
-          </div>
-        </article>
-      </main>
-      <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header 
+          headerDictionary={dictionary.header}
+          languageSwitcherDictionary={dictionary.languageSwitcher}
+          currentLocale={params.locale}
+        />
+        <main className="flex-grow pt-24 md:pt-28">
+          <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
+            <header className="mb-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary font-heading mb-4">
+                {postTitle}
+              </h1>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
+                <div className="flex items-center gap-1.5">
+                  <UserIcon className="h-4 w-4" />
+                  <span>{post.author}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CalendarDaysIcon className="h-4 w-4" />
+                  <time dateTime={parsedDate.toISOString()}>{displayDate}</time>
+                </div>
+              </div>
+              <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
+                <Image
+                  src={post.imageUrl}
+                  alt={postTitle}
+                  fill
+                  className={`object-cover ${imagePositionClass}`}
+                  priority
+                  data-ai-hint={post.imageHint}
+                />
+              </div>
+            </header>
+
+            <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
+              {postFullContent.map((paragraph, index) => {
+                if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes(' ') && !paragraph.slice(2,-2).includes('**')) {
+                  const headingText = paragraph.slice(2, -2);
+                  return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;
+                }
+                if (paragraph.trim().startsWith('* ') || paragraph.trim().startsWith('  * ') || paragraph.trim().startsWith('    * ')) {
+                  const items = paragraph.split('\\n').map(item => item.trim().replace(/^\\*\\s*/, ''));
+                  return (
+                    <ul key={`list-${index}`} className="list-disc space-y-1 pl-6">
+                      {items.map((item, itemIndex) => (
+                        <li key={`list-item-${index}-${itemIndex}`}>{parseTextForFormatting(item)}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                return <p key={`p-${index}`}>{parseTextForFormatting(paragraph)}</p>;
+              })}
+            </div>
+          </article>
+        </main>
+        <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+      </div>
     </div>
   );
 }
-
-    
