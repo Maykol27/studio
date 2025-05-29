@@ -13,7 +13,7 @@ const defaultTexts: Dictionary['heroSection'] = {
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En SIKAI Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
   ctaButton: "¡Diagnostico gratuito ahora mismo!",
-  videoCaption: "Conoce al CEO de SIKAI Consulting", // Actualizado aquí si se usa
+  videoCaption: "Conoce al CEO de SIKAI Consulting",
   playVideo: "Reproducir Video",
   pauseVideo: "Pausar Video",
   enterPiP: "Entrar en Picture-in-Picture",
@@ -44,7 +44,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="space-y-6 md:space-y-8 animate-fade-in-up">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground font-heading leading-tight">
               {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
             <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
@@ -61,29 +61,6 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
             </Button>
           </Link>
         </div>
-
-        {/*
-        Video Section commented out
-        <div className="mt-12 md:mt-16 max-w-3xl mx-auto animate-fade-in-up animation-delay-[900ms]">
-          <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video">
-             // Image placeholder instead of video
-            <Image
-              src="https://placehold.co/1280x720.png"
-              alt={texts.videoCaption || "Video de presentación de la consultora"}
-              width={1280}
-              height={720}
-              className="w-full h-full object-cover"
-              data-ai-hint="CEO presentacion"
-              priority
-            />
-            {(!isPlaying && texts.videoCaption) && (
-              <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md ${isPlaying ? 'hidden' : ''}`}>
-                <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
-              </div>
-            )}
-          </div>
-        </div>
-        */}
       </div>
     </section>
   );
