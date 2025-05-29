@@ -18,8 +18,8 @@
     "titlePart1": "IA Sob Medida para Você: ",
     "titlePart2": "Nosso Processo",
     "titlePart3": " Rumo ao Seu Sucesso.",
-    "description": "¿Buscas llevar tu negocio al siguiente nivel? En SIKAI Consulting, transformamos la complejidad de la automatización y el uso de IA en soluciones prácticas y accesibles para tu negocio.",
-    "ctaButton": "¡Diagnóstico gratuito agora mesmo!",
+    "description": "Você busca levar seu negócio ao próximo nível? Na SIKAI Consulting, transformamos a complexidade da automação e do uso de IA em soluções práticas e acessíveis para o seu negócio.",
+    "ctaButton": "Diagnóstico gratuito agora mesmo!",
     "videoCaption": "Conheça o CEO da SIKAI Consulting",
     "playVideo": "Reproduzir Vídeo",
     "pauseVideo": "Pausar Vídeo",
@@ -102,9 +102,9 @@
     "paragraph1": "A SIKAI Consulting nasceu da convicção de que a Inteligência Artificial deve ser acessível e benéfica para empresas de todos os tamanhos. Trazemos profunda visão e experiência em tecnologia (IA, automação), gerenciamento de projetos e melhoria contínua, adquirida em ambientes complexos de grandes indústrias. Agora, trazemos esse conhecimento para criar soluções simples e práticas para profissionalizar e escalar sua empresa, independentemente do seu tamanho ou capacidade econômica.",
     "paragraph2": "Nossa missão é capacitar negócios como o seu para aproveitar o poder da IA para otimizar processos, reduzir custos, mejorar a tomada de decisões e enriquecer a experiência de seus clientes. Acreditamos em uma abordagem colaborativa, trabalhando em estreita colaboração com você para entender seus desafios e até descubrir oportunidades que você pode não ver, porque nos dedicamos a compreender a fundo o seu negócio e seus processos, para assim encontrar juntos as melhores soluções.",
     "paragraph3": "Com foco em resultados tangíveis e um processo de implementação ágil, guiamos você em cada etapa do caminho. Nosso objetivo não é apenas fornecer ferramentas de IA, mas ser seu parceiro estratégico no crescimento de sua empresa, permitindo que você se concentre no que te apaixona e no que te levou a construir seu negócio.",
-    "imageAltCEO": "Foto de Maykol Sicard, CEO da SIKAI Consulting",
+    "imageAltCEO": "Foto de Maykol Sicard, CEO Fundador da SIKAI Consulting",
     "ceoName": "Maykol Sicard",
-    "ceoTitle": "CEO"
+    "ceoTitle": "CEO Fundador"
   },
   "contactSection": {
     "title": "Vamos Conversar Sobre o Seu Negócio",
@@ -126,8 +126,7 @@
     "submitButtonLoading": "Enviando...",
     "toastSuccessTitle": "Mensagem Enviada!",
     "toastSuccessDescription": "Sua solicitação foi enviada com sucesso! Entraremos em contato em breve.",
-    "toastErrorTitle": "Erro",
-    "toastErrorDescriptionGeneral": "Falha ao enviar mensagem. Por favor, tente novamente.",
+    "toastErrorTitle": "Erro ao Enviar",
     "toastErrorDescriptionUnexpected": "Ocorreu um erro inesperado. Por favor, tente mais tarde."
   },
   "footer": {
@@ -171,7 +170,7 @@
           "  - Responder aos seus comentários, perguntas e solicitações de atendimento ao cliente.",
           "  - Comunicar com você sobre promoções, próximos eventos e outras notícias sobre produtos e serviços oferecidos pela SIKAI Consulting (se você optou por recebê-las).",
           "  - Monitorar e analisar tendências, uso e atividades em conexão com nosso site.",
-          "  - Personalizar e melhorar o site e nossos serviços."
+          "  - Personalizar e mejorar o site e nossos serviços."
         ]
       },
       {
@@ -184,7 +183,7 @@
       {
         "heading": "4. Segurança dos Dados",
         "paragraphs": [
-          "Tomamos medidas razoáveis para proteger suas informações pessoais contra perda, roubo, uso indevido и acesso não autorizado, divulgação, alteração e destruição."
+          "Tomamos medidas razoáveis para proteger suas informações pessoais contra perda, roubo, uso indevido e acesso não autorizado, divulgação, alteração e destruição."
         ]
       },
       {
@@ -246,5 +245,3 @@
     "contactDetails": "Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco em [seu email de contato]."
   }
 }
-
-    
