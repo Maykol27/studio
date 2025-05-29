@@ -3,9 +3,8 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-// import { LayersIcon, MenuIcon } from 'lucide-react'; // LayersIcon removido
 import { MenuIcon } from 'lucide-react';
-import { SikaiLogoIcon } from '@/components/icons/sikai-logo-icon'; // Importamos el nuevo icono
+import { BrainMinimalistIcon } from '@/components/icons/brain-minimalist-icon'; // Importamos el nuevo icono
 import {
   Sheet,
   SheetContent,
@@ -20,8 +19,8 @@ import type { Locale } from '@/i18n-config';
 import type { Dictionary } from '@/lib/get-dictionary';
 
 interface HeaderProps {
-  headerDictionary?: Partial<Dictionary['header']>; 
-  languageSwitcherDictionary?: Partial<Dictionary['languageSwitcher']>; 
+  headerDictionary?: Partial<Dictionary['header']>;
+  languageSwitcherDictionary?: Partial<Dictionary['languageSwitcher']>;
   currentLocale: Locale;
 }
 
@@ -58,7 +57,7 @@ export function Header({ headerDictionary: dictProp, languageSwitcherDictionary:
     <header className="py-4 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
         <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
-          <SikaiLogoIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
+          <BrainMinimalistIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
           <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">
             {headerDictionary.companyName}
           </span>
