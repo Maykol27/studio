@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import type { Dictionary } from '@/lib/get-dictionary';
 
@@ -16,6 +17,7 @@ const defaultTexts: Dictionary['aboutSection'] = {
 
 export function AboutSection({ dictionary }: AboutSectionProps) {
   const texts = { ...defaultTexts, ...(dictionary || {}) };
+  const imageAltText = texts.title || "Equipo de SIKAI Consulting"; // Usar el título localizado como alt
 
   return (
     <section id="about" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
@@ -34,12 +36,12 @@ export function AboutSection({ dictionary }: AboutSectionProps) {
           </div>
           <div className="rounded-xl overflow-hidden shadow-lg">
             <Image
-              src="https://placehold.co/550x400.png"
-              alt={texts.title || "Equipo de SIKAI Consulting"}
+              src="/images/sikai-equipo.jpg" // Actualizado para apuntar a una imagen local
+              alt={imageAltText}
               width={550}
               height={400}
               className="w-full h-full object-cover"
-              data-ai-hint="equipo colaboracion oficina"
+              data-ai-hint="equipo colaboracion oficina" // Puedes ajustar este hint si lo deseas
             />
           </div>
         </div>
