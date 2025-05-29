@@ -1,20 +1,21 @@
 // src/components/landing/hero-section.tsx
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+// import { useRef, useState, useEffect, useCallback } from 'react'; // Comentado porque el video está comentado
+import Image from 'next/image'; // Necesario para el placeholder
 import { Button } from '@/components/ui/button';
-import { ArrowRightIcon, PlayCircleIcon, PictureInPictureIcon, PlayIcon, PauseIcon } from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react'; // PlayCircleIcon, PictureInPictureIcon, PlayIcon, PauseIcon comentados
 import Link from 'next/link';
-import type { Dictionary } from '@/lib/get-dictionary';
+import type { Dictionary } from '@/locales/get-dictionary';
 
-// Default texts (Spanish fallbacks)
+// Textos por defecto en español si el diccionario no se provee
 const defaultTexts: Dictionary['heroSection'] = {
   titlePart1: "IA a tu Medida: ",
-  titlePart2: "Nuestro Proceso",
+  titlePart2: "Propuesta de Valor", // Actualizado según el menú
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
   ctaButton: "¡Diagnostico gratuito ahora mismo!",
-  videoCaption: "Conoce al CEO de Aetheria",
+  videoCaption: "Conoce al CEO de Aetheria Consulting",
   playVideo: "Reproducir Video",
   pauseVideo: "Pausar Video",
   enterPiP: "Entrar en Picture-in-Picture",
@@ -23,21 +24,20 @@ const defaultTexts: Dictionary['heroSection'] = {
 };
 
 interface HeroSectionProps {
-  dictionary?: Partial<Dictionary['heroSection']>; // Made dictionary prop optional and accept partial
+  dictionary?: Partial<Dictionary['heroSection']>;
 }
 
 export function HeroSection({ dictionary }: HeroSectionProps) {
+  const texts = { ...defaultTexts, ...(dictionary || {}) };
+
+  // Toda la lógica del video comentada
+  /*
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPiPSupported, setIsPiPSupported] = useState(false);
   const [isInPiP, setIsInPiP] = useState(false);
 
-  // Safely merge provided dictionary with default texts
-  // Fallback to an empty object if dictionary is undefined to prevent spread error
-  const texts = { ...defaultTexts, ...(dictionary || {}) };
-
   useEffect(() => {
-    // PiP support can only be checked on the client
     setIsPiPSupported(typeof document !== 'undefined' && !!document.pictureInPictureEnabled);
 
     const video = videoRef.current;
@@ -97,7 +97,6 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     if (!video) return;
 
     if (!isPiPSupported) {
-      // texts.pipNotSupported will always be available due to defaultTexts
       alert(texts.pipNotSupported); 
       return;
     }
@@ -111,7 +110,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     } catch (error) {
       console.error("Error al cambiar modo PiP:", error);
     }
-  }, [isPiPSupported, texts.pipNotSupported]); // Crucially, use texts.pipNotSupported here
+  }, [isPiPSupported, texts.pipNotSupported]);
 
   const handleScroll = useCallback(() => {
     const video = videoRef.current;
@@ -137,6 +136,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
       };
     }
   }, [handleScroll]);
+  */
 
   return (
     <section
@@ -163,13 +163,15 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
           </div>
           
           <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-[300ms]">
+            {/* Video comentado */}
+            {/* 
             <video
               ref={videoRef}
-              src="https://www.w3schools.com/html/mov_bbb.mp4" 
+              src="https://www.w3schools.com/html/mov_bbb.mp4" // CAMBIA ESTO POR TU VIDEO
               poster="https://placehold.co/600x400.png"
               className="w-full h-full object-cover"
               playsInline
-              controls
+              controls 
               data-ai-hint="CEO presentacion" 
               onLoadedMetadata={(e) => { 
                 const videoElement = e.currentTarget;
@@ -216,6 +218,21 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
             )}
 
             <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none ${isPlaying ? 'hidden' : ''}`}>
+              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
+            </div>
+            */}
+
+            {/* Placeholder de Imagen */}
+            <Image
+              src="https://placehold.co/1280x720.png" // Placeholder genérico 16:9
+              alt={texts.videoCaption || "Video sobre Aetheria Consulting"}
+              width={1280}
+              height={720}
+              className="w-full h-full object-cover rounded-xl" // Mantener el redondeo
+              data-ai-hint="tecnologia IA consultoria"
+              priority
+            />
+             <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none`}>
               <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
             </div>
           </div>
