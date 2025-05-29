@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import type { Dictionary } from '@/lib/get-dictionary';
+import type { Dictionary } from '@/lib/get-dictionary'; // Asegúrate que Dictionary está bien tipado
 
 interface AboutSectionProps {
   dictionary?: Partial<Dictionary['aboutSection']>;
@@ -12,12 +12,14 @@ const defaultTexts: Dictionary['aboutSection'] = {
   subtitle: "Tus aliados en la transformación digital impulsada por IA. Nos apasiona ayudar a las empresas a prosperar y escalar.",
   paragraph1: "SIKAI Consulting nació de la convicción de que la Inteligencia Artificial debe ser accesible y beneficiosa para empresas de todos los tamaños. Aportamos una profunda visión y experiencia en tecnología (IA, automatización), gestión de proyectos y mejora continua, adquirida en entornos complejos de grandes industrias. Ahora, llevamos ese conocimiento para crear soluciones simples y prácticas para profesionalizar y escalar tu empresa, sin importar su tamaño o capacidad económica.",
   paragraph2: "Nuestra misión es empoderar a negocios como el tuyo para que aprovechen el poder de la IA para optimizar procesos, reducir costos, mejorar la toma de decisiones y enriquecer la experiencia de sus clientes. Creemos en un enfoque colaborativo, trabajando de cerca contigo para entender tus desafíos e incluso descubrir oportunidades que podrías no ver, porque nos dedicamos a comprender a fondo tu negocio y tus procesos, para así encontrar juntos las mejores soluciones.",
-  paragraph3: "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio."
+  paragraph3: "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio.",
+  imageAltCEO: "Foto de Maykol Sicard, CEO de SIKAI Consulting",
+  ceoName: "Maykol Sicard",
+  ceoTitle: "CEO"
 };
 
 export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
   const texts = { ...defaultTexts, ...(dictProp || {}) };
-  const imageAltText = texts.title || "Equipo de SIKAI Consulting";
 
   return (
     <section id="about" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
@@ -34,15 +36,18 @@ export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
               <p>{texts.paragraph3}</p>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden shadow-lg">
-            <Image
-              src="/images/sikai-equipo.jpg"
-              alt={imageAltText}
-              width={550}
-              height={400}
-              className="w-full h-full object-cover"
-              data-ai-hint="equipo colaboracion oficina"
-            />
+          <div className="flex flex-col items-center text-center">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl mx-auto">
+              <Image
+                src="/images/sikai-equipo.jpg" 
+                alt={texts.imageAltCEO}
+                fill
+                className="object-cover"
+                data-ai-hint="CEO retrato corporativo"
+              />
+            </div>
+            <p className="mt-4 text-xl font-semibold text-foreground font-heading">{texts.ceoName}</p>
+            <p className="text-md text-primary">{texts.ceoTitle}</p>
           </div>
         </div>
       </div>
