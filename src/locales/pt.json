@@ -18,8 +18,8 @@
     "titlePart1": "IA Sob Medida para Você: ",
     "titlePart2": "Nosso Processo",
     "titlePart3": " Rumo ao Seu Sucesso.",
-    "description": "Procurando levar seu negócio para o próximo nível? Na SIKAI Consulting, transformamos a complexidade da automação e o uso de IA em soluções práticas e acessíveis para o seu negócio.",
-    "ctaButton": "Diagnóstico gratuito agora mesmo!",
+    "description": "¿Buscas llevar tu negocio al siguiente nivel? En SIKAI Consulting, transformamos la complejidad de la automatización y el uso de IA en soluciones prácticas y accesibles para tu negocio.",
+    "ctaButton": "¡Diagnóstico gratuito agora mesmo!",
     "videoCaption": "Conheça o CEO da SIKAI Consulting",
     "playVideo": "Reproduzir Vídeo",
     "pauseVideo": "Pausar Vídeo",
@@ -153,7 +153,7 @@
   "privacyPolicyPage": {
     "title": "Política de Privacidade",
     "metaDescription": "Detalhes sobre nossa política de privacidade e como lidamos com seus dados.",
-    "lastUpdated": "Última atualização: 1 de Agosto de 2024",
+    "lastUpdated": "Última atualização: 1 de Maio de 2025",
     "introduction": "Bem-vindo à Política de Privacidade da SIKAI Consulting. Sua privacidade é importante para nós. Esta política explica como coletamos, usamos, compartilhamos e protegemos suas informações pessoais quando você visita nosso site ou utiliza nossos serviços.",
     "sections": [
       {
@@ -206,7 +206,7 @@
   "termsOfServicePage": {
     "title": "Termos de Uso",
     "metaDescription": "Leia nossos termos e condições de uso para o site e os serviços da SIKAI Consulting.",
-    "lastUpdated": "Última atualização: 1 de Agosto de 2024",
+    "lastUpdated": "Última atualização: 1 de Maio de 2025",
     "introduction": "Bem-vindo à SIKAI Consulting. Estes termos e condições descrevem as regras e regulamentos para o uso do site da SIKAI Consulting, localizado em [URL do seu site]. Ao acessar este site, presumimos que você aceita estes termos e condições. Não continue a usar SIKAI Consulting se você não concordar com todos os termos e condições estabelecidos nesta página.",
     "sections": [
       {
@@ -246,3 +246,5 @@
     "contactDetails": "Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco em [seu email de contato]."
   }
 }
+
+    

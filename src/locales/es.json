@@ -153,7 +153,7 @@
   "privacyPolicyPage": {
     "title": "Política de Privacidad",
     "metaDescription": "Detalles sobre nuestra política de privacidad y cómo manejamos tus datos.",
-    "lastUpdated": "Última actualización: 1 de Agosto de 2024",
+    "lastUpdated": "Última actualización: 1 de Mayo de 2025",
     "introduction": "Bienvenido a la Política de Privacidad de SIKAI Consulting. Tu privacidad es importante para nosotros. Esta política explica cómo recopilamos, usamos, compartimos y protegemos tu información personal cuando visitas nuestro sitio web o utilizas nuestros servicios.",
     "sections": [
       {
@@ -206,7 +206,7 @@
   "termsOfServicePage": {
     "title": "Términos de Uso",
     "metaDescription": "Lee nuestros términos y condiciones de uso para el sitio web y los servicios de SIKAI Consulting.",
-    "lastUpdated": "Última actualización: 1 de Agosto de 2024",
+    "lastUpdated": "Última actualización: 1 de Mayo de 2025",
     "introduction": "Bienvenido a SIKAI Consulting. Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de SIKAI Consulting, ubicado en [la URL de tu sitio web]. Al acceder a este sitio web, asumimos que aceptas estos términos y condiciones. No continúes usando SIKAI Consulting si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.",
     "sections": [
       {
@@ -246,3 +246,5 @@
     "contactDetails": "Si tienes alguna pregunta sobre estos Términos de Uso, por favor contáctanos en [tu email de contacto]."
   }
 }
+
+    

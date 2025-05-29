@@ -38,7 +38,7 @@ export default async function PrivacyPolicyPage({ params: { locale } }: PrivacyP
   // Default placeholder content if not in dictionary
   const defaultContent = {
     title: locale === 'pt' ? 'Política de Privacidade' : 'Política de Privacidad',
-    lastUpdated: locale === 'pt' ? 'Última atualização: 1 de Agosto de 2024' : 'Última actualización: 1 de Agosto de 2024',
+    lastUpdated: locale === 'pt' ? 'Última atualização: 1 de Maio de 2025' : 'Última actualización: 1 de Mayo de 2025',
     introduction: locale === 'pt' ? 'Bem-vindo à nossa Política de Privacidade...' : 'Bienvenido a nuestra Política de Privacidad...',
     sections: [
       {
@@ -108,3 +108,5 @@ export default async function PrivacyPolicyPage({ params: { locale } }: PrivacyP
     </div>
   );
 }
+
+    

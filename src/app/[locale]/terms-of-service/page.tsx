@@ -38,7 +38,7 @@ export default async function TermsOfServicePage({ params: { locale } }: TermsOf
   // Default placeholder content if not in dictionary
   const defaultContent = {
     title: locale === 'pt' ? 'Termos de Uso' : 'Términos de Uso',
-    lastUpdated: locale === 'pt' ? 'Última atualização: 1 de Agosto de 2024' : 'Última actualización: 1 de Agosto de 2024',
+    lastUpdated: locale === 'pt' ? 'Última atualização: 1 de Maio de 2025' : 'Última actualización: 1 de Mayo de 2025',
     introduction: locale === 'pt' ? 'Bem-vindo aos nossos Termos de Uso...' : 'Bienvenido a nuestros Términos de Uso...',
     sections: [
       {
@@ -107,3 +107,5 @@ export default async function TermsOfServicePage({ params: { locale } }: TermsOf
     </div>
   );
 }
+
+    
