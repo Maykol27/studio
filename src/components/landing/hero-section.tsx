@@ -4,6 +4,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Dictionary } from '@/lib/get-dictionary';
 
 // Textos por defecto en español si el diccionario no se provee o falta alguna clave
@@ -45,7 +46,7 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="space-y-6 md:space-y-8 animate-fade-in-up">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground font-heading leading-relaxed">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground font-heading leading-loose"> {/* Changed from leading-relaxed to leading-loose */}
               {texts.titlePart1} <br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
             <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
