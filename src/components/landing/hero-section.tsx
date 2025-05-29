@@ -6,12 +6,12 @@ import Image from 'next/image'; // Necesario para el placeholder
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon } from 'lucide-react'; // PlayCircleIcon, PictureInPictureIcon, PlayIcon, PauseIcon comentados
 import Link from 'next/link';
-import type { Dictionary } from '@/locales/get-dictionary';
+import type { Dictionary } from '@/locales/pt.json'; // Asegúrate que la ruta es correcta si tienes un get-dictionary
 
 // Textos por defecto en español si el diccionario no se provee
 const defaultTexts: Dictionary['heroSection'] = {
   titlePart1: "IA a tu Medida: ",
-  titlePart2: "Propuesta de Valor", // Actualizado según el menú
+  titlePart2: "Nuestro Proceso", 
   titlePart3: " Hacia Tu Éxito.",
   description: "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
   ctaButton: "¡Diagnostico gratuito ahora mismo!",
@@ -38,12 +38,14 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
   const [isInPiP, setIsInPiP] = useState(false);
 
   useEffect(() => {
-    setIsPiPSupported(typeof document !== 'undefined' && !!document.pictureInPictureEnabled);
+    if (typeof window !== 'undefined') {
+      setIsPiPSupported(!!document.pictureInPictureEnabled);
+    }
 
     const video = videoRef.current;
     if (!video) return;
 
-    const handlePlayingState = () => setIsPlaying(!video.paused);
+    const handlePlayingState = () => setIsPlaying(!video.paused && !video.ended);
     const handlePiPState = () => setIsInPiP(document.pictureInPictureElement === video);
     
     const handleVideoEnd = async () => {
@@ -59,10 +61,10 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
 
     video.addEventListener('play', handlePlayingState);
     video.addEventListener('pause', handlePlayingState);
-    video.addEventListener('playing', handlePlayingState); 
     video.addEventListener('ended', handleVideoEnd);
-
-    if (typeof document !== 'undefined' && document.pictureInPictureEnabled) {
+    video.addEventListener('playing', handlePlayingState); 
+    
+    if (isPiPSupported) {
       video.addEventListener('enterpictureinpicture', handlePiPState);
       video.addEventListener('leavepictureinpicture', handlePiPState);
       if (document.pictureInPictureElement === video) {
@@ -73,14 +75,14 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
     return () => {
       video.removeEventListener('play', handlePlayingState);
       video.removeEventListener('pause', handlePlayingState);
-      video.removeEventListener('playing', handlePlayingState);
       video.removeEventListener('ended', handleVideoEnd);
-      if (typeof document !== 'undefined' && document.pictureInPictureEnabled) {
+      video.removeEventListener('playing', handlePlayingState);
+      if (isPiPSupported) {
         video.removeEventListener('enterpictureinpicture', handlePiPState);
         video.removeEventListener('leavepictureinpicture', handlePiPState);
       }
     };
-  }, []);
+  }, [isPiPSupported]);
 
   const togglePlayPause = useCallback(() => {
     const video = videoRef.current;
@@ -141,7 +143,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
       <div className="absolute inset-0 z-0 opacity-100">
         <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full animate-bubble-1 hidden md:block" />
@@ -152,93 +154,18 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in-up">
+        <div className="max-w-3xl mx-auto"> {/* Centering content */}
+          <div className="space-y-6 md:space-y-8 animate-fade-in-up">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground font-heading leading-tight">
               {texts.titlePart1}<br className="hidden md:block" /> <span className="text-primary">{texts.titlePart2}</span>{texts.titlePart3}
             </h1>
-            <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="text-md sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
               {texts.description}
             </p>
           </div>
-          
-          <div className="relative group rounded-xl overflow-hidden shadow-xl aspect-video mt-6 md:mt-0 animate-fade-in-up animation-delay-[300ms]">
-            {/* Video comentado */}
-            {/* 
-            <video
-              ref={videoRef}
-              src="https://www.w3schools.com/html/mov_bbb.mp4" // CAMBIA ESTO POR TU VIDEO
-              poster="https://placehold.co/600x400.png"
-              className="w-full h-full object-cover"
-              playsInline
-              controls 
-              data-ai-hint="CEO presentacion" 
-              onLoadedMetadata={(e) => { 
-                const videoElement = e.currentTarget;
-                // Optional: Adjust styling or logic after metadata is loaded
-              }}
-            >
-              <track
-                label="Español"
-                kind="subtitles"
-                srcLang="es"
-                src="/subtitles/video_es.vtt" 
-                default 
-              />
-              <track
-                label="Português"
-                kind="subtitles"
-                srcLang="pt"
-                src="/subtitles/video_pt.vtt" 
-              />
-            </video>
-            
-            {!isPlaying && (
-              <div 
-                className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 pointer-events-auto cursor-pointer"
-                onClick={(e) => { e.stopPropagation(); togglePlayPause(); }}
-                aria-label={texts.playVideo}
-              >
-                <PlayCircleIcon className="h-20 w-20 text-white/90 hover:text-white transition-colors" />
-              </div>
-            )}
-
-            {isPlaying && isPiPSupported && (
-              <div
-                className="absolute bottom-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto z-20" 
-              >
-                <button
-                  onClick={(e) => { e.stopPropagation(); togglePiP(); }}
-                  aria-label={isInPiP ? texts.exitPiP : texts.enterPiP}
-                  className={`p-1.5 bg-black/50 hover:bg-black/70 text-white/90 hover:text-white rounded-md transition-colors`}
-                >
-                  <PictureInPictureIcon className="h-5 w-5" /> 
-                </button>
-              </div>
-            )}
-
-            <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none ${isPlaying ? 'hidden' : ''}`}>
-              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
-            </div>
-            */}
-
-            {/* Placeholder de Imagen */}
-            <Image
-              src="https://placehold.co/1280x720.png" // Placeholder genérico 16:9
-              alt={texts.videoCaption || "Video sobre Aetheria Consulting"}
-              width={1280}
-              height={720}
-              className="w-full h-full object-cover rounded-xl" // Mantener el redondeo
-              data-ai-hint="tecnologia IA consultoria"
-              priority
-            />
-             <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/50 backdrop-blur-sm p-2 rounded-md pointer-events-none`}>
-              <p className="text-xs sm:text-sm text-white/90">{texts.videoCaption}</p>
-            </div>
-          </div>
         </div>
         
-        <div className="mt-10 md:mt-16 flex justify-center animate-fade-in-up animation-delay-[600ms]">
+        <div className="mt-10 md:mt-12 flex justify-center animate-fade-in-up animation-delay-[600ms]">
           <Link href="#automation-advisor" passHref>
             <Button size="lg" className="btn-cta-primary rounded-md px-8 py-3.5 text-base sm:text-lg group w-full max-w-xs sm:max-w-md sm:w-auto shadow-lg hover:shadow-xl">
               {texts.ctaButton}
