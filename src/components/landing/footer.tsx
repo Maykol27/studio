@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { LayersIcon } from 'lucide-react';
+// import { LayersIcon } from 'lucide-react'; // LayersIcon removido
+import { SikaiLogoIcon } from '@/components/icons/sikai-logo-icon'; // Importamos el nuevo icono
 import type { Dictionary } from '@/lib/get-dictionary';
 import type { Locale } from '@/i18n-config';
 
@@ -16,9 +17,9 @@ const defaultTexts: Dictionary['footer'] = {
 };
 
 
-export function Footer({ dictionary, currentLocale }: FooterProps) {
+export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const texts = { ...defaultTexts, ...(dictionary || {}) };
+  const dictionary = { ...defaultTexts, ...(dictProp || {}) };
 
 
   return (
@@ -26,18 +27,18 @@ export function Footer({ dictionary, currentLocale }: FooterProps) {
       <div className="container mx-auto px-4 md:px-8 text-foreground/70">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-4 text-center sm:text-left">
           <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
-            <LayersIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" />
-            <span className="text-lg font-semibold text-primary group-hover:text-accent transition-colors font-heading">{texts.companyName}</span>
+            <SikaiLogoIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" />
+            <span className="text-lg font-semibold text-primary group-hover:text-accent transition-colors font-heading">{dictionary.companyName}</span>
           </Link>
           <p className="text-sm order-last sm:order-none">
-            &copy; {currentYear} {texts.copyright}
+            &copy; {currentYear} {dictionary.copyright}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link href={`/${currentLocale}/privacy-policy`} className="text-sm hover:text-primary transition-colors" prefetch={false}>
-              {texts.privacyPolicy}
+              {dictionary.privacyPolicy}
             </Link>
             <Link href={`/${currentLocale}/terms-of-service`} className="text-sm hover:text-primary transition-colors" prefetch={false}>
-              {texts.termsOfService}
+              {dictionary.termsOfService}
             </Link>
           </div>
         </div>

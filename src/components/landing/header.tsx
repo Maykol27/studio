@@ -3,7 +3,9 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { LayersIcon, MenuIcon } from 'lucide-react';
+// import { LayersIcon, MenuIcon } from 'lucide-react'; // LayersIcon removido
+import { MenuIcon } from 'lucide-react';
+import { SikaiLogoIcon } from '@/components/icons/sikai-logo-icon'; // Importamos el nuevo icono
 import {
   Sheet,
   SheetContent,
@@ -27,7 +29,7 @@ interface HeaderProps {
 const defaultHeaderTexts: Dictionary['header'] = {
   companyName: "SIKAI Consulting",
   benefits: "Beneficios",
-  process: "Propuesta de Valor", // Ya estaba actualizado, pero lo reconfirmamos
+  process: "Propuesta de Valor",
   blog: "Blog",
   about: "Nosotros",
   contactUs: "Contáctanos",
@@ -41,24 +43,24 @@ const defaultLangSwitcherTexts: Dictionary['languageSwitcher'] = {
   portuguese: "Portugués"
 };
 
-export function Header({ headerDictionary, languageSwitcherDictionary, currentLocale }: HeaderProps) {
-  const texts = { ...defaultHeaderTexts, ...(headerDictionary || {}) };
-  const langSwitcherTexts = { ...defaultLangSwitcherTexts, ...(languageSwitcherDictionary || {}) };
+export function Header({ headerDictionary: dictProp, languageSwitcherDictionary: langDictProp, currentLocale }: HeaderProps) {
+  const headerDictionary = { ...defaultHeaderTexts, ...(dictProp || {}) };
+  const langSwitcherDictionary = { ...defaultLangSwitcherTexts, ...(langDictProp || {}) };
 
   const navItems = [
-    { href: '#benefits', label: texts.benefits },
-    { href: '#process', label: texts.process },
-    { href: '#blog', label: texts.blog },
-    { href: '#about', label: texts.about },
+    { href: '#benefits', label: headerDictionary.benefits },
+    { href: '#process', label: headerDictionary.process },
+    { href: '#blog', label: headerDictionary.blog },
+    { href: '#about', label: headerDictionary.about },
   ];
 
   return (
     <header className="py-4 px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
         <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
-          <LayersIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
+          <SikaiLogoIcon className="h-7 w-7 text-primary group-hover:text-accent transition-colors" />
           <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">
-            {texts.companyName}
+            {headerDictionary.companyName}
           </span>
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
@@ -73,25 +75,25 @@ export function Header({ headerDictionary, languageSwitcherDictionary, currentLo
             </Link>
           ))}
           <ThemeSwitcher />
-          <LanguageSwitcher currentLocale={currentLocale} dictionary={langSwitcherTexts} />
+          <LanguageSwitcher currentLocale={currentLocale} dictionary={langSwitcherDictionary} />
           <Link href="#contact" prefetch={false}>
             <Button className="btn-cta-primary rounded-md px-6 py-2.5 text-sm ml-2">
-              {texts.contactUs}
+              {headerDictionary.contactUs}
             </Button>
           </Link>
         </nav>
         <div className="md:hidden flex items-center">
           <ThemeSwitcher />
-          <LanguageSwitcher currentLocale={currentLocale} dictionary={langSwitcherTexts} />
+          <LanguageSwitcher currentLocale={currentLocale} dictionary={langSwitcherDictionary} />
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label={texts.toggleMenu}>
+              <Button variant="ghost" size="icon" aria-label={headerDictionary.toggleMenu}>
                 <MenuIcon className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background text-foreground p-6">
               <SheetHeader className="pt-0 px-0 pb-4 text-center border-b mb-4">
-                <SheetTitle>{texts.sheetTitle}</SheetTitle>
+                <SheetTitle>{headerDictionary.sheetTitle}</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col space-y-5">
                 {navItems.map(item => (
@@ -104,7 +106,7 @@ export function Header({ headerDictionary, languageSwitcherDictionary, currentLo
                 <SheetClose asChild>
                   <Link href="#contact" prefetch={false} className="mt-4">
                     <Button className="w-full btn-cta-primary rounded-md py-3 text-base">
-                      {texts.contactUs}
+                      {headerDictionary.contactUs}
                     </Button>
                   </Link>
                 </SheetClose>
