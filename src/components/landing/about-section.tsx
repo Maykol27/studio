@@ -1,12 +1,13 @@
 
 import Image from 'next/image';
-import type { Dictionary } from '@/lib/get-dictionary'; // Asegúrate que Dictionary está bien tipado
+import Link from 'next/link'; // Import Link, though for external <a> is fine
+import type { Dictionary } from '@/lib/get-dictionary';
 
 interface AboutSectionProps {
-  dictionary?: Partial<Dictionary['aboutSection']>;
+  dictionary: Dictionary['aboutSection'];
 }
 
-// Default texts (Spanish fallbacks)
+// Default texts (Spanish fallbacks) - these should ideally match es.json
 const defaultTexts: Dictionary['aboutSection'] = {
   title: "Sobre SIKAI Consulting",
   subtitle: "Tus aliados en la transformación digital impulsada por IA. Nos apasiona ayudar a las empresas a prosperar y escalar.",
@@ -19,7 +20,7 @@ const defaultTexts: Dictionary['aboutSection'] = {
 };
 
 export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
-  const texts = { ...defaultTexts, ...(dictProp || {}) };
+  const texts = { ...defaultTexts, ...dictProp };
 
   return (
     <section id="about" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
@@ -37,7 +38,7 @@ export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
             </div>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl mx-auto">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl mx-auto mb-4">
               <Image
                 src="/images/sikai-equipo.jpg" 
                 alt={texts.imageAltCEO}
@@ -46,8 +47,15 @@ export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
                 data-ai-hint="CEO retrato corporativo"
               />
             </div>
-            <p className="mt-4 text-xl font-semibold text-foreground font-heading">{texts.ceoName}</p>
-            <p className="text-md text-primary">{texts.ceoTitle}</p>
+            <a
+              href="https://www.linkedin.com/in/maykol-sicard"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-block"
+            >
+              <p className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors font-heading">{texts.ceoName}</p>
+              <p className="text-md text-primary group-hover:text-accent transition-colors">{texts.ceoTitle}</p>
+            </a>
           </div>
         </div>
       </div>
