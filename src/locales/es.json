@@ -149,5 +149,100 @@
   },
   "loading": {
     "message": "Cargando..."
+  },
+  "privacyPolicyPage": {
+    "title": "Política de Privacidad",
+    "metaDescription": "Detalles sobre nuestra política de privacidad y cómo manejamos tus datos.",
+    "lastUpdated": "Última actualización: 1 de Agosto de 2024",
+    "introduction": "Bienvenido a la Política de Privacidad de SIKAI Consulting. Tu privacidad es importante para nosotros. Esta política explica cómo recopilamos, usamos, compartimos y protegemos tu información personal cuando visitas nuestro sitio web o utilizas nuestros servicios.",
+    "sections": [
+      {
+        "heading": "1. Información que Recopilamos",
+        "paragraphs": [
+          "Podemos recopilar información personal que nos proporcionas directamente, como tu nombre, dirección de correo electrónico, nombre de la empresa y cualquier mensaje que nos envíes a través de nuestros formularios de contacto o cuando te comunicas con nosotros.",
+          "También podemos recopilar información automáticamente cuando navegas por nuestro sitio, como tu dirección IP, tipo de navegador, sistema operativo, páginas de referencia, páginas visitadas en nuestro sitio y las fechas/horas de tus visitas, a través de cookies y tecnologías similares."
+        ]
+      },
+      {
+        "heading": "2. Cómo Usamos tu Información",
+        "paragraphs": [
+          "Utilizamos la información que recopilamos para:",
+          "  - Proveer, operar y mantener nuestro sitio web y servicios.",
+          "  - Responder a tus comentarios, preguntas y solicitudes de servicio al cliente.",
+          "  - Comunicarnos contigo sobre promociones, próximos eventos y otras noticias sobre productos y servicios ofrecidos por SIKAI Consulting (si has optado por recibirlas).",
+          "  - Monitorear y analizar tendencias, uso y actividades en conexión con nuestro sitio web.",
+          "  - Personalizar y mejorar el sitio web y nuestros servicios."
+        ]
+      },
+      {
+        "heading": "3. Intercambio de Información",
+        "paragraphs": [
+          "No vendemos tu información personal a terceros. Podemos compartir información con proveedores de servicios de terceros que nos ayudan a operar nuestro sitio web y realizar nuestros servicios, bajo acuerdos de confidencialidad.",
+          "También podemos divulgar tu información si así lo requiere la ley o en respuesta a solicitudes válidas de autoridades públicas."
+        ]
+      },
+      {
+        "heading": "4. Seguridad de los Datos",
+        "paragraphs": [
+          "Tomamos medidas razonables para proteger tu información personal de la pérdida, el robo, el uso indebido y el acceso no autorizado, la divulgación, la alteración y la destrucción."
+        ]
+      },
+      {
+        "heading": "5. Tus Derechos",
+        "paragraphs": [
+          "Dependiendo de tu ubicación, puedes tener ciertos derechos con respecto a tu información personal, como el derecho a acceder, corregir o eliminar tus datos personales. Por favor, contáctanos para ejercer tus derechos."
+        ]
+      },
+      {
+        "heading": "6. Cambios a esta Política",
+        "paragraphs": [
+          "Podemos actualizar esta política de privacidad de vez en cuando. Te notificaremos cualquier cambio publicando la nueva política de privacidad en esta página. Te recomendamos revisar esta política periódicamente para cualquier cambio."
+        ]
+      }
+    ],
+    "contactUs": "Contáctanos",
+    "contactDetails": "Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos en [tu email de contacto]."
+  },
+  "termsOfServicePage": {
+    "title": "Términos de Uso",
+    "metaDescription": "Lee nuestros términos y condiciones de uso para el sitio web y los servicios de SIKAI Consulting.",
+    "lastUpdated": "Última actualización: 1 de Agosto de 2024",
+    "introduction": "Bienvenido a SIKAI Consulting. Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de SIKAI Consulting, ubicado en [la URL de tu sitio web]. Al acceder a este sitio web, asumimos que aceptas estos términos y condiciones. No continúes usando SIKAI Consulting si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.",
+    "sections": [
+      {
+        "heading": "1. Licencia",
+        "paragraphs": [
+          "A menos que se indique lo contrario, SIKAI Consulting y/o sus licenciantes poseen los derechos de propiedad intelectual de todo el material en SIKAI Consulting. Todos los derechos de propiedad intelectual están reservados. Puedes acceder a esto desde SIKAI Consulting para tu propio uso personal sujeto a las restricciones establecidas en estos términos y condiciones."
+        ]
+      },
+      {
+        "heading": "2. No Debes",
+        "paragraphs": [
+          "- Republicar material de SIKAI Consulting.",
+          "- Vender, alquilar o sublicenciar material de SIKAI Consulting.",
+          "- Reproducir, duplicar o copiar material de SIKAI Consulting.",
+          "- Redistribuir contenido de SIKAI Consulting."
+        ]
+      },
+      {
+        "heading": "3. Contenido del Usuario",
+        "paragraphs": [
+          "Ciertas partes de este sitio web ofrecen la oportunidad a los usuarios de publicar e intercambiar opiniones e información. SIKAI Consulting no filtra, edita, publica ni revisa los Comentarios antes de su presencia en el sitio web. Los Comentarios no reflejan los puntos de vista y opiniones de SIKAI Consulting, sus agentes y/o afiliados. Los Comentarios reflejan los puntos de vista y opiniones de la persona que publica sus puntos de vista y opiniones.",
+          "SIKAI Consulting se reserva el derecho de monitorear todos los Comentarios y eliminar cualquier Comentario que pueda considerarse inapropiado, ofensivo o que cause incumplimiento de estos Términos y Condiciones."
+        ]
+      },
+      {
+        "heading": "4. Descargo de Responsabilidad",
+        "paragraphs": [
+          "En la medida máxima permitida por la ley aplicable, excluimos todas las representaciones, garantías y condiciones relacionadas con nuestro sitio web y el uso de este sitio web. Nada en este descargo de responsabilidad:",
+          "- Limitará o excluirá nuestra o tu responsabilidad por muerte o lesiones personales;",
+          "- Limitará o excluirá nuestra o tu responsabilidad por fraude o tergiversación fraudulenta;",
+          "- Limitará cualquiera de nuestras o tus responsabilidades de cualquier manera que no esté permitida por la ley aplicable; o",
+          "- Excluirá cualquiera de nuestras o tus responsabilidades que no puedan ser excluidas bajo la ley aplicable."
+        ]
+      }
+    ],
+    "contactUs": "Contáctanos",
+    "contactDetails": "Si tienes alguna pregunta sobre estos Términos de Uso, por favor contáctanos en [tu email de contacto]."
   }
 }

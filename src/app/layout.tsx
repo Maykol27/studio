@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Poppins, Open_Sans } from 'next/font/google';
 import './globals.css';
@@ -20,6 +21,7 @@ const openSans = Open_Sans({
 
 // Metadata base, puede ser sobreescrita por layouts de locale
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9003'),
   title: 'SIKAI Consulting',
   description: 'IA a tu Medida: Nuestro Proceso Hacia Tu Éxito.',
 };
@@ -46,4 +48,3 @@ export default function RootLayout({
     </html>
   );
 }
-
