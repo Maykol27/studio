@@ -15,9 +15,9 @@ const defaultTexts: Dictionary['aboutSection'] = {
   paragraph3: "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio."
 };
 
-export function AboutSection({ dictionary }: AboutSectionProps) {
-  const texts = { ...defaultTexts, ...(dictionary || {}) };
-  const imageAltText = texts.title || "Equipo de SIKAI Consulting"; // Usar el título localizado como alt
+export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
+  const texts = { ...defaultTexts, ...(dictProp || {}) };
+  const imageAltText = texts.title || "Equipo de SIKAI Consulting";
 
   return (
     <section id="about" className="py-10 sm:py-12 md:py-16 bg-secondary/5">
@@ -34,14 +34,14 @@ export function AboutSection({ dictionary }: AboutSectionProps) {
               <p>{texts.paragraph3}</p>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden shadow-lg">
+          <div className="rounded-xl overflow-hidden shadow-lg [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
             <Image
-              src="/images/sikai-equipo.jpg" // Actualizado para apuntar a una imagen local
+              src="/images/sikai-equipo.jpg"
               alt={imageAltText}
               width={550}
               height={400}
               className="w-full h-full object-cover"
-              data-ai-hint="equipo colaboracion oficina" // Puedes ajustar este hint si lo deseas
+              data-ai-hint="equipo colaboracion oficina"
             />
           </div>
         </div>
