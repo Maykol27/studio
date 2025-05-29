@@ -8,7 +8,7 @@ export default function Loading() {
         <LayersIcon className="h-16 w-16 text-primary mb-4" />
       </div>
       <p className="text-xl font-semibold font-heading animate-pulse-subtle-text">
-        Aetheria Consulting
+        SIKAI Consulting
       </p>
       <p className="text-sm text-muted-foreground mt-2">Cargando...</p>
     </div>

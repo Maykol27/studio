@@ -1,11 +1,11 @@
 
 {
   "metadata": {
-    "title": "Aetheria Consulting",
+    "title": "SIKAI Consulting",
     "description": "IA a tu Medida: Nuestro Proceso Hacia Tu Éxito."
   },
   "header": {
-    "companyName": "Aetheria Consulting",
+    "companyName": "SIKAI Consulting",
     "benefits": "Beneficios",
     "process": "Propuesta de Valor",
     "blog": "Blog",
@@ -18,9 +18,9 @@
     "titlePart1": "IA a tu Medida: ",
     "titlePart2": "Nuestro Proceso",
     "titlePart3": " Hacia Tu Éxito.",
-    "description": "¿Buscas llevar tu negocio al siguiente nivel? En Aetheria Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
+    "description": "¿Buscas llevar tu negocio al siguiente nivel? En SIKAI Consulting, transformamos la complejidad de la automatización e IA en soluciones prácticas y accesibles para tu negocio.",
     "ctaButton": "¡Diagnostico gratuito ahora mismo!",
-    "videoCaption": "Conoce al CEO de Aetheria Consulting",
+    "videoCaption": "Conoce al CEO de SIKAI Consulting",
     "playVideo": "Reproducir Video",
     "pauseVideo": "Pausar Video",
     "enterPiP": "Entrar en Picture-in-Picture",
@@ -97,9 +97,9 @@
     "readMore": "Leer Más"
   },
   "aboutSection": {
-    "title": "Sobre Aetheria Consulting",
+    "title": "Sobre SIKAI Consulting",
     "subtitle": "Tus aliados en la transformación digital impulsada por IA. Nos apasiona ayudar a las empresas a prosperar y escalar.",
-    "paragraph1": "Aetheria Consulting nació de la convicción de que la Inteligencia Artificial debe ser accesible y beneficiosa para empresas de todos los tamaños. Aportamos una profunda visión y experiencia en tecnología (IA, automatización), gestión de proyectos y mejora continua, adquirida en entornos complejos de grandes industrias. Ahora, llevamos ese conocimiento para crear soluciones simples y prácticas para profesionalizar y escalar tu empresa, sin importar su tamaño o capacidad económica.",
+    "paragraph1": "SIKAI Consulting nació de la convicción de que la Inteligencia Artificial debe ser accesible y beneficiosa para empresas de todos los tamaños. Aportamos una profunda visión y experiencia en tecnología (IA, automatización), gestión de proyectos y mejora continua, adquirida en entornos complejos de grandes industrias. Ahora, llevamos ese conocimiento para crear soluciones simples y prácticas para profesionalizar y escalar tu empresa, sin importar su tamaño o capacidad económica.",
     "paragraph2": "Nuestra misión es empoderar a negocios como el tuyo para que aprovechen el poder de la IA para optimizar procesos, reducir costos, mejorar la toma de decisiones y enriquecer la experiencia de sus clientes. Creemos en un enfoque colaborativo, trabajando de cerca contigo para entender tus desafíos e incluso descubrir oportunidades que podrías no ver, porque nos dedicamos a comprender a fondo tu negocio y tus procesos, para así encontrar juntos las mejores soluciones.",
     "paragraph3": "Con un enfoque en resultados tangibles y un proceso de implementación ágil, te guiamos en cada paso del camino. Nuestro objetivo no es solo proveerte herramientas de IA, sino ser tu socio estratégico en el crecimiento de tu empresa, permitiéndote enfocarte en lo que te apasiona y lo que te llevó a construir tu negocio."
   },
@@ -128,8 +128,8 @@
     "toastErrorDescriptionUnexpected": "Ocurrió un error inesperado. Por favor, inténtalo más tarde."
   },
   "footer": {
-    "companyName": "Aetheria Consulting",
-    "copyright": "Aetheria Consulting. Todos los derechos reservados.",
+    "companyName": "SIKAI Consulting",
+    "copyright": "SIKAI Consulting. Todos los derechos reservados.",
     "privacyPolicy": "Política de Privacidad",
     "termsOfService": "Términos de Servicio"
   },

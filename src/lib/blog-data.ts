@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
     slug: "futuro-ia-pymes",
     imageUrl: "/images/futuro-ia-pymes.jpg",
     imageHint: "futuro tecnologia IA",
-    author: "Equipo Aetheria",
+    author: "Equipo SIKAI",
     date: "2025-05-02",
     fullContent: {
       es: [
@@ -63,7 +63,7 @@ export const blogPosts: BlogPost[] = [
     slug: "automatizar-marketing-ia",
     imageUrl: "/images/automatizar-marketing-ia.jpg",
     imageHint: "marketing digital automatizacion",
-    author: "Equipo Aetheria",
+    author: "Equipo SIKAI",
     date: "2025-05-02",
     fullContent: {
       es: [
@@ -99,7 +99,7 @@ export const blogPosts: BlogPost[] = [
     slug: "automatizacion-inteligente-procesos",
     imageUrl: "/images/automatizacion-inteligente-procesos.jpg",
     imageHint: "procesos internos automatizacion",
-    author: "Equipo Aetheria",
+    author: "Equipo SIKAI",
     date: "2025-05-02",
     fullContent: {
       es: [
@@ -113,7 +113,7 @@ export const blogPosts: BlogPost[] = [
       ],
       pt: [
         "Enquanto muitas empresas focam na IA voltada para o cliente, a verdadeira revolução silenciosa está ocorrendo dentro das organizações. A automação inteligente (IA + RPA + Process Mining) não se trata apenas de reduzir custos, mas de liberar o potencial humano e construir operações resilientes e ágeis.",
-        "**Como você pode melhorar seus processos internos?**",
+        "**Como você pode mejorar seus processos internos?**",
         "**Fluxos de Trabalho Cognitivos:** Imagine sistemas que não apenas executam tarefas, mas entendem o contexto, aprendem com as exceções e tomam decisões autônomas em áreas como finanças, RH e logística.",
         "**Descoberta e Otimização Autônoma de Processos:** A IA analisará continuamente suas operações, identificará gargalos e ineficiências (mesmo aquelas que você não sabia que tinha) e sugerirá ou até mesmo implementará melhorias automaticamente.",
         "**Gestão Preditiva de Recursos:** Desde a alocação de pessoal até o gerenciamento de estoques, a IA antecipará necessidades futuras, otimizando o uso de seus ativos e prevenindo problemas antes que ocorram.",
