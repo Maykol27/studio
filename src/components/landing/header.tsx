@@ -18,16 +18,16 @@ import type { Locale } from '@/i18n-config';
 import type { Dictionary } from '@/lib/get-dictionary';
 
 interface HeaderProps {
-  headerDictionary?: Partial<Dictionary['header']>; // Made optional and partial
-  languageSwitcherDictionary?: Partial<Dictionary['languageSwitcher']>; // Made optional and partial
+  headerDictionary?: Partial<Dictionary['header']>; 
+  languageSwitcherDictionary?: Partial<Dictionary['languageSwitcher']>; 
   currentLocale: Locale;
 }
 
 // Default texts (Spanish fallbacks)
 const defaultHeaderTexts: Dictionary['header'] = {
-  companyName: "Aetheria Consulting",
+  companyName: "SIKAI Consulting",
   benefits: "Beneficios",
-  process: "Propuesta de Valor",
+  process: "Propuesta de Valor", // Ya estaba actualizado, pero lo reconfirmamos
   blog: "Blog",
   about: "Nosotros",
   contactUs: "Contáctanos",
@@ -42,8 +42,8 @@ const defaultLangSwitcherTexts: Dictionary['languageSwitcher'] = {
 };
 
 export function Header({ headerDictionary, languageSwitcherDictionary, currentLocale }: HeaderProps) {
-  const texts = { ...defaultHeaderTexts, ...headerDictionary };
-  const langSwitcherTexts = { ...defaultLangSwitcherTexts, ...languageSwitcherDictionary };
+  const texts = { ...defaultHeaderTexts, ...(headerDictionary || {}) };
+  const langSwitcherTexts = { ...defaultLangSwitcherTexts, ...(languageSwitcherDictionary || {}) };
 
   const navItems = [
     { href: '#benefits', label: texts.benefits },
