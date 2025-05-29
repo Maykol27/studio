@@ -34,7 +34,7 @@ export function AboutSection({ dictionary: dictProp }: AboutSectionProps) {
               <p>{texts.paragraph3}</p>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden shadow-lg [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
+          <div className="rounded-xl overflow-hidden shadow-lg">
             <Image
               src="/images/sikai-equipo.jpg"
               alt={imageAltText}
