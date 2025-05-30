@@ -28,7 +28,7 @@ export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-4 text-center sm:text-left">
           <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
             {/* Usa CustomLogoIcon si estás cargando un archivo SVG desde /public */}
-            <CustomLogoIcon width={32} height={32} className="text-primary group-hover:text-accent transition-colors" />
+            <CustomLogoIcon width={36} height={36} className="text-primary group-hover:text-accent transition-colors" />
             {/* O usa SikaiLogoIcon si quieres mantener el SVG complejo definido en el componente */}
             {/* <SikaiLogoIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" /> */}
             <span className="text-lg font-semibold text-primary group-hover:text-accent transition-colors font-heading">{dictionary.companyName}</span>
