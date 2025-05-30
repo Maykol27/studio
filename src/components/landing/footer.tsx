@@ -1,15 +1,16 @@
 // src/components/landing/footer.tsx
 import Link from 'next/link';
-// import { BrainMinimalistIcon } from '@/components/icons/brain-minimalist-icon'; // Comentado o eliminado
-import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Importar nuevo logo
+import { SikaiLogoIcon } from '@/components/icons/sikai-logo-icon'; // Usaremos SikaiLogoIcon si prefieres el SVG complejo
+import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // O el nuevo CustomLogoIcon si usas un archivo
 import type { Dictionary } from '@/lib/get-dictionary';
 import type { Locale } from '@/i18n-config';
 
 interface FooterProps {
-  dictionary?: Partial<Dictionary['footer']>; // Hacer el diccionario opcional
+  dictionary?: Partial<Dictionary['footer']>; 
   currentLocale: Locale;
 }
 
+// Default texts (Spanish fallbacks)
 const defaultTexts: Dictionary['footer'] = {
   companyName: "SIKAI Consulting",
   copyright: "SIKAI Consulting. Todos los derechos reservados.",
@@ -17,9 +18,9 @@ const defaultTexts: Dictionary['footer'] = {
   termsOfService: "Términos de Servicio"
 };
 
+
 export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  // Fusionar el diccionario de props con los textos por defecto
   const dictionary = { ...defaultTexts, ...(dictProp || {}) };
 
   return (
@@ -27,7 +28,10 @@ export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
       <div className="container mx-auto px-4 md:px-8 text-foreground/70">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-4 text-center sm:text-left">
           <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
-            <CustomLogoIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" /> {/* Usar CustomLogoIcon */}
+            {/* Usa CustomLogoIcon si estás cargando un archivo SVG desde /public */}
+            <CustomLogoIcon width={24} height={24} className="text-primary group-hover:text-accent transition-colors" />
+            {/* O usa SikaiLogoIcon si quieres mantener el SVG complejo definido en el componente */}
+            {/* <SikaiLogoIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" /> */}
             <span className="text-lg font-semibold text-primary group-hover:text-accent transition-colors font-heading">{dictionary.companyName}</span>
           </Link>
           <p className="text-sm order-last sm:order-none">

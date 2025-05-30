@@ -1,28 +1,24 @@
 // src/components/icons/custom-logo-icon.tsx
+import Image from 'next/image';
 import type { SVGProps } from 'react';
 
-export function CustomLogoIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100" // Ajusta el viewBox según tu SVG
-      fill="currentColor" // O ajusta fill/stroke según tu SVG y cómo quieras que herede colores
-      {...props}
-    >
-      {/*
-        ¡AQUÍ DEBES PEGAR EL CÓDIGO DE TU PROPIO SVG!
-        Asegúrate de que los atributos como `fill` o `stroke` estén configurados
-        como `currentColor` si quieres que el logo herede el color del texto
-        (ej. text-primary) o de su contexto.
-        Si tu SVG ya tiene colores fijos, esos se mantendrán.
+interface CustomLogoIconProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  width?: number;
+  height?: number;
+}
 
-        Ejemplo de un SVG simple de placeholder (¡REEMPLÁZALO!):
-      */}
-      <rect width="100" height="100" rx="10" ry="10" />
-      <circle cx="50" cy="50" r="30" fill="white" />
-      <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="20" fill="black">
-        LOGO
-      </text>
-    </svg>
+export function CustomLogoIcon({ width = 64, height = 64, className, ...props }: CustomLogoIconProps) {
+  // Nota: El componente `Image` de Next.js maneja la optimización y el servicio de imágenes desde la carpeta `public`.
+  // Asegúrate de que tu archivo SVG se llame 'sikai-logo.svg' y esté en la carpeta 'public/images/'.
+  return (
+    <Image
+      src="/images/sikai-logo.svg" // Esta ruta es relativa a la carpeta 'public'
+      alt="SIKAI Consulting Logo"
+      width={width}
+      height={height}
+      className={className}
+      priority // Puede ser útil para el LCP si el logo es importante
+      {...props}
+    />
   );
 }
