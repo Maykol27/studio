@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -315,5 +314,3 @@ export function AutomationAdvisorSection({ dictionary: dictProp }: AutomationAdv
     </section>
   );
 }
-
-    

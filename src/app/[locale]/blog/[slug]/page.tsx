@@ -19,7 +19,7 @@ interface BlogPostPageProps {
 export async function generateStaticParams({ params: { locale: defaultLocale } }: { params: { locale: Locale }}) {
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: defaultLocale, 
+    locale: defaultLocale,
   }));
 }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: dictionary.blogPostPage?.notFoundDescription || "El artículo de blog que buscas no existe o fue movido.",
     };
   }
-  
+
   const postTitle = getLocalizedPostField(post.title, params.locale) as string;
   const postSummary = getLocalizedPostField(post.summary, params.locale) as string;
   const publishedDate = parseISO(post.date);
@@ -47,9 +47,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         description: postSummary,
         images: [
             {
-                url: post.imageUrl, 
-                width: 800, 
-                height: 450, 
+                url: post.imageUrl,
+                width: 800,
+                height: 450,
                 alt: postTitle,
             },
         ],
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         card: 'summary_large_image',
         title: postTitle,
         description: postSummary,
-        images: [post.imageUrl], 
+        images: [post.imageUrl],
     }
   };
 }
@@ -71,7 +71,7 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       const boldText = part.slice(2, -2);
-      if (boldText) { 
+      if (boldText) {
         return <strong key={`bold-${index}`}>{boldText}</strong>;
       }
     }
@@ -87,13 +87,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
-  
+
   const dateLocale = params.locale === 'pt' ? pt : es;
   const parsedDate = parseISO(post.date);
   const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
 
   const postTitle = getLocalizedPostField(post.title, params.locale) as string;
-  const postFullContent = getLocalizedPostField(post.fullContent, params.locale) as string[];
+  const postFullContent = getLocalizedPostField(post.fullContent, params.locale);
 
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
   const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   let imagePositionClass = '';
   if (post.slug === thirdPostSlug) {
-    imagePositionClass = 'object-top'; 
+    imagePositionClass = 'object-top';
   } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
     imagePositionClass = 'object-bottom';
   }
@@ -118,7 +118,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header 
+        <Header
           headerDictionary={dictionary.header}
           languageSwitcherDictionary={dictionary.languageSwitcher}
           currentLocale={params.locale}
@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed space-y-6">
-              {postFullContent.map((paragraph, index) => {
+              {Array.isArray(postFullContent) && postFullContent.map((paragraph, index) => {
                 if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**') && !paragraph.slice(2, -2).includes(' ') && !paragraph.slice(2,-2).includes('**')) {
                   const headingText = paragraph.slice(2, -2);
                   return <h3 key={`heading-${index}`} className="text-xl font-semibold text-primary font-heading mt-6 mb-3">{headingText}</h3>;

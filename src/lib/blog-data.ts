@@ -1,4 +1,3 @@
-
 import type { Locale } from '@/i18n-config';
 
 export interface LocalizedText {
@@ -15,11 +14,11 @@ export interface BlogPost {
   id: string;
   title: LocalizedText;
   summary: LocalizedText;
-  slug: string; 
+  slug: string;
   imageUrl: string;
   imageHint: string;
   fullContent: LocalizedTextArray;
-  author: string; 
+  author: string;
   date: string; // YYYY-MM-DD
 }
 
@@ -78,7 +77,7 @@ export const blogPosts: BlogPost[] = [
       pt: [
         "O marketing digital evolui na velocidade da luz, e a IA é seu motor principal. Se você acha que já viu de tudo, prepare-se. Aqui apresentamos 5 maneiras pelas quais a IA está redefinindo a automação de marketing a partir de 2025, e como você pode começar a aproveitá-las:",
         "**1. Hiper-Personalização Preditiva em Escala:** Além de \"Olá, [Nome]\". A IA analisará em tempo real o comportamento, as emoções (inferidas) e o contexto do cliente para oferecer experiências e conteúdos únicos para cada indivíduo, no momento exato.",
-        "**2. Criação de Conteúdo Aumentada:** A IA não apenas escreverá rascunhos; co-criará campanhas completas, desde o conceito visual até o copy e a otimização SEO, baseando-se em análises preditivas de tendências e desempenho.",
+        "**2. Criação de Conteúdo Aumentada:** A IA não só escreverá rascunhos; co-criará campanhas completas, desde o conceito visual até o copy e a otimização SEO, baseando-se em análises preditivas de tendências e desempenho.",
         "**3. Otimização de Canais Multi-Experiência:** Esqueça gerenciar canais separadamente. A IA orquestrará jornadas de cliente fluidas e coerentes através de todos os pontos de contato (web, móvel, VR/AR, IoT), otimizando o investimento em tempo real.",
         "**4. Análise Sentimental Preditiva:** A IA não apenas dirá o que dizem sobre sua marca, mas como seus clientes se sentem e como se sentirão diante de futuras campanhas, permitindo que você ajuste proativamente sua estratégia.",
         "**5. Segmentação Quântica (Quase):** Com capacidades de análise mais profundas, a IA identificará micro-segmentos e nichos ocultos com um potencial de conversão altíssimo, permitindo que você lance campanhas ultra-direcionadas.",
@@ -113,12 +112,12 @@ export const blogPosts: BlogPost[] = [
       ],
       pt: [
         "Enquanto muitas empresas focam na IA voltada para o cliente, a verdadeira revolução silenciosa está ocorrendo dentro das organizações. A automação inteligente (IA + RPA + Process Mining) não se trata apenas de reduzir custos, mas de liberar o potencial humano e construir operações resilientes e ágeis.",
-        "**Como você pode mejorar seus processos internos?**",
+        "**Como você pode melhorar seus processos internos?**",
         "**Fluxos de Trabalho Cognitivos:** Imagine sistemas que não apenas executam tarefas, mas entendem o contexto, aprendem com as exceções e tomam decisões autônomas em áreas como finanças, RH e logística.",
         "**Descoberta e Otimização Autônoma de Processos:** A IA analisará continuamente suas operações, identificará gargalos e ineficiências (mesmo aquelas que você não sabia que tinha) e sugerirá ou até mesmo implementará melhorias automaticamente.",
-        "**Gestão Preditiva de Recursos:** Desde a alocação de pessoal até o gerenciamento de estoques, a IA antecipará necessidades futuras, otimizando o uso de seus ativos e prevenindo problemas antes que ocorram.",
+        "**Gestão Preditiva de Recursos:** Desde a alocação de pessoal até o gerenciamento de estoques, a IA antecipará necessidades futuras, otimizando o uso de seus ativos e previndo problemas antes que ocorram.",
         "**Onboarding e Treinamento Adaptativo:** Sistemas inteligentes que personalizam a integração e o desenvolvimento dos funcionários, acelerando sua produtividade e melhorando sua experiência.",
-        "Modernizar seus processos internos não é um gasto, é um investimento estratégico em sua capacidade de adaptar-se, inovar e crescer de forma sustentável. O caminho para a empresa verdadeiramente inteligente e automatizada começou, e dar o primeiro passo (ou o próximo) é mais acessível do que você pensa com o parceiro tecnológico certo."
+        "Modernizar seus processos internos não é um gasto, é um investimento estratégico em sua capacidade de se adaptar, inovar e crescer de forma sustentável. O caminho para a empresa verdadeiramente inteligente e automatizada começou, e dar o primeiro passo (ou o próximo) é mais acessível do que você pensa com o parceiro tecnológico certo."
       ]
     }
   }
@@ -126,17 +125,25 @@ export const blogPosts: BlogPost[] = [
 
 // Helper function to get localized text
 export function getLocalizedPostField(
-  postField: LocalizedText | LocalizedTextArray,
+  postField: LocalizedText | LocalizedTextArray | undefined,
   locale: Locale
 ): string | string[] {
-  if (typeof postField === 'object' && postField !== null && locale in postField) {
-    return postField[locale as keyof typeof postField];
+  if (typeof postField === 'object' && postField !== null) {
+    // Check if the specific locale exists in the postField
+    if (locale in postField) {
+      // @ts-ignore
+      return postField[locale];
+    }
+    // Fallback to Spanish ('es') if the current locale is not found
+    // @ts-ignore
+    if ('es' in postField) {
+      // @ts-ignore
+      return postField.es;
+    }
   }
-  // Fallback to 'es' or a default string/array if locale or field is missing
-  if (typeof postField === 'object' && postField !== null && 'es' in postField) {
-    return postField.es;
-  }
+  // If the field is not an object or doesn't have 'es' or the specific locale,
+  // return a default value based on whether an array or string is expected.
+  // This heuristic is based on the structure; you might need a more robust way
+  // to determine if an array is expected.
   return Array.isArray(postField) ? [] : '';
 }
-
-    

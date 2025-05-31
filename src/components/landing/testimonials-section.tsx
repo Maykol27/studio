@@ -10,7 +10,7 @@ interface TestimonialData {
   rating: number;
 }
 
-// Texts are now hardcoded in Spanish
+// Textos hardcodeados en español
 const texts = {
   title: "Lo que Dicen Nuestros Clientes",
   description: "Historias reales de negocios prosperando con nuestras soluciones de IA.",
@@ -57,7 +57,7 @@ export function TestimonialsSection() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {texts.testimonials.map((testimonial, index) => (
-            <Card key={testimonial.id} className="bg-card border-border rounded-xl card-hover p-6 flex flex-col items-center text-center">
+            <Card key={testimonial.id} className="bg-card border-border rounded-xl shadow-md card-hover p-6 flex flex-col items-center text-center">
               <CardHeader className="mb-4">
                 <Image
                   src={testimonialAssets[index % testimonialAssets.length].imageUrl}

@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -40,7 +39,7 @@ export function BlogSection({ dictionary: dictProp, locale }: BlogSectionProps) 
           {blogPosts.map((post) => {
             let imagePositionClass = '';
             if (post.slug === thirdPostSlug) {
-              imagePositionClass = 'object-top';
+              imagePositionClass = 'object-top'; 
             } else if (post.slug === firstPostSlug || post.slug === lastPostSlug) {
               imagePositionClass = 'object-bottom';
             }
