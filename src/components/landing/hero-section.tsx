@@ -37,8 +37,6 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
   }, []);
 
   if (!mounted) {
-    // Puedes renderizar un placeholder o null aquí para evitar el renderizado inicial
-    // que podría causar un layout shift o si los textos no están listos.
     return null;
   }
 
@@ -56,15 +54,16 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
         <div className="absolute bottom-[5%] right-[25%] w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]"></div>
       </div>
 
-      {/* Background Logo - Restored subtle opacity and blur */}
+      {/* Background Logo - DEBUGGING: Increased opacity, no blur, unoptimized, no object-contain */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-        <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]">
+        <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] border-2 border-dashed border-green-500"> {/* Temporal border for logo container */}
           <Image
             src="/images/sikai-logo.svg"
-            alt="SIKAI Consulting background logo"
+            alt="SIKAI Consulting background logo (DEBUG)"
             fill
-            className="object-contain opacity-10 blur-xl" 
+            className="opacity-100" // DEBUG: Full opacity, no blur, no object-contain
             priority
+            unoptimized={true} // DEBUG: Serve SVG as-is
           />
         </div>
       </div>
