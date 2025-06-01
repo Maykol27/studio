@@ -12,22 +12,21 @@ import { es, pt } from 'date-fns/locale';
 import type { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 
-// The interface can remain for documentation or other uses, but it's not directly used by the functions below anymore.
-interface BlogPostPageProps {
-  params: { slug: string; locale: Locale };
-}
-
+// generateStaticParams receives `locale` from the [locale] segment, which IS of type Locale.
+// It then generates params for this page, including that locale.
 export async function generateStaticParams({ params: { locale: defaultLocale } }: { params: { locale: Locale }}) {
   return blogPosts.map(post => ({
     slug: post.slug,
-    locale: defaultLocale,
+    locale: defaultLocale, // Pass the specific locale for which params are being generated
   }));
 }
 
-
-export async function generateMetadata({ params }: { params: { slug: string; locale: Locale } }): Promise<Metadata> {
+// For generateMetadata, we'll accept `params.locale` as `string`
+// and then cast it to `Locale` for internal use.
+export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
+  const currentLocale = params.locale as Locale; // Cast to Locale
   const post = blogPosts.find(p => p.slug === params.slug);
-  const dictionary = await getDictionary(params.locale);
+  const dictionary = await getDictionary(currentLocale);
 
   if (!post) {
     return {
@@ -36,8 +35,8 @@ export async function generateMetadata({ params }: { params: { slug: string; loc
     };
   }
 
-  const postTitle = getLocalizedPostField(post.title, params.locale) as string;
-  const postSummary = getLocalizedPostField(post.summary, params.locale) as string;
+  const postTitle = getLocalizedPostField(post.title, currentLocale) as string;
+  const postSummary = getLocalizedPostField(post.summary, currentLocale) as string;
   const publishedDate = parseISO(post.date);
 
   return {
@@ -80,21 +79,29 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
   });
 };
 
+// For BlogPostPage, we'll accept `params.locale` as `string`
+// and then cast it to `Locale` for internal use.
+export default async function BlogPostPage({ params }: { params: { slug: string; locale: string }}) {
+  const currentLocale = params.locale as Locale; // Cast to Locale
 
-export default async function BlogPostPage({ params }: { params: { slug: string; locale: Locale }}) {
   const post = blogPosts.find(p => p.slug === params.slug);
-  const dictionary = await getDictionary(params.locale);
+  const dictionary = await getDictionary(currentLocale);
 
   if (!post) {
     notFound();
   }
 
-  const dateLocale = params.locale === 'pt' ? pt : es;
+  const dateLocaleMap: Record<Locale, typeof es | typeof pt> = {
+    es: es,
+    pt: pt,
+  };
+  const dateLocale = dateLocaleMap[currentLocale] || es; // Fallback to 'es' locale for date-fns
+
   const parsedDate = parseISO(post.date);
   const displayDate = format(parsedDate, "dd 'de' MMMM, yyyy", { locale: dateLocale });
 
-  const postTitle = getLocalizedPostField(post.title, params.locale) as string;
-  const postFullContent = getLocalizedPostField(post.fullContent, params.locale);
+  const postTitle = getLocalizedPostField(post.title, currentLocale) as string;
+  const postFullContent = getLocalizedPostField(post.fullContent, currentLocale);
 
   const firstPostSlug = blogPosts.length > 0 ? blogPosts[0].slug : null;
   const thirdPostSlug = blogPosts.length > 2 ? blogPosts[2].slug : null;
@@ -122,7 +129,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string;
         <Header
           headerDictionary={dictionary.header}
           languageSwitcherDictionary={dictionary.languageSwitcher}
-          currentLocale={params.locale}
+          currentLocale={currentLocale}
         />
         <main className="flex-grow pt-24 md:pt-28">
           <article className="container mx-auto px-4 md:px-8 py-8 md:py-12 max-w-3xl">
@@ -173,7 +180,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string;
             </div>
           </article>
         </main>
-        <Footer dictionary={dictionary.footer} currentLocale={params.locale} />
+        <Footer dictionary={dictionary.footer} currentLocale={currentLocale} />
       </div>
     </div>
   );
