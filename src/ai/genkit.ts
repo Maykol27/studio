@@ -22,5 +22,6 @@ if (process.env.NODE_ENV === 'development') {
 
 export const ai = genkit({
   plugins: [googleAI()], // This will look for GOOGLE_API_KEY in process.env
-  model: 'googleai/gemini-2.0-flash',
+  model: 'googleai/gemini-1.5-flash-latest', // Updated to a standard and efficient text model
 });
+
