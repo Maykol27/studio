@@ -51,7 +51,8 @@ const AutomationSuggestionsOutputSchema = z.object({
 export type AutomationSuggestionsOutput = z.infer<typeof AutomationSuggestionsOutputSchema>;
 
 export async function getAutomationSuggestions(input: AutomationSuggestionsInput): Promise<AutomationSuggestionsOutput> {
-  console.log('[getAutomationSuggestions] Received input:', JSON.stringify(input));
+  // Log receipt of input without sensitive data for production
+  console.log('[getAutomationSuggestions] Received automation suggestion request.');
 
   // Check for GOOGLE_API_KEY at the point of use
   if (!process.env.GOOGLE_API_KEY) {
@@ -62,6 +63,7 @@ export async function getAutomationSuggestions(input: AutomationSuggestionsInput
     if (process.env.NODE_ENV === 'development') {
       console.log("[getAutomationSuggestions] GOOGLE_API_KEY seems to be set (first 5 chars for verification in dev):", process.env.GOOGLE_API_KEY.substring(0,5) + "...");
     } else {
+      // Minimal log for production to confirm presence without exposing details
       console.log("[getAutomationSuggestions] GOOGLE_API_KEY is present (production check).");
     }
   }
@@ -165,21 +167,18 @@ const automationSuggestionsFlow = ai.defineFlow(
     outputSchema: AutomationSuggestionsOutputSchema,
   },
   async input => {
-    console.log('[automationSuggestionsFlow] Starting flow with input:', JSON.stringify(input));
+    console.log('[automationSuggestionsFlow] Starting flow.'); // Removed input data from log
     try {
       console.log('[automationSuggestionsFlow] Calling prompt...');
       const {output} = await prompt(input); // Call the prompt object
-      console.log('[automationSuggestionsFlow] Received output from prompt:', JSON.stringify(output));
       if (!output) {
         console.error('[automationSuggestionsFlow] Prompt returned no output. This is unexpected.');
         throw new Error('AI prompt failed to return an output. The output was null or undefined.');
       }
+      console.log('[automationSuggestionsFlow] Received output from prompt.'); // Removed output data from log
       return output;
     } catch (error: any) {
       console.error('[automationSuggestionsFlow] Error during prompt execution or processing:', error.message, error.stack, error);
-      // Re-throw to be caught by the calling function (getAutomationSuggestions)
-      // It's better to throw the original error or a new error with more context if needed.
-      // The message here will be a more generic one if the error is not an instance of Error or doesn't have a message.
       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred in the AI prompt generation.";
       throw new Error(`Error in AI prompt generation: ${errorMessage}`);
     }
