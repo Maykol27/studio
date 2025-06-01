@@ -37,13 +37,16 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
   }, []);
 
   if (!mounted) {
-    return null;
+    // Render a placeholder or null if preferred to avoid layout shift
+    // For a hero, it might be okay to render nothing until mounted
+    // or a very basic skeleton.
+    return null; 
   }
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center items-center text-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background" // REMOVED overflow-hidden for debugging
     >
       {/* Animated Background Bubbles */}
       <div className="absolute inset-0 z-0 opacity-100">
@@ -54,16 +57,16 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
         <div className="absolute bottom-[5%] right-[25%] w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]"></div>
       </div>
 
-      {/* Background Logo - Positioned to the right, blurred, and partially off-screen */}
-      <div className="absolute inset-0 flex items-center justify-end z-0 pointer-events-none overflow-hidden">
-        <div className="relative w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] -mr-[100px] sm:-mr-[150px] md:-mr-[250px] lg:-mr-[300px]">
+      {/* Background Logo - DEBUGGING STYLES APPLIED */}
+      <div className="absolute inset-0 flex items-center justify-end z-0 pointer-events-none bg-yellow-300/30"> {/* REMOVED overflow-hidden, ADDED bg-yellow-300/30 */}
+        <div className="relative w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] bg-pink-500/50"> {/* REMOVED negative margins, ADDED bg-pink-500/50 */}
           <Image
             src="/images/sikai-logo.svg"
-            alt="SIKAI Consulting background logo"
+            alt="SIKAI Consulting background logo DEBUG"
             fill
-            className="object-contain opacity-10 blur-xl" // Subtle opacity and blur
+            className="object-contain opacity-100" // Max opacity, no blur
             priority
-            unoptimized={true} // Kept as it helped with display
+            unoptimized={true}
           />
         </div>
       </div>
