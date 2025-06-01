@@ -17,8 +17,8 @@ export function CustomLogoIcon({ width, height, className }: CustomLogoIconProps
     setMounted(true);
   }, []);
 
-  // The SVG itself should be theme-aware (e.g., using currentColor or CSS variables)
-  const logoSrc = '/images/sikai-logo.svg'; // Assuming this is your single, theme-aware SVG
+  // Path to your single, theme-aware SVG file in the public/images directory
+  const logoSrc = '/images/sikai-logo.svg'; // Assuming your single adaptive SVG is named sikai-logo.svg
 
   if (!mounted) {
     // Render a placeholder div matching dimensions to prevent layout shift and hydration errors
@@ -28,11 +28,11 @@ export function CustomLogoIcon({ width, height, className }: CustomLogoIconProps
   return (
     <Image
       src={logoSrc}
-      alt="SIKAI Consulting Logo" // Considerar obtener este texto del diccionario para localización
+      alt="SIKAI Consulting Logo"
       width={width}
       height={height}
       className={className}
-      priority // Es buena idea si el logo está en el LCP (Largest Contentful Paint), como en el header
+      priority 
     />
   );
 }
