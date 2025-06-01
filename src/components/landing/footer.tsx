@@ -1,6 +1,6 @@
 // src/components/landing/footer.tsx
 import Link from 'next/link';
-import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // O el nuevo CustomLogoIcon si usas un archivo
+import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Cambiado a CustomLogoIcon
 import type { Dictionary } from '@/lib/get-dictionary';
 import type { Locale } from '@/i18n-config';
 
@@ -27,10 +27,7 @@ export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
       <div className="container mx-auto px-4 md:px-8 text-foreground/70">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-4 text-center sm:text-left">
           <Link href={`/${currentLocale}`} className="flex items-center gap-2 group" prefetch={false}>
-            {/* Usa CustomLogoIcon si estás cargando un archivo SVG desde /public */}
             <CustomLogoIcon width={36} height={36} className="text-primary group-hover:text-accent transition-colors" />
-            {/* O usa SikaiLogoIcon si quieres mantener el SVG complejo definido en el componente */}
-            {/* <SikaiLogoIcon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" /> */}
             <span className="text-lg font-semibold text-primary group-hover:text-accent transition-colors font-heading">{dictionary.companyName}</span>
           </Link>
           <p className="text-sm order-last sm:order-none">

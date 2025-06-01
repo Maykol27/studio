@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MenuIcon } from 'lucide-react';
-import { CustomLogoIcon } from '@/components/icons/custom-logo-icon';
+import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Changed back to CustomLogoIcon
 import {
   Sheet,
   SheetContent,

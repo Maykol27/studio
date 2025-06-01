@@ -1,4 +1,11 @@
 // src/components/icons/sikai-logo-icon.tsx
+// ESTE ARCHIVO YA NO SE USA. EL LOGO SE MANEJA CON CustomLogoIcon.tsx
+// Y LOS ARCHIVOS SVG EN LA CARPETA PUBLIC/IMAGES.
+
+// Puedes eliminar este archivo o dejarlo si planeas usarlo para otro propósito.
+// Por ahora, lo dejo con un comentario para indicar que no está en uso activo
+// para el logo principal de la cabecera y pie de página.
+
 import type { SVGProps } from 'react';
 
 export function SikaiLogoIcon(props: SVGProps<SVGSVGElement>) {
