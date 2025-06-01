@@ -36,7 +36,10 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
   }, []);
 
   if (!mounted) {
-    return null;
+    // Puedes renderizar un placeholder o null aquí para evitar el renderizado inicial
+    // que podría causar un layout shift o si los textos no están listos.
+    // Por ahora, devolvemos null si no está montado.
+    return null; 
   }
 
   return (
@@ -60,7 +63,7 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
             src="/images/sikai-logo.svg" 
             alt="SIKAI Consulting background logo"
             fill
-            className="object-contain opacity-10 blur-2xl" 
+            className="object-contain opacity-20 blur-lg" 
             priority 
           />
         </div>
