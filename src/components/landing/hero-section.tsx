@@ -54,16 +54,16 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
         <div className="absolute bottom-[5%] right-[25%] w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]"></div>
       </div>
 
-      {/* Background Logo - DEBUGGING: Increased opacity, no blur, unoptimized, no object-contain */}
-      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-        <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] border-2 border-dashed border-green-500"> {/* Temporal border for logo container */}
+      {/* Background Logo - Positioned to the right, blurred, and partially off-screen */}
+      <div className="absolute inset-0 flex items-center justify-end z-0 pointer-events-none overflow-hidden">
+        <div className="relative w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] -mr-[100px] sm:-mr-[150px] md:-mr-[250px] lg:-mr-[300px]">
           <Image
             src="/images/sikai-logo.svg"
-            alt="SIKAI Consulting background logo (DEBUG)"
+            alt="SIKAI Consulting background logo"
             fill
-            className="opacity-100" // DEBUG: Full opacity, no blur, no object-contain
+            className="object-contain opacity-10 blur-xl" // Subtle opacity and blur
             priority
-            unoptimized={true} // DEBUG: Serve SVG as-is
+            unoptimized={true} // Kept as it helped with display
           />
         </div>
       </div>
