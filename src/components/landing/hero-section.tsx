@@ -7,7 +7,7 @@ import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import type { Dictionary } from '@/lib/get-dictionary';
 import { useEffect, useState } from 'react';
-import Image from 'next/image'; // Import next/image
+// Image component for background logo is no longer needed here if we remove it.
 
 // Textos por defecto en español si el diccionario no se provee o falta alguna clave
 const defaultTexts: Dictionary['heroSection'] = {
@@ -37,6 +37,9 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
   }, []);
 
   if (!mounted) {
+    // Render a placeholder or null for SSR/hydration consistency
+    // Or a basic structure if layout shift is a concern.
+    // For simplicity now, returning null.
     return null; 
   }
 
@@ -54,19 +57,8 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
         <div className="absolute bottom-[5%] right-[25%] w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]"></div>
       </div>
 
-      {/* Background Logo */}
-      <div className="absolute inset-0 flex items-center justify-end z-0 pointer-events-none overflow-hidden">
-        <div className="relative w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px] -mr-[100px] sm:-mr-[150px] md:-mr-[200px]">
-          <Image
-            src="/images/sikai-logo.svg"
-            alt="SIKAI Consulting background logo"
-            fill
-            className="object-contain opacity-10 blur-2xl" // Ajusta opacidad y desenfoque aquí
-            priority
-            unoptimized={true}
-          />
-        </div>
-      </div>
+      {/* Removed Background Logo Section */}
+      {/* The div that previously held the background logo has been removed. */}
 
       {/* Foreground Content */}
       <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
