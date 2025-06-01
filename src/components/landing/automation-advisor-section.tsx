@@ -26,7 +26,7 @@ const suggestionIcons = [
 ];
 
 // Default texts (Spanish fallbacks)
-const defaultTexts = {
+const defaultTexts: Dictionary['automationAdvisorSection'] = {
   title: "Análisis Inicial Gratuito",
   description: "Completa este formulario para recibir sugerencias de automatización personalizadas impulsadas por IA para tu negocio.",
   formCardTitle: "Cuéntanos Sobre Tu Negocio",
@@ -73,8 +73,6 @@ export function AutomationAdvisorSection({ dictionary: dictProp }: AutomationAdv
   const [analysisResult, setAnalysisResult] = useState<AutomationSuggestionsOutput | null>(null);
   const { toast } = useToast();
 
-  // Use prop dictionary if available, otherwise fall back to defaultTexts
-  // This ensures 'dictionary' is always an object, preventing errors on access.
   const dictionary = dictProp && Object.keys(dictProp).length > 0 ? dictProp : defaultTexts;
 
   const formSchema = z.object({
@@ -95,8 +93,8 @@ export function AutomationAdvisorSection({ dictionary: dictProp }: AutomationAdv
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aiBudget: "no-especificado", // Default value for the select
-      aiExperienceLevel: "", // Ensure it's an empty string or a valid value if you have one
+      aiBudget: "no-especificado", 
+      aiExperienceLevel: "", 
     }
   });
 
@@ -116,11 +114,23 @@ export function AutomationAdvisorSection({ dictionary: dictProp }: AutomationAdv
         title: dictionary.toastSuccessTitle || defaultTexts.toastSuccessTitle,
         description: dictionary.toastSuccessDescription || defaultTexts.toastSuccessDescription,
       });
-    } catch (error) {
-      console.error("Error getting analysis:", error);
+    } catch (error: any) {
+      console.error("Error getting analysis. Raw error object:", error);
+      let errorMessage = dictionary.toastErrorDescription || defaultTexts.toastErrorDescription;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      } else if (error && typeof error.message === 'string') {
+        errorMessage = error.message;
+      } else {
+        // Fallback for truly unexpected error structures
+        errorMessage = "An unexpected error occurred. Please check the console for more details.";
+      }
+      
       toast({
         title: dictionary.toastErrorTitle || defaultTexts.toastErrorTitle,
-        description: dictionary.toastErrorDescription || defaultTexts.toastErrorDescription,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -314,3 +324,4 @@ export function AutomationAdvisorSection({ dictionary: dictProp }: AutomationAdv
     </section>
   );
 }
+

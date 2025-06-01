@@ -50,28 +50,39 @@ const AutomationSuggestionsOutputSchema = z.object({
 export type AutomationSuggestionsOutput = z.infer<typeof AutomationSuggestionsOutputSchema>;
 
 export async function getAutomationSuggestions(input: AutomationSuggestionsInput): Promise<AutomationSuggestionsOutput> {
+  console.log('[getAutomationSuggestions] Received input:', JSON.stringify(input));
   // First, save the input to Firestore
   try {
     const docRef = await addDoc(collection(db, "automationRequests"), {
       ...input,
       submittedAt: Timestamp.now() // Server-side timestamp
     });
-    console.log("Automation request saved with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding automation request to Firestore: ", e);
+    console.log("[getAutomationSuggestions] Automation request saved to Firestore with ID: ", docRef.id);
+  } catch (e: any) {
+    console.error("[getAutomationSuggestions] Error adding automation request to Firestore: ", e.message, e.stack);
     // Optionally, you could decide if this error should prevent AI suggestion generation
-    // For now, we'll log it and continue.
+    // For now, we'll log it and continue. If Firestore write is critical, throw an error here.
   }
 
   // Then, proceed with the Genkit flow
-  return automationSuggestionsFlow(input);
+  try {
+    console.log('[getAutomationSuggestions] Calling automationSuggestionsFlow...');
+    const result = await automationSuggestionsFlow(input);
+    console.log('[getAutomationSuggestions] Successfully received result from automationSuggestionsFlow.');
+    return result;
+  } catch (flowError: any) {
+    console.error("[getAutomationSuggestions] Error calling automationSuggestionsFlow: ", flowError.message, flowError.stack);
+    // Re-throw the error so it can be handled by the client or a higher-level error handler
+    // Server Actions should automatically serialize this error for the client.
+    throw new Error(`AI suggestions generation failed. Details: ${flowError.message}`);
+  }
 }
 
 const prompt = ai.definePrompt({
   name: 'automationSuggestionsPrompt',
   input: {schema: AutomationSuggestionsInputSchema},
   output: {schema: AutomationSuggestionsOutputSchema},
-  prompt: `Eres un consultor experto de Aetheria Consulting. Un usuario ha proporcionado información sobre su negocio. Tu tarea es analizar esta información y generar TRES sugerencias de automatización, cada una con un título y una explicación general y concisa (2-3 frases).
+  prompt: `Eres un consultor experto de SIKAI Consulting. Un usuario ha proporcionado información sobre su negocio. Tu tarea es analizar esta información y generar TRES sugerencias de automatización, cada una con un título y una explicación general y concisa (2-3 frases).
 Adicionalmente, debes proporcionar un mensaje introductorio breve y positivo, y un llamado a la acción claro para que el usuario complete el formulario de contacto para una asesoría personalizada.
 
 Contexto del usuario (NO lo repitas directamente en la respuesta, úsalo para inspirar las sugerencias):
@@ -114,7 +125,21 @@ const automationSuggestionsFlow = ai.defineFlow(
     outputSchema: AutomationSuggestionsOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    console.log('[automationSuggestionsFlow] Starting flow with input:', JSON.stringify(input));
+    try {
+      console.log('[automationSuggestionsFlow] Calling prompt...');
+      const {output} = await prompt(input); // Call the prompt object
+      console.log('[automationSuggestionsFlow] Received output from prompt:', JSON.stringify(output));
+      if (!output) {
+        console.error('[automationSuggestionsFlow] Prompt returned no output. This is unexpected.');
+        throw new Error('AI prompt failed to return an output. The output was null or undefined.');
+      }
+      return output;
+    } catch (error: any) {
+      console.error('[automationSuggestionsFlow] Error during prompt execution or processing:', error.message, error.stack);
+      // Re-throw to be caught by the calling function (getAutomationSuggestions)
+      throw new Error(`Error in AI prompt generation: ${error.message}`);
+    }
   }
 );
+
