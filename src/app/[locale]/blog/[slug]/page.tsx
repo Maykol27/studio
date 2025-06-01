@@ -12,6 +12,7 @@ import { es, pt } from 'date-fns/locale';
 import type { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 
+// The interface can remain for documentation or other uses, but it's not directly used by the functions below anymore.
 interface BlogPostPageProps {
   params: { slug: string; locale: Locale };
 }
@@ -24,7 +25,7 @@ export async function generateStaticParams({ params: { locale: defaultLocale } }
 }
 
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string; locale: Locale } }): Promise<Metadata> {
   const post = blogPosts.find(p => p.slug === params.slug);
   const dictionary = await getDictionary(params.locale);
 
@@ -80,7 +81,7 @@ const parseTextForFormatting = (text: string): ReactNode[] => {
 };
 
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: { params: { slug: string; locale: Locale }}) {
   const post = blogPosts.find(p => p.slug === params.slug);
   const dictionary = await getDictionary(params.locale);
 
