@@ -18,7 +18,7 @@ export function CustomLogoIcon({ width, height, className }: CustomLogoIconProps
   }, []);
 
   // Path to your single, theme-aware SVG file in the public/images directory
-  const logoSrc = '/images/sikai-logo.svg'; // Assuming your single adaptive SVG is named sikai-logo.svg
+  const logoSrc = '/images/sikai-logo.svg'; 
 
   if (!mounted) {
     // Render a placeholder div matching dimensions to prevent layout shift and hydration errors
@@ -28,11 +28,11 @@ export function CustomLogoIcon({ width, height, className }: CustomLogoIconProps
   return (
     <Image
       src={logoSrc}
-      alt="SIKAI Consulting Logo"
+      alt="SIKAI Consulting Logo" // Texto alternativo corregido y consistente
       width={width}
       height={height}
       className={className}
-      priority 
+      priority // Ayuda a priorizar la carga del logo
     />
   );
 }
