@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MenuIcon } from 'lucide-react';
-import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Changed back to CustomLogoIcon
+import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Asegurando que usa CustomLogoIcon
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,6 @@ interface HeaderProps {
   currentLocale: Locale;
 }
 
-// Default texts (Spanish fallbacks)
 const defaultHeaderTexts: Dictionary['header'] = {
   companyName: "SIKAI Consulting",
   benefits: "Beneficios",

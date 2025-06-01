@@ -1,6 +1,6 @@
 // src/components/landing/footer.tsx
 import Link from 'next/link';
-import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Cambiado a CustomLogoIcon
+import { CustomLogoIcon } from '@/components/icons/custom-logo-icon'; // Asegurando que usa CustomLogoIcon
 import type { Dictionary } from '@/lib/get-dictionary';
 import type { Locale } from '@/i18n-config';
 
@@ -9,14 +9,12 @@ interface FooterProps {
   currentLocale: Locale;
 }
 
-// Default texts (Spanish fallbacks)
 const defaultTexts: Dictionary['footer'] = {
   companyName: "SIKAI Consulting",
   copyright: "SIKAI Consulting. Todos los derechos reservados.",
   privacyPolicy: "Política de Privacidad",
   termsOfService: "Términos de Servicio"
 };
-
 
 export function Footer({ dictionary: dictProp, currentLocale }: FooterProps) {
   const currentYear = new Date().getFullYear();

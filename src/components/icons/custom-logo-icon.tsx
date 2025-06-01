@@ -1,35 +1,51 @@
 // src/components/icons/custom-logo-icon.tsx
-import type { SVGProps } from 'react';
+'use client';
 
-export function CustomLogoIcon(props: SVGProps<SVGSVGElement>) {
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+
+interface CustomLogoIconProps {
+  width: number;
+  height: number;
+  className?: string;
+}
+
+export function CustomLogoIcon({ width, height, className }: CustomLogoIconProps) {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  // Default to light theme SVG, will be updated by useEffect on client-side
+  const [logoSrc, setLogoSrc] = useState('/images/sikai-logo-light.svg');
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const currentTheme = resolvedTheme || theme;
+      if (currentTheme === 'dark') {
+        setLogoSrc('/images/sikai-logo-dark.svg');
+      } else {
+        setLogoSrc('/images/sikai-logo-light.svg');
+      }
+    }
+  }, [mounted, theme, resolvedTheme]);
+
+  if (!mounted) {
+    // Render a placeholder div matching dimensions to prevent layout shift and hydration errors
+    // The className is passed to apply any styling (like text color if it were an inline SVG)
+    return <div style={{ width: `${width}px`, height: `${height}px` }} className={className} />;
+  }
+
   return (
-    <svg
-      width="128"
-      height="128"
-      viewBox="0 0 128 128"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/*
-        =====================================================================
-        ¡AQUÍ COMIENZA EL ÁREA PARA PEGAR EL CÓDIGO DE TU PROPIO SVG!
-        Borra el siguiente SVG de ejemplo y pega el tuyo aquí.
-        Asegúrate de ajustar el `viewBox` de la etiqueta <svg> de arriba si es necesario,
-        y configura los atributos `fill` o `stroke` como `currentColor`
-        si quieres que el logo herede el color del texto.
-        =====================================================================
-      */}
-
-      {/* EJEMPLO DE SVG DE PLACEHOLDER (¡REEMPLÁZALO!) */}
-      <rect x="14" y="14" width="100" height="100" rx="10" fill="#8A2BE2" />
-      <circle cx="50" cy="50" r="30" fill="white" />
-      <circle cx="78" cy="50" r="30" fill="white" />
-      <circle cx="64" cy="78" r="30" fill="white" />
-      {/*
-        =====================================================================
-        ¡AQUÍ TERMINA EL ÁREA PARA PEGAR EL CÓDIGO DE TU PROPIO SVG!
-        =====================================================================
-      */}
-    </svg>
-  )
+    <Image
+      src={logoSrc}
+      alt="SIKAI Consulting Logo" // Considerar obtener este texto del diccionario para localización
+      width={width}
+      height={height}
+      className={className}
+      priority // Es buena idea si el logo está en el LCP (Largest Contentful Paint), como en el header
+    />
+  );
 }
