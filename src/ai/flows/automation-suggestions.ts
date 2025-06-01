@@ -1,3 +1,4 @@
+
 // AutomationSuggestions.ts
 'use server';
 /**
@@ -51,6 +52,20 @@ export type AutomationSuggestionsOutput = z.infer<typeof AutomationSuggestionsOu
 
 export async function getAutomationSuggestions(input: AutomationSuggestionsInput): Promise<AutomationSuggestionsOutput> {
   console.log('[getAutomationSuggestions] Received input:', JSON.stringify(input));
+
+  // Check for GOOGLE_API_KEY at the point of use
+  if (!process.env.GOOGLE_API_KEY) {
+    console.error("[getAutomationSuggestions] CRITICAL: GOOGLE_API_KEY is not set in the environment. AI calls will fail.");
+    // For client-side, it's better to throw an error that can be caught and displayed.
+    throw new Error("Configuration error: The AI service is currently unavailable due to a configuration issue (missing API key).");
+  } else {
+    if (process.env.NODE_ENV === 'development') {
+      console.log("[getAutomationSuggestions] GOOGLE_API_KEY seems to be set (first 5 chars for verification in dev):", process.env.GOOGLE_API_KEY.substring(0,5) + "...");
+    } else {
+      console.log("[getAutomationSuggestions] GOOGLE_API_KEY is present (production check).");
+    }
+  }
+
   // First, save the input to Firestore
   try {
     const docRef = await addDoc(collection(db, "automationRequests"), {
@@ -60,8 +75,9 @@ export async function getAutomationSuggestions(input: AutomationSuggestionsInput
     console.log("[getAutomationSuggestions] Automation request saved to Firestore with ID: ", docRef.id);
   } catch (e: any) {
     console.error("[getAutomationSuggestions] Error adding automation request to Firestore: ", e.message, e.stack);
-    // Optionally, you could decide if this error should prevent AI suggestion generation
-    // For now, we'll log it and continue. If Firestore write is critical, throw an error here.
+    // Decide if this error should prevent AI suggestion generation or just be logged.
+    // For now, we log it and continue. If Firestore write is critical, throw an error here.
+    // throw new Error(`Failed to save automation request to database. Details: ${e.message}`);
   }
 
   // Then, proceed with the Genkit flow
@@ -71,10 +87,34 @@ export async function getAutomationSuggestions(input: AutomationSuggestionsInput
     console.log('[getAutomationSuggestions] Successfully received result from automationSuggestionsFlow.');
     return result;
   } catch (flowError: any) {
-    console.error("[getAutomationSuggestions] Error calling automationSuggestionsFlow: ", flowError.message, flowError.stack);
-    // Re-throw the error so it can be handled by the client or a higher-level error handler
-    // Server Actions should automatically serialize this error for the client.
-    throw new Error(`AI suggestions generation failed. Details: ${flowError.message}`);
+    // Log the full error object for server-side debugging
+    console.error(
+        "[getAutomationSuggestions] Error calling automationSuggestionsFlow. This might be due to an invalid or missing GOOGLE_API_KEY, model access issues, content filtering, or other Genkit/AI service errors. Full error object:",
+        flowError
+      );
+    console.error("[getAutomationSuggestions] Error message:", flowError.message);
+    console.error("[getAutomationSuggestions] Error stack:", flowError.stack);
+
+
+    let clientErrorMessage = "AI suggestions generation failed unexpectedly.";
+    if (flowError.message) {
+        if (flowError.message.toLowerCase().includes('api key') || flowError.message.toLowerCase().includes('permission denied')) {
+            clientErrorMessage = "AI suggestions failed: There might be an issue with the API key configuration or service permissions.";
+        } else if (flowError.message.toLowerCase().includes('quota')) {
+            clientErrorMessage = "AI suggestions failed: Quota limit reached for the AI service.";
+        } else if (flowError.message.toLowerCase().includes('model_not_found') || flowError.message.toLowerCase().includes('model not found')) {
+            clientErrorMessage = "AI suggestions failed: The specified AI model is not available or accessible.";
+        } else if (flowError.message.toLowerCase().includes('billing')) {
+            clientErrorMessage = "AI suggestions failed: There is an issue with the billing account for the AI service.";
+        }
+         else {
+            // Keep it generic for other errors to avoid exposing too much detail,
+            // but the detailed error is logged server-side.
+            clientErrorMessage = `AI suggestions generation failed. Please try again later.`;
+        }
+    }
+    // For the client, throw an error that Server Actions can serialize.
+    throw new Error(clientErrorMessage);
   }
 }
 
@@ -136,10 +176,12 @@ const automationSuggestionsFlow = ai.defineFlow(
       }
       return output;
     } catch (error: any) {
-      console.error('[automationSuggestionsFlow] Error during prompt execution or processing:', error.message, error.stack);
+      console.error('[automationSuggestionsFlow] Error during prompt execution or processing:', error.message, error.stack, error);
       // Re-throw to be caught by the calling function (getAutomationSuggestions)
-      throw new Error(`Error in AI prompt generation: ${error.message}`);
+      // It's better to throw the original error or a new error with more context if needed.
+      // The message here will be a more generic one if the error is not an instance of Error or doesn't have a message.
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred in the AI prompt generation.";
+      throw new Error(`Error in AI prompt generation: ${errorMessage}`);
     }
   }
 );
-
