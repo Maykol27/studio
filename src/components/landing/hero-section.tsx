@@ -6,6 +6,7 @@ import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import type { Dictionary } from '@/lib/get-dictionary';
 import { useEffect, useState } from 'react';
+import Image from 'next/image'; // Import next/image
 
 // Textos por defecto en español si el diccionario no se provee o falta alguna clave
 const defaultTexts: Dictionary['heroSection'] = {
@@ -14,20 +15,20 @@ const defaultTexts: Dictionary['heroSection'] = {
   titlePart3: " Hacia Tu Éxito.",
   description: "Soluciones de IA personalizadas para potenciar tu negocio. Optimizamos procesos, reducimos costos y mejoramos la toma de decisiones.",
   ctaButton: "¡Diagnóstico gratuito ahora mismo!",
-  videoCaption: "Conoce al CEO de SIKAI Consulting", // Este ya no se usará
-  playVideo: "Reproducir Video", // No se usa
-  pauseVideo: "Pausar Video", // No se usa
-  enterPiP: "Entrar en Picture-in-Picture", // No se usa
-  exitPiP: "Salir de Picture-in-Picture", // No se usa
-  pipNotSupported: "El modo Picture-in-Picture no es compatible con este navegador." // No se usa
+  videoCaption: "Conoce al CEO de SIKAI Consulting", 
+  playVideo: "Reproducir Video", 
+  pauseVideo: "Pausar Video", 
+  enterPiP: "Entrar en Picture-in-Picture", 
+  exitPiP: "Salir de Picture-in-Picture", 
+  pipNotSupported: "El modo Picture-in-Picture no es compatible con este navegador." 
 };
 
 interface HeroSectionProps {
-  dictionary?: Partial<Dictionary['heroSection']>; // Hacer el diccionario opcional y parcial
+  dictionary?: Partial<Dictionary['heroSection']>; 
 }
 
 export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
-  const texts = { ...defaultTexts, ...(dictProp || {}) }; // Asegurar que texts siempre tenga valores
+  const texts = { ...defaultTexts, ...(dictProp || {}) }; 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,8 +36,6 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
   }, []);
 
   if (!mounted) {
-    // Podrías renderizar un esqueleto o nada hasta que el cliente se hidrate
-    // para evitar cualquier parpadeo si el texto depende del tema.
     return null;
   }
 
@@ -45,6 +44,7 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
       id="hero"
       className="relative min-h-screen flex flex-col justify-center items-center text-center pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-background via-muted to-background overflow-hidden"
     >
+      {/* Animated Background Bubbles */}
       <div className="absolute inset-0 z-0 opacity-100">
         <div className="absolute top-[10%] left-[5%] w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-primary/20 rounded-full animate-bubble-1"></div>
         <div className="absolute top-[20%] right-[10%] w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 bg-accent/20 rounded-full animate-bubble-2"></div>
@@ -53,6 +53,20 @@ export function HeroSection({ dictionary: dictProp }: HeroSectionProps) {
         <div className="absolute bottom-[5%] right-[25%] w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-accent/15 rounded-full animate-bubble-2 animation-delay-[4s]"></div>
       </div>
 
+      {/* Blurred Background Logo */}
+      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+        <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]">
+          <Image
+            src="/images/sikai-logo.svg" 
+            alt="SIKAI Consulting background logo"
+            fill
+            className="object-contain opacity-10 blur-2xl" 
+            priority 
+          />
+        </div>
+      </div>
+
+      {/* Foreground Content */}
       <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
         <div className="max-w-3xl mx-auto">
           <div className="space-y-6 md:space-y-8 animate-fade-in-up">
